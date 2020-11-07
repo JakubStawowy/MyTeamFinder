@@ -4,11 +4,11 @@ body{
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
+    background: #474242 0% 0% no-repeat padding-box;
 }
 .container{
     width: 100%;
     height: 200%;
-    background: #474242 0% 0% no-repeat padding-box;
 
     display: flex;
     flex-direction: column;
@@ -45,18 +45,25 @@ body{
             margin: 0;
             li{
                 padding: 0 2em 0 2em;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
                 text-align: center;
                 list-style: none;
-                color: #474242;
                 width: 10%;
+                a{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    text-decoration: none;
+                    color: #474242;
+                }
             }
             li:hover{
                 cursor: pointer;
                 background: #474242 0% 0% no-repeat padding-box;
-                color: #E5951D;
+                a{
+                    color: #E5951D;
+                }
             }
         }
     }
@@ -188,6 +195,91 @@ body{
             }
         }
     }
+    .new-event-section{
+        color: #AEAEAE;
+        display: grid;
+        width: 70vw;
+        padding: 4em 8em 4em 8em;
+        grid-template-areas: 
+            'title button'
+            'event-title event-title'
+            'sport picture'
+            'players picture'
+            'description description'
+            'description description'
+            'date-location none';
+        h2{
+            grid-area: title;
+            color: white;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+        .publish-button{
+            
+            grid-area: button;
+            background: transparent linear-gradient(180deg, #E5951D 0%, #915E13 100%, #734B0F 100%) 0% 0% no-repeat padding-box;
+            border: 1px solid #707070;
+            border-radius: 30px;
+            font-size: 1.5em;
+            color: #474242;
+        }
+        .image-button{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 2em;
+            grid-area: picture;
+
+            color: #AEAEAE;
+            button{
+                color: #AEAEAE;
+                width: 50%;
+                height: 100%;
+                background: transparent;
+                border: none;
+                font-size: 5em;
+            }
+        }
+        input{
+            font-size: 1em;
+            background: transparent;
+            border: none;
+            color: #AEAEAE;
+            border-bottom: 1px solid #AEAEAE;
+            padding: 1em;
+            margin: 1em 0 1em;
+        }
+        .event-title{
+            grid-area: event-title;
+        }
+        .sport{
+            grid-area: sport;
+        }
+        .players{
+            grid-area: players;
+        }
+        .date-location{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            a:hover{
+                cursor: pointer;
+            }
+        }
+        .description{
+            grid-area: description;
+            resize: none;
+            background: transparent;
+            border: 1px solid #707070;
+            border-radius: 30px;
+            padding: 2em;
+            margin: 2em 0;
+            font-size: 1em;
+            font-family: 'Montserrat', sans-serif;
+            color: #AEAEAE;
+        }
+    }
     .sub-container{
         display: flex;
         flex-direction: row;
@@ -303,6 +395,31 @@ body{
                     height: 20vw;
                     border-radius: 0;
                     border-bottom-right-radius: 10px;
+                }
+            }
+        }
+        .new-event-section{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 2em 0 10em;
+            width: 100%;
+            .publish-button{
+                order: 7;
+                width: 70%;
+                height: 10vh;
+            }
+            .date-location{
+                a{
+                    display: none;
+                }
+                i{
+                    font-size: 2em;
+                    padding: 2em;
+                }
+                i:hover{
+                    cursor: pointer;
                 }
             }
         }

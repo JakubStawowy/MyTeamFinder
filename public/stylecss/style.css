@@ -3,12 +3,12 @@ body {
   height: 100%;
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
+  background: #474242 0% 0% no-repeat padding-box;
 }
 
 .container {
   width: 100%;
   height: 200%;
-  background: #474242 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
 }
@@ -52,18 +52,27 @@ body {
 
 .container .menu-bar ul li {
   padding: 0 2em 0 2em;
+  text-align: center;
+  list-style: none;
+  width: 10%;
+}
+
+.container .menu-bar ul li a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
-  list-style: none;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
   color: #474242;
-  width: 10%;
 }
 
 .container .menu-bar ul li:hover {
   cursor: pointer;
   background: #474242 0% 0% no-repeat padding-box;
+}
+
+.container .menu-bar ul li:hover a {
   color: #E5951D;
 }
 
@@ -215,6 +224,95 @@ body {
   color: #707070;
 }
 
+.container .new-event-section {
+  color: #AEAEAE;
+  display: grid;
+  width: 70vw;
+  padding: 4em 8em 4em 8em;
+  grid-template-areas: 'title button' 'event-title event-title' 'sport picture' 'players picture' 'description description' 'description description' 'date-location none';
+}
+
+.container .new-event-section h2 {
+  grid-area: title;
+  color: white;
+}
+
+.container .new-event-section button:hover {
+  cursor: pointer;
+}
+
+.container .new-event-section .publish-button {
+  grid-area: button;
+  background: transparent linear-gradient(180deg, #E5951D 0%, #915E13 100%, #734B0F 100%) 0% 0% no-repeat padding-box;
+  border: 1px solid #707070;
+  border-radius: 30px;
+  font-size: 1.5em;
+  color: #474242;
+}
+
+.container .new-event-section .image-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2em;
+  grid-area: picture;
+  color: #AEAEAE;
+}
+
+.container .new-event-section .image-button button {
+  color: #AEAEAE;
+  width: 50%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  font-size: 5em;
+}
+
+.container .new-event-section input {
+  font-size: 1em;
+  background: transparent;
+  border: none;
+  color: #AEAEAE;
+  border-bottom: 1px solid #AEAEAE;
+  padding: 1em;
+  margin: 1em 0 1em;
+}
+
+.container .new-event-section .event-title {
+  grid-area: event-title;
+}
+
+.container .new-event-section .sport {
+  grid-area: sport;
+}
+
+.container .new-event-section .players {
+  grid-area: players;
+}
+
+.container .new-event-section .date-location {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.container .new-event-section .date-location a:hover {
+  cursor: pointer;
+}
+
+.container .new-event-section .description {
+  grid-area: description;
+  resize: none;
+  background: transparent;
+  border: 1px solid #707070;
+  border-radius: 30px;
+  padding: 2em;
+  margin: 2em 0;
+  font-size: 1em;
+  font-family: 'Montserrat', sans-serif;
+  color: #AEAEAE;
+}
+
 .container .sub-container {
   display: flex;
   flex-direction: row;
@@ -336,6 +434,29 @@ body {
     height: 20vw;
     border-radius: 0;
     border-bottom-right-radius: 10px;
+  }
+  .container .new-event-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2em 0 10em;
+    width: 100%;
+  }
+  .container .new-event-section .publish-button {
+    order: 7;
+    width: 70%;
+    height: 10vh;
+  }
+  .container .new-event-section .date-location a {
+    display: none;
+  }
+  .container .new-event-section .date-location i {
+    font-size: 2em;
+    padding: 2em;
+  }
+  .container .new-event-section .date-location i:hover {
+    cursor: pointer;
   }
   .container .bottom-bar {
     background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
