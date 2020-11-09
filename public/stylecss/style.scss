@@ -1,333 +1,128 @@
+$container-color: #474242 0% 0% no-repeat padding-box;
+$bar-color: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
+$component-color: #AEAEAE 0% 0% no-repeat padding-box;
+$font-color: white;
+$menu-font-color: #474242;
+$star-color: #E5951D;
+$border-color: #707070;
+$font: 'Montserrat', sans-serif;
+
+@mixin block-size($width, $height){
+	width: $width;
+	height: $height;
+}
+@mixin flex-column{
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin flex-row{
+	display: flex;
+	flex-direction: row;
+}
 
 body{
     margin: 0;
     height: 100%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font;
     font-size: 20px;
-    background: #474242 0% 0% no-repeat padding-box;
+    background: $container-color;
 }
 .container{
-    width: 100%;
-    height: 200%;
-
-    display: flex;
-    flex-direction: column;
+    @include block-size(100%, 200%);
+    @include flex-column();
     
     .top-bar{
-        width: 100%;
-        height: 12vh;
-        background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
-        display: flex;
+        @include block-size(100%, 12vh);
+        @include flex-row();
         justify-content: center;
         align-items: center;
+        background: $bar-color;
         img{
             height: 2em;
         }
     }
     .menu-bar{
-        z-index: 1;
-        width: 100%;
-        height: 12vh;
-        background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
-        display: flex;
-        flex-direction: column;
+        @include block-size(100%, 12vh);
+        @include flex-column();
         justify-content: space-around;
+        z-index: 1;
+        background: $bar-color;
         img{
+            height: 2em;
             position: absolute;
             padding-left: 2em;
-            height: 2em;
         }
         ul{
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
+            @include flex-row();
             height: 100%;
             margin: 0;
+            justify-content: flex-end;
             li{
+                // width: 100%;
                 padding: 0 2em 0 2em;
                 text-align: center;
                 list-style: none;
-                width: 10%;
                 a{
-                    display: flex;
-                    flex-direction: column;
+                    @include block-size(100%, 100%);
+                    @include flex-column();
                     justify-content: center;
-                    width: 100%;
-                    height: 100%;
                     text-decoration: none;
-                    color: #474242;
+                    color: $menu-font-color;
                 }
             }
             li:hover{
                 cursor: pointer;
-                background: #474242 0% 0% no-repeat padding-box;
+                background: $container-color;
                 a{
-                    color: #E5951D;
+                    color: $star-color;
                 }
             }
         }
     }
     .right-side-bar-hidden{
-        // display: none;
-        display: flex;
-        flex-direction: column;
+        @include block-size(7%, 100%);
+        // @include flex-column();
+        display: none;
         justify-content: space-between;
         align-items: center;
-        width: 7%;
-        height: 100%;
-        border-left: 1px solid #707070;
+        border-left: 1px solid $border-color;
         position: fixed;
         right: 0;
-        color: white;
+        color: $font-color;
         .nav-icon{
             font-size: 3em;
         }
         .nav-icon:hover{
             cursor: pointer;
-            color: #707070;
+            color: $border-color;
         }
     }
     .right-side-bar{
-        // display: flex;
-        display: none;
-        flex-direction: column;
+        @include block-size(20%, 100%);
+        @include flex-column();
+        // display: none;
         justify-content: space-around;
         align-items: center;
-        color:white;
-        height: 100%;
-        width: 20%;
+        color:$font-color;
         position: fixed;
         right: 0;
-        border-left: 1px solid #707070;
-        background: #474242 0% 0% no-repeat padding-box;
+        border-left: 1px solid $border-color;
+        background: $container-color;
+        a{
+            color: $font-color;
+            text-decoration: none;
+        }
         a:hover{
             cursor: pointer;
-            color: #707070;
+            color: $border-color;
         }
         .user-image{
-            width: 5em;
-            height: 5em;
-            background: #FFFFFF 0% 0% no-repeat padding-box;
+            @include block-size(5em, 5em);
+            background: $component-color;
         }
         .nav-icon{
             font-size: 3em;
-        }
-    }
-    .home-page{
-        width: 93%;
-        display: flex;
-        flex-direction: column;
-        color: white;
-        .filtration-panel{
-            display: flex;
-            justify-content: center;
-            padding: 2em 0 2em;
-            height: 100%;
-            font-size: 0.6em;
-            border-bottom: 1px solid #707070;
-            text-align: center;
-            a{
-                margin: auto 20px auto;
-            }
-            i{
-                font-size: 4em;
-            }
-        }
-        .filtration-panel:hover{
-            cursor: pointer;
-            
-        }
-        .post{
-            margin: 4em 4em 0;
-            height: 50vh;
-            width: calc(100%-8em);
-            border: 1px solid #707070;
-            border-radius: 30px;
-            display: flex;
-            flex-direction: row;
-            .image{
-                background: #FFFFFF 0% 0% no-repeat padding-box;
-                border-radius: 30px;
-                height: 100%;
-                width: 50vh;
-            }
-            .post-description{
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                margin: 2em;
-                width: 50%;
-                h2{
-                    margin: 0;
-                }
-                h4{
-                    margin: 0;
-                }
-                a{
-                    display: flex;
-                    font-size: 0.6em;
-                    align-items: center;
-                    i{
-                        margin-right: 0.5em;
-                        font-size: 2em;
-                    }
-                }
-                .icons-section{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    .location-date-section{
-                        height: 150%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-around;
-                    }
-                    .sign-section{
-                        font-size: 1em;
-                        font-weight: bold;
-                    }
-                    .sign-section:hover{
-                        cursor: pointer;
-                        color: #707070;
-                    }
-                }
-            }
-        }
-    }
-    .new-event-section{
-        color: #AEAEAE;
-        display: grid;
-        width: 70vw;
-        padding: 4em 8em 4em 8em;
-        grid-template-areas: 
-            'title button'
-            'event-title event-title'
-            'sport picture'
-            'players picture'
-            'description description'
-            'description description'
-            'date-location none';
-        h2{
-            grid-area: title;
-            color: white;
-        }
-        button:hover{
-            cursor: pointer;
-        }
-        .publish-button{
-            
-            grid-area: button;
-            background: transparent linear-gradient(180deg, #E5951D 0%, #915E13 100%, #734B0F 100%) 0% 0% no-repeat padding-box;
-            border: 1px solid #707070;
-            border-radius: 30px;
-            font-size: 1.5em;
-            color: #474242;
-        }
-        .image-button{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 2em;
-            grid-area: picture;
-
-            color: #AEAEAE;
-            button{
-                color: #AEAEAE;
-                width: 50%;
-                height: 100%;
-                background: transparent;
-                border: none;
-                font-size: 5em;
-            }
-        }
-        input{
-            font-size: 1em;
-            background: transparent;
-            border: none;
-            color: #AEAEAE;
-            border-bottom: 1px solid #AEAEAE;
-            padding: 1em;
-            margin: 1em 0 1em;
-        }
-        .event-title{
-            grid-area: event-title;
-        }
-        .sport{
-            grid-area: sport;
-        }
-        .players{
-            grid-area: players;
-        }
-        .date-location{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            a:hover{
-                cursor: pointer;
-            }
-        }
-        .description{
-            grid-area: description;
-            resize: none;
-            background: transparent;
-            border: 1px solid #707070;
-            border-radius: 30px;
-            padding: 2em;
-            margin: 2em 0;
-            font-size: 1em;
-            font-family: 'Montserrat', sans-serif;
-            color: #AEAEAE;
-        }
-    }
-    .sub-container{
-        display: flex;
-        flex-direction: row;
-        div{
-            height: 100%;
-            width: 50%;
-            margin: 20vh 0 20vh;
-        }
-        .logo{
-            text-align: center;
-            img{
-                width: 50%;
-            }
-        }
-        .login-container{
-            form{
-                padding: 1.5em;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                align-items: center;
-                width: 50%;
-                background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
-                border-radius: 5vw;
-                input{
-                    border: none;
-                    background-color: transparent;
-                    color: white;
-                    border-bottom: 2px solid #F2F2F1;
-                    padding: 1em;
-                    margin: 1em;
-                    width: 60%;
-                }
-                button{
-                    font-family: 'Montserrat', sans-serif;
-                    background: #474242 0% 0% no-repeat padding-box;
-                    border: 1px solid #707070;
-                    border-radius: 30px;
-                    color: white;
-                    width: 60%;
-                    height: 15%;
-                    margin: 1em;
-                    line-height: 2.5em;
-                }
-                button:hover{
-                    cursor: pointer;
-                }
-            }
         }
     }
     .bottom-bar{
@@ -337,8 +132,7 @@ body{
 
 @media only screen and (max-width: 768px){
     body{
-        height: 100%;
-        width: 100%;
+        @include block-size(100%, 100%);
     }
     .container{
         flex-direction: column;
@@ -355,24 +149,19 @@ body{
             display: flex;
             justify-content: center;
         }
-        .sub-container{
+        .login-register{
+            padding: 50px 0 50px 0;
             display: flex;
             flex-direction: column;
-            padding: 50px 0 50px 0;
             .logo{
                 width: 100%;
             }
-            .login-container{
-                width: 100%;
-                form{
-                    margin: auto;
-                    background: transparent;
-                }
+            div{
+                margin: 0;
             }
         }
         .menu-bar{
-            display: flex;
-            flex-direction: row;
+            @include flex-row();
             justify-content: center;
             align-items: center;
             ul{
@@ -382,60 +171,19 @@ body{
         .right-side-bar{
             display: none;
         }
-        .home-page{
-            .filtration-panel{
-                width: 100%;
-            }
-            .post{
-                margin: 20px 0 20px 0;
-                width: 100%;
-                border-radius: 0;
-                .image{
-                    width: 20vw;
-                    height: 20vw;
-                    border-radius: 0;
-                    border-bottom-right-radius: 10px;
-                }
-            }
-        }
-        .new-event-section{
-            display: flex;
-            flex-direction: column;
+        .bottom-bar{
+            @include block-size(100%, 12vh);
+            @include flex-row();
             justify-content: space-around;
             align-items: center;
-            padding: 2em 0 10em;
-            width: 100%;
-            .publish-button{
-                order: 7;
-                width: 70%;
-                height: 10vh;
-            }
-            .date-location{
-                a{
-                    display: none;
-                }
-                i{
-                    font-size: 2em;
-                    padding: 2em;
-                }
-                i:hover{
-                    cursor: pointer;
-                }
-            }
-        }
-        .bottom-bar{
-            background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
+            font-size: 2em;
             position: fixed;
             bottom: 0;
-            height: 12vh;
-            width: 100%;
-            color: #474242;
-            font-size: 2em;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-
+            color: $menu-font-color;
+            background: $bar-color;
+            a{
+                color: $menu-font-color;
+            }
         }
     }
 }

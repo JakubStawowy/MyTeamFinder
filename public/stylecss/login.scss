@@ -1,0 +1,101 @@
+$container-color: #474242 0% 0% no-repeat padding-box;
+$bar-color: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
+$component-color: #AEAEAE 0% 0% no-repeat padding-box;
+$font-color: white;
+$menu-font-color: #474242;
+$star-color: #E5951D;
+$border-color: #707070;
+$font: 'Montserrat', sans-serif;
+
+@mixin block-size($width, $height){
+	width: $width;
+	height: $height;
+}
+@mixin flex-column{
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin flex-row{
+	display: flex;
+	flex-direction: row;
+}
+
+.login-register{
+    @include flex-row();
+    div{
+        @include block-size(50%, 100%);
+        margin: 20vh 0 20vh;
+    }
+    .logo{
+        text-align: center;
+        img{
+            width: 50%;
+        }
+    }
+    .login-container{
+        form{
+            @include flex-column();
+            width: 50%;
+            padding: 1.5em;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 5vw;
+            background: $bar-color;
+            input{
+                width: 60%;
+                margin: 1em;
+                padding: 1em;
+                border: none;
+                background-color: transparent;
+                color: $font-color;
+                border-bottom: 2px solid $font-color;
+            }
+            button{
+                @include block-size(60%, 15%);
+                margin: 1em;
+                border: 1px solid $border-color;
+                border-radius: 30px;
+                font-family: $font;
+                line-height: 2.5em;
+                color: $font-color;
+                background: $container-color;
+            }
+            button:hover{
+                cursor: pointer;
+            }
+            a{
+                color: $font-color;
+                font-size: 0.5em;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 768px){
+    .container{
+        .login-container{
+            width: 100%;
+            form{
+                width: 100%;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                background: transparent;
+                a{
+                    margin-bottom: 4vh;
+                }
+                input{
+                    margin-bottom: 4vh;
+                }
+                button{
+                    margin-bottom: 4vh;
+                    height: 8vh;
+                }
+            }
+        }
+    }
+}

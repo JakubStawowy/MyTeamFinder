@@ -1,0 +1,117 @@
+$container-color: #474242 0% 0% no-repeat padding-box;
+$bar-color: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
+$component-color: #AEAEAE 0% 0% no-repeat padding-box;
+$font-color: white;
+$menu-font-color: #474242;
+$star-color: #E5951D;
+$border-color: #707070;
+$font: 'Montserrat', sans-serif;
+
+@mixin block-size($width, $height){
+	width: $width;
+	height: $height;
+}
+@mixin flex-column{
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin flex-row{
+	display: flex;
+	flex-direction: row;
+}
+.home-page{
+    @include block-size(93%, 100%);
+    @include flex-column();
+    color: $font-color;
+    .filtration-panel{
+        @include block-size(100%, 100%);
+        @include flex-row();
+        justify-content: center;
+        padding: 2em 0 2em;
+        font-size: 0.6em;
+        border-bottom: 1px solid $border-color;
+        text-align: center;
+        a{
+            margin: auto 20px auto;
+        }
+        i{
+            font-size: 4em;
+        }
+    }
+    .filtration-panel:hover{
+        cursor: pointer;
+        
+    }
+    .post{
+        @include block-size(calc(100%-8em), 50vh);
+        @include flex-row();
+        margin: 4em 4em 0;
+        border: 1px solid $border-color;
+        border-radius: 30px;
+        .image{
+            @include block-size(50vh, 50vh);
+            background: $component-color;
+            border-radius: 30px;
+        }
+        .post-description{
+            @include flex-column();
+            margin: 2em;
+            width: 50%;
+            justify-content: space-around;
+            h2{
+                margin: 0;
+            }
+            h4{
+                margin: 0;
+            }
+            a{
+                @include flex-row();
+                font-size: 0.6em;
+                align-items: center;
+                i{
+                    margin-right: 0.5em;
+                    font-size: 2em;
+                }
+            }
+            .icons-section{
+                @include flex-row();
+                justify-content: space-between;
+                align-items: center;
+                .location-date-section{
+                    @include flex-column();
+                    height: 150%;
+                    justify-content: space-around;
+                }
+                .sign-section{
+                    font-size: 1em;
+                    font-weight: bold;
+                }
+                .sign-section:hover{
+                    cursor: pointer;
+                    color: $border-color;
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 768px){
+    
+    .home-page{
+        .filtration-panel{
+            width: 100%;
+        }
+        .post{
+            width: 100%;
+            margin: 20px 0 20px 0;
+            border-radius: 0;
+            .image{
+                @include block-size(20vw, 20vw);
+                border-radius: 0;
+                border-bottom-right-radius: 10px;
+            }
+        }
+    }
+}

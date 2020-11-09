@@ -1,0 +1,130 @@
+$container-color: #474242 0% 0% no-repeat padding-box;
+$bar-color: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
+$component-color: #AEAEAE 0% 0% no-repeat padding-box;
+$font-color: white;
+$menu-font-color: #474242;
+$star-color: #E5951D;
+$border-color: #707070;
+$font: 'Montserrat', sans-serif;
+
+@mixin block-size($width, $height){
+	width: $width;
+	height: $height;
+}
+@mixin flex-column{
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin flex-row{
+	display: flex;
+	flex-direction: row;
+}
+
+.new-event-section{
+    width: 70vw;
+    padding: 4em 8em 4em 8em;
+    display: grid;
+    grid-template-areas: 
+        'title button'
+        'event-title event-title'
+        'sport picture'
+        'players picture'
+        'description description'
+        'description description'
+        'date-location none';
+    color: #AEAEAE;
+    h2{
+        grid-area: title;
+        color: $font-color;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    .publish-button{
+        
+        grid-area: button;
+        border: 1px solid $border-color;
+        border-radius: 30px;
+        font-size: 1.5em;
+        color: #474242;
+        background: $bar-color;
+    }
+    .image-button{
+        @include flex-row();
+        grid-area: picture;
+        margin: 2em;
+        align-items: center;
+        button{
+            @include block-size(50%, 100%);
+            font-size: 5em;
+            border: none;
+            color: $border-color;
+            background: transparent;
+        }
+    }
+    input{
+        padding: 1em;
+        margin: 1em 0 1em;
+        font-size: 1em;
+        border: none;
+        border-bottom: 1px solid $border-color;
+        color: #AEAEAE;
+        background: transparent;
+    }
+    .event-title{
+        grid-area: event-title;
+    }
+    .sport{
+        grid-area: sport;
+    }
+    .players{
+        grid-area: players;
+    }
+    .date-location{
+        @include flex-row();
+        justify-content: space-around;
+        a:hover{
+            cursor: pointer;
+        }
+    }
+    .description{
+        grid-area: description;
+        padding: 2em;
+        margin: 2em 0;
+        border: 1px solid $border-color;
+        border-radius: 30px;
+        font-size: 1em;
+        resize: none;
+        font-family: $font;
+        color: #AEAEAE;
+        background: transparent;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    
+    .new-event-section{
+        @include flex-column();
+        width: 100%;
+        padding: 2em 0 10em;
+        justify-content: space-around;
+        align-items: center;
+        .publish-button{
+            @include block-size(70%, 10vh);
+            order: 7;
+        }
+        .date-location{
+            a{
+                display: none;
+            }
+            i{
+                padding: 2em;
+                font-size: 2em;
+            }
+            i:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}
