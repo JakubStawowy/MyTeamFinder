@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset = "utf-8" />
-            <title>Nss</title>
-            <link rel="stylesheet" href="public/stylecss/style.css" type="text/css"/>
-            
-    </head>
-    <body>
-        
-    </body>
-</html>
+<?php
+require 'Routing.php';
+
+$path = trim($_SERVER['REQUEST_URI'], '/');
+$path = parse_url($path, PHP_URL_PATH);
+
+Routing::get('index', 'DefaultController');
+Routing::get('register', 'DefaultController');
+Routing::get('home', 'DefaultController');
+Routing::get('newevent', 'DefaultController');
+Routing::get('profile', 'DefaultController');
+
+Routing::run($path);

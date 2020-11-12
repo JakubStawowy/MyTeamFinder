@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="../stylecss/style.min.css" type="text/css"/>
-    <link rel="stylesheet" href="../stylecss/login.min.css" type="text/css"/>
+    <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
+    <link rel="stylesheet" href="public/stylecss/login.min.css" type="text/css"/>
     <title>Zaloguj sie</title>
 </head>
 <body>
     <div class="container">
         <div class="top-bar">
-            <img src="../img/Graylogo.png">
+            <img src="public/img/Graylogo.png">
         </div>
         <div class="login-register">
             <div class="logo">
-                <img src="../img/Loggo1.png">
+                <img src="public/img/Loggo1.png">
             </div>
             <div class="login-container">
                 <form>

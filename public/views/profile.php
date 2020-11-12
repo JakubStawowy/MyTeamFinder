@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="../stylecss/style.min.css" type="text/css"/>
-    <link rel="stylesheet" href="../stylecss/profile.min.css" type="text/css"/>
+    <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
+    <link rel="stylesheet" href="public/stylecss/profile.min.css" type="text/css"/>
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
     <title>Moj profil</title>
 </head>
@@ -10,25 +10,25 @@
     <div class="container">
         <div class="menu-bar">
             
-            <img src="../img/Graylogo.png">
+            <img src="public/img/Graylogo.png">
             <ul>
                 <li>
-                    <a href="home.html">
+                    <a href="home">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="home.html">
+                    <a href="home">
                         E-sports
                     </a>
                 </li>
                 <li>
-                    <a href="home.html">
+                    <a href="home">
                         Team-sports
                     </a>
                 </li>
                 <li>
-                    <a href="newevent.html">
+                    <a href="newevent">
                         New event
                     </a>
                 </li>
@@ -37,10 +37,10 @@
         </div>
         <div class="bottom-bar">
             <i class="fas fa-bars"></i>
-            <a href="home.html">
+            <a href="home">
                 <i class="fas fa-home"></i>
             </a>
-            <a href="profile.html">
+            <a href="profile">
                 <i class="fas fa-user"></i>
             </a>
         </div>
