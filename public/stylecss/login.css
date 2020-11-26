@@ -17,7 +17,7 @@
   width: 50%;
 }
 
-.login-register .login-container form {
+.login-register .login-container .login {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -28,7 +28,13 @@
   background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
 }
 
-.login-register .login-container form input {
+.login-register .login-container .login .message {
+  color: white;
+  font-size: 0.5em;
+  margin: 0;
+}
+
+.login-register .login-container .login input {
   width: 60%;
   margin: 1em;
   padding: 1em;
@@ -38,7 +44,7 @@
   border-bottom: 2px solid white;
 }
 
-.login-register .login-container form button {
+.login-register .login-container .login button {
   width: 60%;
   height: 15%;
   margin: 1em;
@@ -50,11 +56,11 @@
   background: #474242 0% 0% no-repeat padding-box;
 }
 
-.login-register .login-container form button:hover {
+.login-register .login-container .login button:hover {
   cursor: pointer;
 }
 
-.login-register .login-container form a {
+.login-register .login-container .login a {
   color: white;
   font-size: 0.5em;
 }

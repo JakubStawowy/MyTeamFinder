@@ -1,3 +1,7 @@
 
 *.iml
 *.xml
+
+public/uploads/
+.idea
+.vscode

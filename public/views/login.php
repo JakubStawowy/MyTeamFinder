@@ -15,14 +15,24 @@
                 <img src="public/img/Loggo1.png">
             </div>
             <div class="login-container">
-                <form>
+                <form class="login" action="login" method="POST">
                     <input name="email" type="text" placeholder="email@email.com">
                     <input name="password" type="password" placeholder="password">
                     <a>
                         forgot your password?
                     </a>
-                    <button>Login</button>
+                    <button type="submit">Login</button>
                     <button>Register</button>
+
+                    <div class="message">
+                        <?php
+                        if(isset($messages)){
+                            foreach ($messages as $message){
+                                echo $message;
+                            }
+                        }
+                        ?>
+                    </div>
                 </form>
             </div>
         </div>

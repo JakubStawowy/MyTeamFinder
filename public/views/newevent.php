@@ -73,25 +73,23 @@
                 <i class="fas fa-user"></i>
             </a>
         </div>
-        <form class="new-event-section">
+        <form action="addEvent" method="POST" class="new-event-section" ENCTYPE="multipart/form-data">
             <h2>
                 New event
             </h2>
-            <button class="publish-button">
+            <button type="submit" class="publish-button">
                 Publish event
             </button>
-            <input class="event-title" type="text" placeholder="Title">
-            <input class="sport" type="text" placeholder="Sport">
-            <input class="players" type="text" placeholder="Number of players">
-            <div class="image-button">
-                <button>
-                    <i class="fas fa-image"></i>
-                </button>
+            <input name="title" class="event-title" type="text" placeholder="Title">
+            <input name="sport" class="sport" type="text" placeholder="Sport">
+            <input name="numberOfPlayers" class="players" type="text" placeholder="Number of players">
+            <input type="file" name="file" class="image-button">
+                <!-- <i class="fas fa-image"></i>
                 <a>
                     Picture (optional)
-                </a>
-            </div>
-            <textarea class="description" placeholder="Description, requirements"></textarea>
+                </a> -->
+            </input>
+            <textarea name="description" class="description" placeholder="Description, requirements"></textarea>
             <div class="date-location">
                 <div class="date">
                     <i class="fas fa-calendar-alt"></i>
@@ -106,6 +104,14 @@
                     </a>
                 </div>
             </div>
+            
+            <?php
+                if(isset($messages)){
+                    foreach ($messages as $message){
+                        echo $message;
+                    }
+                }
+            ?>
         </form>
     </div>
 </body>

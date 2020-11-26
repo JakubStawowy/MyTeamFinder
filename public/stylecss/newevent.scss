@@ -55,7 +55,7 @@ $font: 'Montserrat', sans-serif;
         grid-area: picture;
         margin: 2em;
         align-items: center;
-        button{
+        i{
             @include block-size(50%, 100%);
             font-size: 5em;
             border: none;

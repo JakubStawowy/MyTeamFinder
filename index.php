@@ -9,5 +9,7 @@ Routing::get('register', 'DefaultController');
 Routing::get('home', 'DefaultController');
 Routing::get('newevent', 'DefaultController');
 Routing::get('profile', 'DefaultController');
+Routing::post('login', 'SecurityController');
+Routing::post('addEvent', 'NewEventController');
 
 Routing::run($path);
