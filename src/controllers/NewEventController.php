@@ -17,7 +17,6 @@ class NewEventController extends AppController{
         if($this->isPost() && is_uploaded_file($file_tmp_name) && $this->validate($file)){
             move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
             $event = new Event($_POST['title'], $_POST['description'], $_POST['sport'], $_POST['numberOfPlayers']);
-//            $event = new Event("x", "Xd","d", 1);
             $event->setImage($filename);
             $this->render('home', ['messages'=>$this->messages, 'event'=>$event]);
             return;
