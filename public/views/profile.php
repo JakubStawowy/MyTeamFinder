@@ -52,7 +52,7 @@
                 </button>
                 <div class="data">
                     <h2>
-                        Name Surname
+                        <? if(isset($user)){ echo $user->getName()." ".$user->getSurname();}?>
                     </h2>
                     <a>
                         country

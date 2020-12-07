@@ -47,7 +47,7 @@
             <div class="user-image">
                 
             </div>
-            <a>Name Surname</a>
+            <a><? if(isset($user)){ echo $user->getName()." ".$user->getSurname();}?></a>
             <a href="profile">My profile</a>
             <a href="profile">Sports</a>
             <a href="profile">Events</a>
@@ -55,7 +55,7 @@
                 <i class="fas fa-cog"></i>
                 Account settings
             </a>
-            <a href="login">
+            <a href="login" >
                 <i class="fas fa-sign-out-alt"></i>
                 Logout
             </a>
