@@ -8,5 +8,7 @@ class Repository
     public function __construct(){
         $this->database = Database::create();
     }
-
+    protected function getFromDatabase(string $query){
+        return $this->database->connect()->prepare($query);
+    }
 }

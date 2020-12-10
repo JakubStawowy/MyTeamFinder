@@ -5,6 +5,8 @@ require_once __DIR__.'/../models/User.php';
 class UserRepository extends Repository
 {
     public function getUser(string $email): ?User{
+
+        //getting user
         $statement = $this->database->connect()->prepare('
             SELECT * FROM public.users WHERE email = :email
         ');
@@ -12,13 +14,18 @@ class UserRepository extends Repository
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+        //getting user details
+        $statement = $this->getFromDatabase('SELECT * FROM public.user_details WHERE id=?');
+        $statement->execute([$user['user_details_id']]);
+        $userDetails = $statement->fetch(PDO::FETCH_ASSOC);
+
         if($user == false){
             throw new Exception("User with this email doesn't exists");
         }
         return new User(
             $user['id'],
-            $user['name'],
-            $user['surname'],
+            $userDetails['name'],
+            $userDetails['surname'],
             $user['email'],
             $user['password']
         );

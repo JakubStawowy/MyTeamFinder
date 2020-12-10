@@ -8,12 +8,15 @@ class Event{
     private $numberOfPlayers;
     private $location;
     private $date;
-    public function __construct(string $title, string $description, string $sport, string $numberOfPlayers){
+    public function __construct(string $title, string $description, string $sport, string $numberOfPlayers, string $location, string $date, string $image){
 
         $this->title = $title;
         $this->description = $description;
         $this->sport = $sport;
         $this->numberOfPlayers = $numberOfPlayers;
+        $this->location = $location;
+        $this->date = $date;
+        $this->image = $image;
     }
 
     public function getTitle():string
