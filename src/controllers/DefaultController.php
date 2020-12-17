@@ -11,9 +11,6 @@ class DefaultController extends AppController{
     public function register(){
         $this->render('register');
     }
-    public function home(){
-        $this->render('home');
-    }
     public function newEvent(){
         $this->render('newEvent');
     }

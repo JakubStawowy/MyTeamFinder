@@ -82,7 +82,8 @@
             </div>
 
             <?
-            if(isset($event)){
+            if(isset($events)){
+                foreach ($events as $event):
             ?>
             <div class="post">
                 <div class="image">
@@ -116,6 +117,7 @@
                 </div>
             </div>
             <?
+                endforeach;
             }
             ?>
         </div>

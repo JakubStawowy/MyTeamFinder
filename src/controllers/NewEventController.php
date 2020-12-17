@@ -24,14 +24,13 @@ class NewEventController extends AppController{
             try{
 
                 move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
-                //(string $title, string $description, string $sport, string $numberOfPlayers, string $location, string $date, string $image)
                 $event = new Event($_POST['title'], $_POST['description'], $_POST['sport'], $_POST['numberOfPlayers'], 'krakow', '2020-02-11', $filename);
-//                $event->setImage($filename);
-                $this->render('home', ['messages'=>$this->messages, 'event'=>$event]);
                 $this->eventRepository->addEvent($event);
+                $events = $this->eventRepository->getEvents();
+                $this->render('home',['events' => $events]);
                 return;
             }catch (Exception $e){
-                die($e->getMessage());
+                $this->messages[] = $e->getMessage();
             }
         }
         $this->render('newevent', ['messages'=>$this->messages]);
@@ -46,5 +45,9 @@ class NewEventController extends AppController{
             return false;
         }
         return true;
+    }
+    public function home(){
+        $events = $this->eventRepository->getEvents();
+        $this->render('home',['events' => $events]);
     }
 }

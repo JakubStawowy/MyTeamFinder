@@ -7,19 +7,19 @@ class EventRepository extends Repository
 {
     public function getProject(int $id): ?Event{
         //getting user from database
-        $statement = $this->getFromDatabase('SELECT * FROM public.events where id = :id;');
+        $statement = $this->prepareStatement('SELECT * FROM public.events where id = :id;');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
         $event = $statement->fetch(PDO::FETCH_ASSOC);
 
         //getting event details from database
-        $statement = $this->getFromDatabase('SELECT * FROM public.event_details where id = :id;');
+        $statement = $this->prepareStatement('SELECT * FROM public.event_details where id = :id;');
         $statement->bindParam(':id', $event['event_details_id'], PDO::PARAM_INT);
         $statement->execute();
         $eventDetails = $statement->fetch();
 
         //getting sport name from database
-        $statement = $this->getFromDatabase('SELECT * FROM public.sports where id = :id;');
+        $statement = $this->prepareStatement('SELECT * FROM public.sports where id = :id;');
         $statement->bindParam(':id', $event['sport_id'], PDO::PARAM_INT);
         $statement->execute();
         $sport = $statement->fetch();
@@ -43,19 +43,32 @@ class EventRepository extends Repository
             $event->getLocation(),
             $event->getImage()
         ];
-        $statement = $this->getFromDatabase('INSERT INTO event_details VALUES(DEFAULT , ?, ?, ?, ?, ?, ?)');
+        $statement = $this->prepareStatement('INSERT INTO event_details VALUES(DEFAULT , ?, ?, ?, ?, ?, ?)');
         $statement->execute($eventDetails);
 
-        $statement = $this->getFromDatabase('SELECT id FROM event_details WHERE title=?');
+        $statement = $this->prepareStatement('SELECT id FROM event_details WHERE title=?');
         $statement->execute([$eventDetails[0]]);
         $id = $statement->fetch()['id'];
 
-        $statement = $this->getFromDatabase('SELECT id FROM sports WHERE name=?');
+        $statement = $this->prepareStatement('SELECT id FROM sports WHERE name=?');
         $statement->execute([$event->getSport()]);
         $sportId = $statement->fetch()['id'];
 
-        $statement = $this->getFromDatabase('INSERT INTO events VALUES (DEFAULT, 1,?, ?, DEFAULT)');
+        $statement = $this->prepareStatement('INSERT INTO events VALUES (DEFAULT, 1,?, ?, DEFAULT)');
         $statement->execute([$sportId, $id]);
 
+    }
+    public function getEvents(): array{
+
+        $results = [];
+        $statement = $this->prepareStatement('SELECT id FROM events;');
+        $statement->execute();
+
+        $events = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($events as $event){
+            $results[] = $this->getProject($event['id']);
+        }
+        return $results;
     }
 }

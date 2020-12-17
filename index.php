@@ -6,7 +6,7 @@ $path = parse_url($path, PHP_URL_PATH);
 
 Routing::get('index', 'DefaultController');
 Routing::get('register', 'DefaultController');
-Routing::get('home', 'DefaultController');
+Routing::get('home', 'NewEventController');
 Routing::get('newevent', 'DefaultController');
 Routing::get('profile', 'DefaultController');
 Routing::post('login', 'SecurityController');
