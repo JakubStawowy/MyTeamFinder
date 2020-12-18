@@ -6,7 +6,7 @@ require_once __DIR__.'/../models/User.php';
 class EventRepository extends Repository
 {
     public function getProject(int $id): ?Event{
-        //getting user from database
+        //getting event from database
         $statement = $this->prepareStatement('SELECT * FROM public.events where id = :id;');
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
@@ -58,16 +58,40 @@ class EventRepository extends Repository
         $statement->execute([$sportId, $id]);
 
     }
-    public function getEvents(): array{
+    public function getEvents($type = null): array{
 
         $results = [];
-        $statement = $this->prepareStatement('SELECT id FROM events;');
-        $statement->execute();
-
-        $events = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($events as $event){
-            $results[] = $this->getProject($event['id']);
+        switch ($type){
+            case 'esport':
+            case 'normal':
+                $statement = $this->prepareStatement('SELECT id FROM sports WHERE type=:sportType;');
+                $statement->bindParam(':sportType', $type, PDO::PARAM_STR);
+                $statement->execute();
+                $sportIds = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $query = 'SELECT id FROM events WHERE ';
+                foreach ($sportIds as $sportId){
+                    $query = $query.' sport_id=? or ';
+                }
+                $query = substr($query, 0, -4);
+                $query = $query.' ORDER BY created_at DESC;';
+                $statement = $this->prepareStatement($query);
+                $sportIdsArray = [];
+                foreach ($sportIds as $sportId){
+                    $sportIdsArray[] = $sportId['id'];
+                }
+                $statement->execute($sportIdsArray);
+                $eventIds = $statement->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($eventIds as $eventId) {
+                    $results[] = $this->getProject($eventId['id']);
+                }
+                break;
+            default:
+                $statement = $this->prepareStatement('SELECT id FROM events ORDER BY created_at DESC;');
+                $statement->execute();
+                $eventIds = $statement->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($eventIds as $eventId){
+                    $results[] = $this->getProject($eventId['id']);
+                }
         }
         return $results;
     }

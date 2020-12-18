@@ -4,9 +4,10 @@
     <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
     <link rel="stylesheet" href="public/stylecss/newevent.min.css" type="text/css"/>
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="public/js/homeScript.js" defer></script>
     <title>Dodaj wydarzenie</title>
 </head>
-<body>
+<body onload="onLoad()">
     <div class="container">
         <div class="menu-bar">
             
@@ -35,11 +36,11 @@
                 
             </ul>
         </div>
-        <div class="right-side-bar-hidden">
+        <div id="right-side-bar-hidden" class="right-side-bar-hidden">
             <i class="fas fa-angle-up nav-icon"></i>
-            <i class="fas fa-angle-left nav-icon"></i>
+            <i id="nav-icon-hidden" class="fas fa-angle-left nav-icon"></i>
         </div>
-        <div class="right-side-bar">
+        <div id="right-side-bar" class="right-side-bar">
             <a>
                 <i class="fas fa-angle-up nav-icon"></i>
             </a>
@@ -60,9 +61,8 @@
                 Logout
             </a>
             <a>
-                <i class="fas fa-angle-right nav-icon"></i>
+                <i id="nav-icon" class="fas fa-angle-right nav-icon"></i>
             </a>
-            
         </div>
         <div class="bottom-bar">
             <i class="fas fa-bars"></i>

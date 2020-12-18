@@ -56,6 +56,10 @@ $font: 'Montserrat', sans-serif;
                 color: $font-color;
                 border-bottom: 2px solid $font-color;
             }
+            .no-valid{
+                color: red;
+                // border-bottom: 2px solid red;
+            }
             button{
                 @include block-size(60%, 15%);
                 margin: 1em;

@@ -1,7 +1,7 @@
 <?php
 require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/SecurityController.php';
-require_once 'src/controllers/NewEventController.php';
+require_once 'src/controllers/EventController.php';
 class Routing{
     public static $routes;
     public static function get($url, $controller){

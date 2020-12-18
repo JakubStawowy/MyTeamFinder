@@ -4,7 +4,7 @@ require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Event.php';
 require_once __DIR__.'/../repository/EventRepository.php';
-class NewEventController extends AppController{
+class EventController extends AppController{
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
@@ -49,5 +49,13 @@ class NewEventController extends AppController{
     public function home(){
         $events = $this->eventRepository->getEvents();
         $this->render('home',['events' => $events]);
+    }
+    public function eSports(){
+        $events = $this->eventRepository->getEvents('esport');
+        $this->render('home', ['events'=>$events]);
+    }
+    public function normalSports(){
+        $events = $this->eventRepository->getEvents('normal');
+        $this->render('home', ['events'=>$events]);
     }
 }

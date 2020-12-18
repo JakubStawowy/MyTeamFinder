@@ -44,6 +44,10 @@
   border-bottom: 2px solid white;
 }
 
+.login-register .login-container .login .no-valid {
+  color: red;
+}
+
 .login-register .login-container .login button {
   width: 60%;
   height: 15%;

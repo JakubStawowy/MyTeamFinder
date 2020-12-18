@@ -6,10 +6,12 @@ $path = parse_url($path, PHP_URL_PATH);
 
 Routing::get('index', 'DefaultController');
 Routing::get('register', 'DefaultController');
-Routing::get('home', 'NewEventController');
+Routing::get('home', 'EventController');
+Routing::get('eSports', 'EventController');
+Routing::get('normalSports', 'EventController');
 Routing::get('newevent', 'DefaultController');
 Routing::get('profile', 'DefaultController');
 Routing::post('login', 'SecurityController');
-Routing::post('addEvent', 'NewEventController');
+Routing::post('addEvent', 'EventController');
 
 Routing::run($path);

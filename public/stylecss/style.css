@@ -131,6 +131,15 @@ body {
   font-size: 3em;
 }
 
+.container .hidden-element {
+  display: none;
+}
+
+.container .flex-element {
+  display: flex;
+  flex-direction: column;
+}
+
 .container .bottom-bar {
   display: none;
 }
