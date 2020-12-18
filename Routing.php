@@ -18,7 +18,7 @@ class Routing{
         else{
             $controller = self::$routes[$action];
             $object = new $controller;
-            $action = $action ?: 'register';
+            $action = $action ?: 'index';
             $object->$action();
         }
     }

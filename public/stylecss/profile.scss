@@ -52,8 +52,8 @@ $font: 'Montserrat', sans-serif;
         }
         .profile-settings{
             @include flex-row();
-            // flex: 6;
-            // justify-content: flex-end;
+            flex: 6;
+            justify-content: flex-end;
             a{
                 height: 20%;
                 i{

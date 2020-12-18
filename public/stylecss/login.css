@@ -17,6 +17,27 @@
   width: 50%;
 }
 
+.login-register .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.login-register .login-container button {
+  padding: 1.5em;
+  width: 50%;
+  border: none;
+  border-radius: 30px;
+  font-family: "Montserrat", sans-serif;
+  line-height: 2.5em;
+  color: white;
+  background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
+}
+
+.login-register .login-container button:hover {
+  cursor: pointer;
+}
+
 .login-register .login-container .login {
   display: flex;
   flex-direction: column;

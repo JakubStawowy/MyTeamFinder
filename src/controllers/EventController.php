@@ -26,8 +26,8 @@ class EventController extends AppController{
                 move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
                 $event = new Event($_POST['title'], $_POST['description'], $_POST['sport'], $_POST['numberOfPlayers'], 'krakow', '2020-02-11', $filename);
                 $this->eventRepository->addEvent($event);
-                $events = $this->eventRepository->getEvents();
-                $this->render('home',['events' => $events]);
+                $url = "http://$_SERVER[HTTP_HOST]";
+                header("Location: {$url}/home");
                 return;
             }catch (Exception $e){
                 $this->messages[] = $e->getMessage();

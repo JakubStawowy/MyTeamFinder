@@ -22,7 +22,6 @@
                         forgot your password?
                     </a>
                     <button type="submit">Login</button>
-                    <button>Register</button>
 
                     <div class="message">
                         <?php
@@ -33,6 +32,9 @@
                         }
                         ?>
                     </div>
+                </form>
+                <form action="register">
+                    <button type="submit">Register</button>
                 </form>
             </div>
         </div>

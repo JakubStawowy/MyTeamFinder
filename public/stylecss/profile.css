@@ -40,6 +40,8 @@
 .profile .profile-data .profile-settings {
   display: flex;
   flex-direction: row;
+  flex: 6;
+  justify-content: flex-end;
 }
 
 .profile .profile-data .profile-settings a {

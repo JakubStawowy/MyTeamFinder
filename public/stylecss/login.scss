@@ -34,6 +34,22 @@ $font: 'Montserrat', sans-serif;
         }
     }
     .login-container{
+        @include flex-column();
+        justify-content: space-around;
+        button{
+            // @include block-size(50%, 30%);
+            padding: 1.5em;
+            width: 50%;
+            border: none;
+            border-radius: 30px;
+            font-family: $font;
+            line-height: 2.5em;
+            color: $font-color;
+            background: $bar-color;
+        }
+        button:hover{
+            cursor: pointer;
+        }
         .login{
             @include flex-column();
             width: 50%;

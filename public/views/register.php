@@ -16,13 +16,22 @@
                 <img src="public/img/Loggo1.png">
             </div>
             <div class="login-container">
-                <form class="login">
+                <form class="login" action="registerUser" method="post">
                     <input name="name" type="text" placeholder="name">
                     <input name="surname" type="text" placeholder="surname">
                     <input name="email" type="text" placeholder="email@email.com">
                     <input name="password" type="password" placeholder="password">
-                    <input name="confirm password" type="password" placeholder="repeat password">
+                    <input name="confirmedPassword" type="password" placeholder="repeat password">
                     <button>Register</button>
+                    <div class="message">
+                        <?php
+                        if(isset($messages)){
+                            foreach ($messages as $message){
+                                echo $message;
+                            }
+                        }
+                        ?>
+                    </div>
                     <button>I alredy have an account</button>
                 </form>
             </div>

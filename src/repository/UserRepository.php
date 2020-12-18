@@ -15,7 +15,7 @@ class UserRepository extends Repository
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         //getting user details
-        $statement = $this->getFromDatabase('SELECT * FROM public.user_details WHERE id=?');
+        $statement = $this->prepareStatement('SELECT * FROM public.user_details WHERE id=?');
         $statement->execute([$user['user_details_id']]);
         $userDetails = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -40,5 +40,26 @@ class UserRepository extends Repository
         }catch (PDOException $e){
             die("PDO Error: ".$e->getMessage());
         }
+    }
+    public function registerUser(User $user){
+        try{
+            $statement = $this->prepareStatement('INSERT INTO public.user_details VALUES(DEFAULT, ?, ?)');
+            $statement->execute([$user->getName(), $user->getSurname()]);
+
+            $statement = $this->prepareStatement('INSERT INTO public.users VALUES(DEFAULT, ?, ?, ?, DEFAULT)');
+            $statement->execute([$this->getUserDetailsId($user), $user->getEmail(), $user->getPassword()]);
+            return true;
+        }
+        catch (Exception $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+    private function getUserDetailsId(User $user){
+        $statement = $this->prepareStatement(
+          'SELECT id FROM public.user_details WHERE name=? AND surname=?'
+        );
+        $statement->execute([$user->getName(), $user->getSurname()]);
+        return $statement->fetch(PDO::FETCH_ASSOC)['id'];
     }
 }

@@ -48,7 +48,13 @@
             <div class="user-image">
                 
             </div>
-            <a><? if(isset($user)){ echo $user->getName()." ".$user->getSurname();}?></a>
+            <a>
+                <?
+                    if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
+                        echo $_COOKIE['name'].' '.$_COOKIE['surname'];
+                    }
+                ?>
+            </a>
             <a href="profile">My profile</a>
             <a href="profile">Sports</a>
             <a href="profile">Events</a>
@@ -56,7 +62,7 @@
                 <i class="fas fa-cog"></i>
                 Account settings
             </a>
-            <a href="login" >
+            <a href="logout" >
                 <i class="fas fa-sign-out-alt"></i>
                 Logout
             </a>

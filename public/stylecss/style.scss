@@ -82,8 +82,8 @@ body{
     }
     .right-side-bar-hidden{
         @include block-size(7%, 100%);
-        // @include flex-column();
-        display: none;
+        @include flex-column();
+        // display: none;
         justify-content: space-between;
         align-items: center;
         border-left: 1px solid $border-color;
@@ -100,7 +100,8 @@ body{
     }
     .right-side-bar{
         @include block-size(20%, 100%);
-        @include flex-column();
+        // @include flex-column();
+        display: none;
         justify-content: space-around;
         align-items: center;
         color:$font-color;

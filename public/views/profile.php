@@ -4,9 +4,10 @@
     <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
     <link rel="stylesheet" href="public/stylecss/profile.min.css" type="text/css"/>
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="public/js/homeScript.js" defer></script>
     <title>Moj profil</title>
 </head>
-<body>
+<body onload="onLoad()">
     <div class="container">
         <div class="menu-bar">
             
@@ -35,6 +36,41 @@
                 
             </ul>
         </div>
+        <div id="right-side-bar-hidden" class="right-side-bar-hidden">
+            <i class="fas fa-angle-up nav-icon"></i>
+            <i id="nav-icon-hidden" class="fas fa-angle-left nav-icon"></i>
+        </div>
+        <div id="right-side-bar" class="right-side-bar">
+            <a>
+                <i class="fas fa-angle-up nav-icon"></i>
+            </a>
+
+            <div class="user-image">
+
+            </div>
+            <a>
+                <?
+                if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
+                    echo $_COOKIE['name'].' '.$_COOKIE['surname'];
+                }
+                ?>
+            </a>
+            <a href="profile">My profile</a>
+            <a href="profile">Sports</a>
+            <a href="profile">Events</a>
+            <a>
+                <i class="fas fa-cog"></i>
+                Account settings
+            </a>
+            <a href="logout" >
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+            <a>
+                <i id="nav-icon" class="fas fa-angle-right nav-icon"></i>
+            </a>
+
+        </div>
         <div class="bottom-bar">
             <i class="fas fa-bars"></i>
             <a href="home">
@@ -52,7 +88,11 @@
                 </button>
                 <div class="data">
                     <h2>
-                        <? if(isset($user)){ echo $user->getName()." ".$user->getSurname();}?>
+                        <?
+                        if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
+                            echo $_COOKIE['name'].' '.$_COOKIE['surname'];
+                        }
+                        ?>
                     </h2>
                     <a>
                         country

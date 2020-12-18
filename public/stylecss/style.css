@@ -79,7 +79,8 @@ body {
 .container .right-side-bar-hidden {
   width: 7%;
   height: 100%;
-  display: none;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border-left: 1px solid #707070;
@@ -100,8 +101,7 @@ body {
 .container .right-side-bar {
   width: 20%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  display: none;
   justify-content: space-around;
   align-items: center;
   color: white;
