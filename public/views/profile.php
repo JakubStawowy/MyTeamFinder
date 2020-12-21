@@ -19,17 +19,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="home">
+                    <a href="eSports">
                         E-sports
                     </a>
                 </li>
                 <li>
-                    <a href="home">
+                    <a href="normalSports">
                         Team-sports
                     </a>
                 </li>
                 <li>
-                    <a href="newevent">
+                    <a href="newEvent">
                         New event
                     </a>
                 </li>
@@ -81,6 +81,9 @@
             </a>
         </div>
         <section class="profile">
+            <?
+                if(isset($user)){
+            ?>
             <div class="profile-data">
                 
                 <button class="profile-image">
@@ -89,16 +92,18 @@
                 <div class="data">
                     <h2>
                         <?
-                        if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
-                            echo $_COOKIE['name'].' '.$_COOKIE['surname'];
-                        }
+                            echo $user->getName().' '.$user->getSurname();
                         ?>
                     </h2>
                     <a>
-                        country
+                        <?
+                            echo $user->getCountry();
+                        ?>
                     </a>
                     <a>
-                        age
+                        <?
+                            echo $user->getAge();
+                        ?>
                     </a>
                     <div class="stars">
                         <i class="fas fa-star"></i>
@@ -121,7 +126,9 @@
                     About me
                 </h2>
                 <a>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has su
+                    <?
+                        echo $user->getDescription();
+                    ?>
                 </a>
             </div>
             <h2>
@@ -159,6 +166,9 @@
                 </div>
                 </div>
             </section>
+            <?
+                }
+            ?>
         </section>
     </div>
 </body>

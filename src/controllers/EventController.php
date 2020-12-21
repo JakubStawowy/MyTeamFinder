@@ -24,7 +24,17 @@ class EventController extends AppController{
             try{
 
                 move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
-                $event = new Event($_POST['title'], $_POST['description'], $_POST['sport'], $_POST['numberOfPlayers'], 'krakow', '2020-02-11', $filename);
+                $event = new Event(
+                    0,
+                    $_POST['title'],
+                    $_POST['description'],
+                    $_POST['sport'],
+                    $_POST['numberOfPlayers'],
+                    'krakow', '2020-02-11',
+                    $filename,
+                    $_COOKIE['id'],
+                    $_COOKIE['name'].' '.$_COOKIE['surname']
+                );
                 $this->eventRepository->addEvent($event);
                 $url = "http://$_SERVER[HTTP_HOST]";
                 header("Location: {$url}/home");
@@ -57,5 +67,17 @@ class EventController extends AppController{
     public function normalSports(){
         $events = $this->eventRepository->getEvents('normal');
         $this->render('home', ['events'=>$events]);
+    }
+    public function assignUserToEvent(){
+        if($this->isPost()){
+            $userId = $_COOKIE['id'];
+            $eventId = $_POST['eventId'];
+            if($this->eventRepository->assignUserToEvent($userId, $eventId)){
+                $this->render('home', ['messages'=>["You have been successfully assigned to event"]]);
+            }else{
+                $this->render('home', ['meessages'=>["There were problems with assigning you to event. Please try again."]]);
+            }
+
+        }
     }
 }

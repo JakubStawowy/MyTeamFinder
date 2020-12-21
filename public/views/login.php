@@ -16,21 +16,24 @@
             </div>
             <div class="login-container">
                 <form class="login" action="login" method="POST">
-                    <input name="email" type="text" placeholder="email@email.com">
-                    <input name="password" type="password" placeholder="password">
-                    <a>
-                        forgot your password?
-                    </a>
-                    <button type="submit">Login</button>
+                    <div class="login-section">
 
-                    <div class="message">
-                        <?php
-                        if(isset($messages)){
-                            foreach ($messages as $message){
-                                echo $message;
+                        <input name="email" type="text" placeholder="email@email.com">
+                        <input name="password" type="password" placeholder="password">
+                        <a>
+                            forgot your password?
+                        </a>
+                        <button type="submit">Login</button>
+
+                        <div class="message">
+                            <?php
+                            if(isset($messages)){
+                                foreach ($messages as $message){
+                                    echo $message;
+                                }
                             }
-                        }
-                        ?>
+                            ?>
+                        </div>
                     </div>
                 </form>
                 <form action="register">

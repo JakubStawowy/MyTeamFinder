@@ -19,17 +19,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="home">
+                    <a href="eSports">
                         E-sports
                     </a>
                 </li>
                 <li>
-                    <a href="home">
+                    <a href="normalSports">
                         Team-sports
                     </a>
                 </li>
                 <li>
-                    <a href="newevent">
+                    <a href="newEvent">
                         New event
                     </a>
                 </li>

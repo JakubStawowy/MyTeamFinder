@@ -1,6 +1,8 @@
 <?php
 
 class Event{
+
+    private $id;
     private $title;
     private $description;
     private $image;
@@ -8,8 +10,11 @@ class Event{
     private $numberOfPlayers;
     private $location;
     private $date;
-    public function __construct(string $title, string $description, string $sport, string $numberOfPlayers, string $location, string $date, string $image){
-
+    private $addedById;
+    private $addedByNameSurname;
+    private $signedPlayers;
+    public function __construct(int $id, string $title, string $description, string $sport, string $numberOfPlayers, string $location, string $date, string $image, int $addedById, string $addedByNameSurname, int $signedPlayers=0){
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->sport = $sport;
@@ -17,6 +22,23 @@ class Event{
         $this->location = $location;
         $this->date = $date;
         $this->image = $image;
+        $this->addedById = $addedById;
+        $this->addedByNameSurname = $addedByNameSurname;
+        $this->signedPlayers = $signedPlayers;
+    }
+    public function setSignedPlayers(int $signedPlayers){
+        $this->signedPlayers = $signedPlayers;
+    }
+    public function getSignedPlayers(): int{
+        return $this->signedPlayers;
+    }
+    public function getId(): int
+    {
+        return $this->id;
+    }
+    public function getAddedByNameSurname(): string
+    {
+        return $this->addedByNameSurname;
     }
 
     public function getTitle():string

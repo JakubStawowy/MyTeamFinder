@@ -24,4 +24,11 @@ class AppController{
         }
         print $output;
     }
+    protected function renderWhenCookiesAreSet($template, array $variables = []){
+        if(!(isset($_COOKIE['name']) && isset($_COOKIE['surname']) && isset($_COOKIE['id']))){
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}");
+        }
+        else $this->render($template, $variables);
+    }
 }

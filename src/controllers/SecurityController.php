@@ -22,6 +22,7 @@ class SecurityController extends AppController{
                 $userRepository->logUser($user->getId());
                 setcookie('name', $user->getName(), time()+(86400 * 30), "/");
                 setcookie('surname', $user->getSurname(), time()+(86400 * 30), "/");
+                setcookie('id', $user->getId(), time()+(86400 * 30), "/");
                 $url = "http://$_SERVER[HTTP_HOST]";
                 header("Location: {$url}/home");
             }
@@ -31,18 +32,19 @@ class SecurityController extends AppController{
         }
     }
     public function logout(){
-        if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
+        if(isset($_COOKIE['name']) || isset($_COOKIE['surname']) || isset($_COOKIE['id'])){
             unset($_COOKIE['name']);
             unset($_COOKIE['surname']);
+            unset($_COOKIE['id']);
             setcookie('name', null, -1, '/');
             setcookie('surname', null, -1, '/');
+            setcookie('id', null, -1, '/');
         }
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}");
     }
     public function registerUser(){
         if (!$this->isPost()) {
-            echo "xd";
             $this->render('register');
             return;
         }
@@ -51,8 +53,11 @@ class SecurityController extends AppController{
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirmedPassword = $_POST['confirmedPassword'];
+        $phone = $_POST['phone'];
         $name = $_POST['name'];
         $surname = $_POST['surname'];
+        $age = $_POST['age'];
+        $country = $_POST['country'];
 
         if ($password !== $confirmedPassword) {
             $this->render('register', ['messages' => ["Please provide proper password"]]);
@@ -60,11 +65,14 @@ class SecurityController extends AppController{
         }
 
         if($userRepository->registerUser(new User(
-            1,
+            0,
             $name,
             $surname,
             $email,
-            $password
+            $password,
+            $country,
+            $age,
+            $phone
         ))){
             $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
         }

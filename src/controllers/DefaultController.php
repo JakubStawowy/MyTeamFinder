@@ -17,14 +17,10 @@ class DefaultController extends AppController{
     public function newEvent(){
         $this->renderWhenCookiesAreSet('newEvent');
     }
-    public function profile(){
+    public function personalProfile(){
         $this->renderWhenCookiesAreSet('profile');
     }
-    private function renderWhenCookiesAreSet($template){
-        if(!(isset($_COOKIE['name']) && isset($_COOKIE['surname']))){
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}");
-        }
-        else $this->render($template);
+    public function userProfile(){
+
     }
 }

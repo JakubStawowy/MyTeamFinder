@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="newevent">
+                    <a href="newEvent">
                         New event
                     </a>
                 </li>
@@ -55,9 +55,9 @@
                     }
                 ?>
             </a>
-            <a href="profile">My profile</a>
-            <a href="profile">Sports</a>
-            <a href="profile">Events</a>
+            <a href="personalProfile">My profile</a>
+            <a href="personalProfile">Sports</a>
+            <a href="personalProfile">Events</a>
             <a>
                 <i class="fas fa-cog"></i>
                 Account settings
@@ -76,7 +76,7 @@
             <a href="home">
                 <i class="fas fa-home"></i>
             </a>
-            <a href="profile">
+            <a href="personalProfile">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -89,18 +89,25 @@
             </div>
 
             <?
+            if(isset($messages)){
+                foreach ($messages as $message){
+                    echo $message;
+                }
+            }
+            ?>
+            <?
             if(isset($events)){
                 foreach ($events as $event):
             ?>
             <div class="post">
                 <div class="image">
-                            <img src="public/uploads/<?=$event->getImage()?>">
-<!--                    <img src="public/uploads/--><?//=$event->getImage()?><!--">-->
+                    <img src="public/uploads/<?=$event->getImage()?>">
                 </div>
                 <div class="post-description">
                     <h2><?= $event->getTitle() ?></h2>
+                    <a><?= $event->getAddedByNameSurname()?><a/>
                     <h4>
-                        signed players: 0/<?= $event->getNumberOfPlayers() ?>
+                        signed players: <?= $event->getSignedPlayers().'/'.$event->getNumberOfPlayers() ?>
                     </h4>
                     <a class="description">
                         <?= $event->getDescription() ?>
@@ -116,10 +123,13 @@
                                 6 pm, 24-06-2020
                             </a>
                         </section>
-                        <a class="sign-section">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Sign in
-                        </a>
+                        <form class="sign-section" action="assignUserToEvent" method="post">
+                            <input type="hidden" name="eventId" value="<?= $event->getId() ?>"/>
+                            <button class="mybutton" type="submit">
+                                Sign in
+                                <i class="fas fa-sign-in-alt"></i>
+                            </button>
+                        </form>
                     </section>
                 </div>
             </div>

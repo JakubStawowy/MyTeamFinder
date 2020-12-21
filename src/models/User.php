@@ -7,13 +7,54 @@ class User{
     private $surname;
     private $email;
     private $password;
-    public function __construct(int $id, string $name, string $surname, string $email, string $password)
+    private $phone;
+    private $description;
+    private $country;
+    private $age;
+
+    public function __construct(int $id, string $name, string $surname, string $email, string $password, string $country, int $age, string $phone)
     {
         $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
         $this->email = $email;
         $this->password = $password;
+        $this->country = $country;
+        $this->age = $age;
+        $this->phone = $phone;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): void
+    {
+        $this->country = $country;
+    }
+
+    public function getPhone(): string{
+        return $this->phone;
+    }
+
+    public function getAge(): int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): void
+    {
+        $this->age = $age;
+    }
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     public function getId(): int

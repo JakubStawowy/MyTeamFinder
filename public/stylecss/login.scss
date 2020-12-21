@@ -23,6 +23,7 @@ $font: 'Montserrat', sans-serif;
 
 .login-register{
     @include flex-row();
+    align-items: center;
     div{
         @include block-size(50%, 100%);
         margin: 20vh 0 20vh;
@@ -36,6 +37,8 @@ $font: 'Montserrat', sans-serif;
     .login-container{
         @include flex-column();
         justify-content: space-around;
+        padding: 3em;
+        margin: 0;
         button{
             // @include block-size(50%, 30%);
             padding: 1.5em;
@@ -51,17 +54,23 @@ $font: 'Montserrat', sans-serif;
             cursor: pointer;
         }
         .login{
-            @include flex-column();
-            width: 50%;
+            @include flex-row();
+            // width: 50%;
             padding: 1.5em;
             justify-content: space-around;
-            align-items: center;
             border-radius: 5vw;
             background: $bar-color;
+            .login-section{
+                @include flex-column();
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+            }
             .message{
                 color: $font-color;
                 font-size: 0.5em;
-                margin: 0;
+                margin: 1em;
             }
             input{
                 width: 60%;
@@ -103,10 +112,9 @@ $font: 'Montserrat', sans-serif;
         .login-container{
             width: 100%;
             form{
+                // @include flex-column();
                 width: 100%;
                 padding: 0;
-                display: flex;
-                flex-direction: column;
                 justify-content: space-around;
                 align-items: center;
                 background: transparent;
