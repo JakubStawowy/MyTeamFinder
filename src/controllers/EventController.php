@@ -22,7 +22,6 @@ class EventController extends AppController{
         $file_tmp_name = $file['tmp_name'];
         if($this->isPost() && is_uploaded_file($file_tmp_name) && $this->validate($file)){
             try{
-
                 move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
                 $event = new Event(
                     0,
@@ -68,14 +67,18 @@ class EventController extends AppController{
         $events = $this->eventRepository->getEvents('normal');
         $this->render('home', ['events'=>$events]);
     }
-    public function assignUserToEvent(){
+    public function signUpUserForEvent(){
         if($this->isPost()){
             $userId = $_COOKIE['id'];
             $eventId = $_POST['eventId'];
-            if($this->eventRepository->assignUserToEvent($userId, $eventId)){
-                $this->render('home', ['messages'=>["You have been successfully assigned to event"]]);
-            }else{
-                $this->render('home', ['meessages'=>["There were problems with assigning you to event. Please try again."]]);
+            try{
+                $this->eventRepository->signUpUserToEvent($userId, $eventId);
+                $this->render('home', ['messages'=>['You have been succesfully signed up for that event']]);
+            }catch (Exception $e){
+                if(substr($e->getMessage(), 9, 5) == "23505")
+                    $this->render('home', ['messages'=>["You are already signed up for that event"]]);
+                else
+                    $this->render('home', ['messages'=>[$e->getMessage()]]);
             }
 
         }

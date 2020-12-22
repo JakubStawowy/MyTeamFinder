@@ -57,7 +57,8 @@
             </a>
             <a href="profile">My profile</a>
             <a href="profile">Sports</a>
-            <a href="profile">Events</a>
+            <a href="userSignedEvents">Events</a>
+            <a href="userEvents">My events</a>
             <a>
                 <i class="fas fa-cog"></i>
                 Account settings

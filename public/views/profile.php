@@ -10,7 +10,6 @@
 <body onload="onLoad()">
     <div class="container">
         <div class="menu-bar">
-            
             <img src="public/img/Graylogo.png">
             <ul>
                 <li>
@@ -55,10 +54,11 @@
                 }
                 ?>
             </a>
-            <a href="profile">My profile</a>
-            <a href="profile">Sports</a>
-            <a href="profile">Events</a>
-            <a>
+            <a href="personalProfile">My profile</a>
+            <a href="personalProfile">Sports</a>
+            <a href="userSignedEvents">Events</a>
+            <a href="userEvents">My events</a>
+            <a href="userSettings">
                 <i class="fas fa-cog"></i>
                 Account settings
             </a>
@@ -114,12 +114,58 @@
                     </div>
                 </div>
                 <div class="profile-settings">
-                    <a>
+                    <a href="userSettings">
                         <i class="fas fa-cog"></i>
                         profile settings
                     </a>
                 </div>
             </div>
+            <section class="event-section">
+            <a href="userSignedEvents">Events</a>
+            <a href="userEvents">My events</a>
+            <?
+            if(isset($events)){
+                foreach ($events as $event):
+                    ?>
+                    <div class="post">
+                        <div class="image">
+                            <img src="public/uploads/<?=$event->getImage()?>">
+                        </div>
+                        <div class="post-description">
+                            <h2><?= $event->getTitle() ?></h2>
+                            <a><?= $event->getAddedByNameSurname()?></a>
+                                <h4>
+                                    signed players: <?= $event->getSignedPlayers().'/'.$event->getNumberOfPlayers() ?>
+                                </h4>
+                                <a class="description">
+                                    <?= $event->getDescription() ?>
+                                </a>
+                                <section class="icons-section">
+                                    <section class="location-date-section">
+                                        <a>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            Cracowa
+                                        </a>
+                                        <a>
+                                            <i class="fas fa-calendar-alt"></i>
+                                            6 pm, 24-06-2020
+                                        </a>
+                                    </section>
+                                    <form class="sign-section" action="assignUserToEvent" method="post">
+                                        <input type="hidden" name="eventId" value="<?= $event->getId() ?>"/>
+                                        <button class="mybutton" type="submit">
+                                            Sign out
+                                            <i class="fas fa-sign-in-alt"></i>
+                                        </button>
+                                    </form>
+                                </section>
+                        </div>
+                    </div>
+                <?
+                endforeach;
+            }
+            ?>
+            </section>
             <div class="profile-description">
 
                 <h2>

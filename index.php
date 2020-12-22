@@ -12,10 +12,14 @@ Routing::get('normalSports', 'EventController');
 Routing::get('newEvent', 'DefaultController');
 Routing::get('personalProfile', 'UserController');
 Routing::get('userProfile', 'DefaultController');
+Routing::get('userSettings', 'UserController');
+Routing::get('userSignedEvents', 'UserController');
+Routing::get('userEvents', 'UserController');
 Routing::post('login', 'SecurityController');
 Routing::post('logout', 'SecurityController');
 Routing::post('addEvent', 'EventController');
 Routing::post('registerUser', 'SecurityController');
-Routing::post('assignUserToEvent', 'EventController');
+Routing::post('signUpUserForEvent', 'EventController');
+Routing::post('saveUser', 'UserController');
 
 Routing::run($path);

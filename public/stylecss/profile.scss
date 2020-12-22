@@ -22,9 +22,68 @@ $font: 'Montserrat', sans-serif;
 }
 
 .profile{
-    @include flex-column();
     color: $font-color;
     margin: 6em;
+    .event-section{
+        @include flex-column();
+        a{
+            margin-top: 2em;
+            text-decoration: none; 
+            color: $font-color;
+        }
+        .post{
+            @include block-size(calc(100%-8em), 50vh);
+            @include flex-row();
+            margin-top: 4em;
+            border: 1px solid $border-color;
+            border-radius: 30px;
+            .image{
+                @include block-size(50vh, 50vh);
+                background: $component-color;
+                border-radius: 30px;
+            }
+            .post-description{
+                @include flex-column();
+                margin: 2em;
+                width: 50%;
+                justify-content: space-around;
+                h2{
+                    margin: 0;
+                }
+                h4{
+                    margin: 0;
+                }
+                a{
+                    @include flex-row();
+                    font-size: 0.6em;
+                    align-items: center;
+                    i{
+                        margin-right: 0.5em;
+                        font-size: 2em;
+                    }
+                }
+                .icons-section{
+                    @include flex-row();
+                    justify-content: space-between;
+                    align-items: center;
+                    .location-date-section{
+                        @include flex-column();
+                        height: 150%;
+                        justify-content: space-around;
+                    }
+                    .sign-section{
+                        font-size: 1em;
+                        font-weight: bold;
+                    }
+                    .sign-section:hover{
+                        cursor: pointer;
+                        color: $border-color;
+                    }
+                }
+            }
+        }
+    }
+    
     .profile-data{
         @include flex-row();
         .stars{

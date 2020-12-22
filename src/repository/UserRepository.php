@@ -111,4 +111,18 @@ class UserRepository extends Repository
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result['name'].' '.$result['surname'];
     }
+    public function editUser(User $user){
+        $statement = $this->prepareStatement('UPDATE users SET password=? WHERE id=?');
+        $statement->execute([$user->getPassword(), $user->getId()]);
+        $statement = $this->prepareStatement('UPDATE user_details SET name=?, surname=?, description=?, phone=?, country=?, age=? WHERE id=?');
+        $statement->execute([
+            $user->getName(),
+            $user->getSurname(),
+            $user->getDescription(),
+            $user->getPhone(),
+            $user->getCountry(),
+            $user->getAge(),
+            $user->getId()
+        ]);
+    }
 }
