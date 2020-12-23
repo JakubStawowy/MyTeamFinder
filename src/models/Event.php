@@ -26,6 +26,14 @@ class Event{
         $this->addedByNameSurname = $addedByNameSurname;
         $this->signedPlayers = $signedPlayers;
     }
+
+    /**
+     * @return int
+     */
+    public function getAddedById(): int
+    {
+        return $this->addedById;
+    }
     public function setSignedPlayers(int $signedPlayers){
         $this->signedPlayers = $signedPlayers;
     }

@@ -151,7 +151,7 @@
                                             6 pm, 24-06-2020
                                         </a>
                                     </section>
-                                    <form class="sign-section" action="assignUserToEvent" method="post">
+                                    <form class="sign-section" action="signOut" method="post">
                                         <input type="hidden" name="eventId" value="<?= $event->getId() ?>"/>
                                         <button class="mybutton" type="submit">
                                             Sign out

@@ -80,7 +80,35 @@ class EventController extends AppController{
                 else
                     $this->render('home', ['messages'=>[$e->getMessage()]]);
             }
-
         }
+    }
+    public function signOut(){
+        if($this->isPost()){
+            $userId = $_COOKIE['id'];
+            $eventId = $_POST['eventId'];
+            try{
+                $this->eventRepository->signOut($userId, $eventId);
+                $this->render('home', ['messages'=>['Success!']]);
+            }catch (Exception $e){
+                $this->render('home', ['messages'=>['Event removing failure']]);
+            }
+        }
+    }
+    public function filterEvents(){
+        if($this->isPost()){
+            $filters = [];
+            if($_POST['free-spots'] != null)
+                $filters["number_of_players-signed_players>='"] = $_POST['free-spots'];
+            if($_POST['location'] != null)
+                $filters["location='"] = $_POST['location'];
+            if($_POST['date'] != null)
+                $filters["date='"] = $_POST['date'];
+            if($_POST['sport'] != null)
+                $filters[" sport_name='"] = $_POST['sport'];
+            $events = $this->eventRepository->getFilteredEvents($filters);
+            $this->render('home', ['events'=>$events]);
+        }
+        else
+            $this->render('home', ['events'=>$this->eventRepository->getEvents(), 'messages'=>['Failed to filter events']]);
     }
 }

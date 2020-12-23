@@ -27,10 +27,10 @@ class UserController extends AppController
         $this->renderWhenCookiesAreSet('userSettings', ['user'=>$this->user]);
     }
     public function saveUser(){
-        if($this->isGet()){
+        if($this->isPost()){
             $id = $this->user->getId();
             $email = $this->user->getEmail();
-            $user = new User(
+            $this->user = new User(
                 $id,
                 $_POST['name'],
                 $_POST['surname'],
@@ -40,7 +40,8 @@ class UserController extends AppController
                 $_POST['age'],
                 $_POST['phone']
             );
-            $this->userRepository->editUser($user);
+            $this->user->setDescription($_POST['description']);
+            $this->userRepository->editUser($this->user);
             $this->renderWhenCookiesAreSet('profile', ['user'=>$this->user]);
         }
         else{

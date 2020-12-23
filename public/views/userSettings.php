@@ -83,7 +83,7 @@
     <?
         if(isset($user)){
     ?>
-    <form action="saveUser" method="POST">
+    <form action="saveUser" method="post">
         <div class="settings-section">
             <input name="password" type="password" placeholder="password">
             <input name="confirmedPassword" type="password" placeholder="repeat password">

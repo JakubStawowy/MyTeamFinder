@@ -95,30 +95,80 @@ class EventRepository extends Repository
         }
         $events = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($events as $event){
-            $results[] = new Event(
-                $event['id'],
-                $event['title'],
-                $event['description'],
-                $event['sport_name'],
-                $event['number_of_players'],
-                $event['location'],
-                $event['date'],
-                $event['image'],
-                $event['created_by'],
-                $event['username'].' '.$event['surname'],
-                $event['signed_players']
-            );
+            $results[] = $this->createEvent($event);
         }
         return $results;
     }
     public function signUpUserToEvent($userId, $eventId){
         $statement = $this->prepareStatement('INSERT INTO players_in_events VALUES(?, ?)');
         $statement->execute([$userId, $eventId]);
+
         $statement = $this->prepareStatement('SELECT event_details_id FROM events WHERE id=?');
         $statement->execute([$eventId]);
-
         $eventDetailsId = $statement->fetch()['event_details_id'];
+
         $statement = $this->prepareStatement('UPDATE event_details SET signed_players = signed_players+1 WHERE id=?');
         $statement->execute([$eventDetailsId]);
+    }
+    public function signOut($userId, $eventId){
+
+        $statement = $this->prepareStatement('SELECT event_details_id FROM events WHERE id=?');
+        $statement->execute([$eventId]);
+        $eventDetailsId = $statement->fetch()['event_details_id'];
+
+        if($this->getEvent($eventId)->getAddedById() != $userId){
+
+            $statement = $this->prepareStatement('DELETE FROM players_in_events WHERE user_id=? AND event_id=?');
+            $statement->execute([$userId, $eventId]);
+
+
+            $statement = $this->prepareStatement('UPDATE event_details SET signed_players = signed_players-1 WHERE id=?');
+            $statement->execute([$eventDetailsId]);
+        }
+        else{
+            $statement = $this->prepareStatement('DELETE FROM players_in_events WHERE event_id=?');
+            $statement->execute([$eventId]);
+
+            $statement = $this->prepareStatement('DELETE FROM events WHERE id=?');
+            $statement->execute([$eventId]);
+
+            $statement = $this->prepareStatement('DELETE FROM event_details WHERE id=?');
+            $statement->execute([$eventDetailsId]);
+        }
+    }
+    public function getFilteredEvents(array $filters): array{
+        $results = [];
+        $query = 'SELECT * FROM event_view WHERE ';
+        if(!empty($filters)){
+            foreach (array_keys($filters) as $key){
+                $query = $query.$key.$filters[$key]."' AND ";
+            }
+            $query = substr($query, 0, -4);
+        }
+        else
+            $query = substr($query, 0, -6);
+        $query = $query.' ORDER BY created_at';
+        $statement = $this->prepareStatement($query);
+        $statement->execute();
+        $events = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($events as $event){
+            $results[] = $this->createEvent($event);
+        }
+        return $results;
+    }
+    private function createEvent(array $event): Event{
+        return new Event(
+            $event['id'],
+            $event['title'],
+            $event['description'],
+            $event['sport_name'],
+            $event['number_of_players'],
+            $event['location'],
+            $event['date'],
+            $event['image'],
+            $event['created_by'],
+            $event['username'].' '.$event['surname'],
+            $event['signed_players']
+        );
     }
 }

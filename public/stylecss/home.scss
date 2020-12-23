@@ -20,6 +20,12 @@ $font: 'Montserrat', sans-serif;
 	display: flex;
 	flex-direction: row;
 }
+.hidden-element{
+    display: none;
+}
+.element{
+    display: block;
+}
 .home-page{
     @include block-size(93%, 100%);
     @include flex-column();
@@ -33,15 +39,17 @@ $font: 'Montserrat', sans-serif;
         border-bottom: 1px solid $border-color;
         text-align: center;
         a{
-            margin: auto 20px auto;
+            // margin: auto 20px auto;
         }
         i{
             font-size: 4em;
         }
-    }
-    .filtration-panel:hover{
-        cursor: pointer;
-        
+        i:hover{
+            cursor: pointer;
+        }
+        form{
+            margin: 1em;
+        }
     }
     .post{
         @include block-size(calc(100%-8em), 50vh);

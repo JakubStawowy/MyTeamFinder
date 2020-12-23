@@ -20,6 +20,8 @@ Routing::post('logout', 'SecurityController');
 Routing::post('addEvent', 'EventController');
 Routing::post('registerUser', 'SecurityController');
 Routing::post('signUpUserForEvent', 'EventController');
+Routing::post('signOut', 'EventController');
 Routing::post('saveUser', 'UserController');
+Routing::post('filterEvents', 'EventController');
 
 Routing::run($path);

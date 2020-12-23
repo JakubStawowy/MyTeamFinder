@@ -91,6 +91,7 @@ body {
 
 .container .right-side-bar-hidden .nav-icon {
   font-size: 3em;
+  bottom: 4em;
 }
 
 .container .right-side-bar-hidden .nav-icon:hover {
@@ -102,7 +103,7 @@ body {
   width: 20%;
   height: 100%;
   display: none;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   color: white;
   position: fixed;

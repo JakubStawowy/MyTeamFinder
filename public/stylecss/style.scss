@@ -92,6 +92,7 @@ body{
         color: $font-color;
         .nav-icon{
             font-size: 3em;
+            bottom: 4em;
         }
         .nav-icon:hover{
             cursor: pointer;
@@ -102,7 +103,7 @@ body{
         @include block-size(20%, 100%);
         // @include flex-column();
         display: none;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         color:$font-color;
         position: fixed;

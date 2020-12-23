@@ -83,10 +83,18 @@
         </div>
         <section class="home-page">
             <div class="filtration-panel">
-                <i class="fas fa-sliders-h"></i>
-                <a>
+                <a class="element open-filters">
+                    <i class="fas fa-sliders-h"></i>
                     Filtration (location, date etc.)
                 </a>
+                <form class="hidden-element filters" action="filterEvents" method="post">
+                    <input type="number" name="free-spots" placeholder="Free spots">
+                    <input type="text" name="location" placeholder="location">
+                    <input type="text" name="date" placeholder="date">
+                    <input type="text" name="sport" placeholder="sport">
+                    <input type="submit" value="Filter">
+                    <i class="fas fa-times-circle"></i>
+                </form>
             </div>
 
             <?

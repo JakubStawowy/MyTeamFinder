@@ -1,3 +1,11 @@
+.hidden-element {
+  display: none;
+}
+
+.element {
+  display: block;
+}
+
 .home-page {
   width: 93%;
   height: 100%;
@@ -18,16 +26,16 @@
   text-align: center;
 }
 
-.home-page .filtration-panel a {
-  margin: auto 20px auto;
-}
-
 .home-page .filtration-panel i {
   font-size: 4em;
 }
 
-.home-page .filtration-panel:hover {
+.home-page .filtration-panel i:hover {
   cursor: pointer;
+}
+
+.home-page .filtration-panel form {
+  margin: 1em;
 }
 
 .home-page .post {
