@@ -8,7 +8,12 @@ class Repository
     public function __construct(){
         $this->database = Database::create();
     }
-    protected function prepareStatement(string $query){
+    private function prepareStatement(string $query){
         return $this->database->connect()->prepare($query);
+    }
+    protected function execute(string $query, array $args = null): PDOStatement{
+        $statement = $this->prepareStatement($query);
+        $statement->execute($args);
+        return $statement;
     }
 }

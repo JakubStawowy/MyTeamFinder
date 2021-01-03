@@ -11,8 +11,9 @@ class User{
     private $description;
     private $country;
     private $age;
+    private $image;
 
-    public function __construct(int $id, string $name, string $surname, string $email, string $password, string $country, int $age, string $phone)
+    public function __construct(int $id, string $name, string $surname, string $email, string $password, string $country, int $age, string $phone, string $image = 'no-image.png')
     {
         $this->id = $id;
         $this->name = $name;
@@ -22,8 +23,17 @@ class User{
         $this->country = $country;
         $this->age = $age;
         $this->phone = $phone;
+        $this->image = $image;
     }
 
+    public function setImage(string $image): void{
+        $this->image = $image;
+    }
+
+    public function getImage(){
+        return $this->image;
+    }
+    
     public function getCountry(): string
     {
         return $this->country;

@@ -8,9 +8,10 @@
     <title>Moj profil</title>
 </head>
 <body onload="onLoad()">
-<div class="container">
     <div class="menu-bar">
-        <img src="public/img/Graylogo.png">
+        <a class="image" href="home">
+            <img src="public/img/Graylogo.png">
+        </a>
         <ul>
             <li>
                 <a href="home">
@@ -35,6 +36,7 @@
 
         </ul>
     </div>
+<div class="container">
     <div id="right-side-bar-hidden" class="right-side-bar-hidden">
         <i class="fas fa-angle-up nav-icon"></i>
         <i id="nav-icon-hidden" class="fas fa-angle-left nav-icon"></i>
@@ -43,14 +45,14 @@
         <a>
             <i class="fas fa-angle-up nav-icon"></i>
         </a>
-
-        <div class="user-image">
-
-        </div>
+        <?
+        if(isset($user)){
+        ?>
+        <img src="public/uploads/<?=$user->getImage()?>">
         <a>
             <?
-            if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
-                echo $_COOKIE['name'].' '.$_COOKIE['surname'];
+            echo $user->getName().' '.$user->getSurname();
+
             }
             ?>
         </a>
@@ -83,12 +85,62 @@
     <?
         if(isset($user)){
     ?>
-    <form action="saveUser" method="post">
-        <div class="settings-section">
-            <input name="password" type="password" placeholder="password">
-            <input name="confirmedPassword" type="password" placeholder="repeat password">
-            <input name="phone" type="text" placeholder="<?= $user->getPhone()?>">
-            <div class="message">
+    <form action="saveUser" method="post" ENCTYPE="multipart/form-data">
+        <div class="section1 settings-section">
+            <div class="label">
+                <a>
+                    Password
+                </a>
+                <input name="password" type="password" placeholder="password">
+            </div>
+            <div class="label">
+                <a>
+                    Repeat password
+                </a>
+                <input name="confirmedPassword" type="password" placeholder="repeat password">
+            </div>
+            <div class="label">
+                <a>
+                Phone number
+                </a>
+                <input name="phone" type="text" placeholder="<?= $user->getPhone()?>">
+            </div>
+        </div>
+        <div class="section2 settings-section">
+            <div class="label">
+                <a>
+                    Name
+                </a>
+                <input name="name" type="text" placeholder="<?= $user->getName()?>">
+            </div>
+            <div class="label">
+                <a>
+                    Surname
+                </a>
+                <input name="surname" type="text" placeholder="<?= $user->getSurname()?>">
+            </div>
+            <div class="label">
+                <a>
+                    Age
+                </a>
+                <input name="age" type="number" placeholder="<?= $user->getAge()?>">
+            </div>
+            <div class="label">
+                <a>
+                    Country
+                </a>
+                <input name="country" type="text" placeholder="<?= $user->getCountry()?>">
+            </div>
+        </div>
+        <div class="section3 settings-section">
+            <input type="file" name="image" class="image-button">
+        </div>
+        <div class="section4 settings-section">
+            <textarea name="description" class="description" placeholder="<?= $user->getDescription() ?>"></textarea>
+        
+        </div>
+        
+        <div class="message">
                 <?php
                 if(isset($messages)){
                     foreach ($messages as $message){
@@ -97,18 +149,7 @@
                 }
                 ?>
             </div>
-        </div>
-        <div class="settings-section">
-            <input name="name" type="text" placeholder="<?= $user->getName()?>">
-            <input name="surname" type="text" placeholder="<?= $user->getSurname()?>">
-            <input name="age" type="number" placeholder="<?= $user->getAge()?>">
-            <input name="country" type="text" placeholder="<?= $user->getCountry()?>">
-            <button type="submit">Save</button>
-        </div>
-        <div class="settings-section">
-            Description
-            <textarea name="description" class="description" placeholder="<?= $user->getDescription() ?>"></textarea>
-        </div>
+        <button class="section6" type="submit">Save</button>
     </form>
     <?
         }

@@ -27,111 +27,148 @@ body{
     font-family: $font;
     font-size: 20px;
     background: $container-color;
-}
-.container{
-    @include block-size(100%, 200%);
-    @include flex-column();
-    
-    .top-bar{
-        @include block-size(100%, 12vh);
-        @include flex-row();
-        justify-content: center;
-        align-items: center;
-        background: $bar-color;
-        img{
-            height: 2em;
-        }
+    a{
+        color: $font-color
     }
-    .menu-bar{
-        @include block-size(100%, 12vh);
-        @include flex-column();
-        justify-content: space-around;
-        z-index: 1;
-        background: $bar-color;
+}
+// .top-bar{
+//     @include block-size(100%, 12vh);
+//     @include flex-row();
+//     justify-content: center;
+//     align-items: center;
+//     background: $bar-color;
+//     img{
+//         height: 2em;
+//     }
+// }
+.menu-bar{
+    @include block-size(100%, 12vh);
+    @include flex-row();
+    justify-content: space-around;
+    position: relative;
+    z-index: 1;
+
+    background: $bar-color;
+    a.image{
+        @include flex-row();
+        align-items: center;
+        height: 12vh;
         img{
             height: 2em;
             position: absolute;
             padding-left: 2em;
-        }
-        ul{
-            @include flex-row();
-            height: 100%;
             margin: 0;
-            justify-content: flex-end;
-            li{
-                // width: 100%;
-                padding: 0 2em 0 2em;
-                text-align: center;
-                list-style: none;
-                a{
-                    @include block-size(100%, 100%);
-                    @include flex-column();
-                    justify-content: center;
-                    text-decoration: none;
-                    color: $menu-font-color;
-                }
+        }
+    }
+    ul{
+        @include flex-row();
+        height: 100%;
+        margin: 0;
+        justify-content: flex-end;
+        li{
+            // width: 100%;
+            text-align: center;
+            list-style: none;
+            padding: 0 2em 0 2em;
+            a{
+                @include block-size(100%, 100%);
+                @include flex-column();
+                // padding: 2em;
+                justify-content: center;
+                text-decoration: none;
+                color: $menu-font-color;
             }
-            li:hover{
-                cursor: pointer;
-                background: $container-color;
-                a{
-                    color: $star-color;
+            ul{
+                display: none;
+                margin: 0;
+                // @include flex-column();
+                // margin-top: 12vh; 
+                background: $bar-color;
+                li{
+                    
+                width: 100%;
                 }
             }
         }
+        li:hover{
+            cursor: pointer;
+            background: $container-color;
+            a{
+                color: $star-color;
+            }
+        }
     }
-    .right-side-bar-hidden{
-        @include block-size(7%, 100%);
-        @include flex-column();
-        // display: none;
-        justify-content: space-between;
-        align-items: center;
-        border-left: 1px solid $border-color;
-        position: fixed;
-        right: 0;
+}
+
+.sports{
+    @include flex-row();
+    display: none;
+    position: fixed;
+    ul{
+        list-style: none;
+        background: $bar-color;
+    }
+}
+
+.right-side-bar-hidden{
+    @include block-size(7%, 100%);
+    @include flex-column();
+    // display: none;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 1px solid $border-color;
+    position: fixed;
+    right: 0;
+    top: 0;
+    color: $font-color;
+    .nav-icon{
+        font-size: 3em;
+        bottom: 4em;
+    }
+    .nav-icon:hover{
+        cursor: pointer;
+        color: $border-color;
+    }
+}
+.right-side-bar{
+    @include block-size(20%, 100%);
+    // @include flex-column();
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    color:$font-color;
+    position: fixed;
+    right: 0;
+    top: 0;
+    border-left: 1px solid $border-color;
+    background: $container-color;
+    a{
         color: $font-color;
-        .nav-icon{
-            font-size: 3em;
-            bottom: 4em;
-        }
-        .nav-icon:hover{
-            cursor: pointer;
-            color: $border-color;
-        }
+        text-decoration: none;
     }
-    .right-side-bar{
-        @include block-size(20%, 100%);
-        // @include flex-column();
-        display: none;
-        justify-content: space-between;
-        align-items: center;
-        color:$font-color;
-        position: fixed;
-        right: 0;
-        border-left: 1px solid $border-color;
-        background: $container-color;
-        a{
-            color: $font-color;
-            text-decoration: none;
-        }
-        a:hover{
-            cursor: pointer;
-            color: $border-color;
-        }
-        .user-image{
-            @include block-size(5em, 5em);
-            background: $component-color;
-        }
-        .nav-icon{
-            font-size: 3em;
-        }
+    a:hover{
+        cursor: pointer;
+        color: $border-color;
     }
-    .hidden-element{
-        display: none;
+    img{
+        @include block-size(5em, 5em);
+        border-radius: 15px;
+        width: fit-content;
     }
-    .flex-element{
-        @include flex-column();
+    .nav-icon{
+        font-size: 3em;
     }
+}
+.hidden-element{
+    display: none;
+}
+.flex-element{
+    @include flex-column();
+}
+.container{
+    @include block-size(100%, 100vh);
+    @include flex-column();
+    
     .bottom-bar{
         display: none;
     }

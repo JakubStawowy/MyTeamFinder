@@ -13,8 +13,8 @@ class SecurityController extends AppController{
         }
         $email = $_POST["email"];
         $password = $_POST["password"];
-        try{
-            $user = $userRepository->getUser($email);
+        $user = $userRepository->getUser($email);
+        if($user != null){
             if($user->getPassword() != $password){
                 $this->render('login', ['messages' => ['Wrong password']]);
             }
@@ -27,8 +27,8 @@ class SecurityController extends AppController{
                 header("Location: {$url}/home");
             }
         }
-        catch (Exception $e){
-            $this->render('login', ['messages' => [$e->getMessage()]]);
+        else{
+            $this->render('login', ['messages'=>['Wrong email']]);
         }
     }
     public function logout(){

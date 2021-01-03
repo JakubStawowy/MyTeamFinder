@@ -19,9 +19,10 @@ Routing::post('login', 'SecurityController');
 Routing::post('logout', 'SecurityController');
 Routing::post('addEvent', 'EventController');
 Routing::post('registerUser', 'SecurityController');
-Routing::post('signUpUserForEvent', 'EventController');
-Routing::post('signOut', 'EventController');
+Routing::post('signUpUserForEvent', 'EventRegisterController');
+Routing::post('signOut', 'EventRegisterController');
 Routing::post('saveUser', 'UserController');
 Routing::post('filterEvents', 'EventController');
+Routing::post('search', 'EventController');
 
 Routing::run($path);

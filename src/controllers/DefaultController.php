@@ -4,6 +4,14 @@ require_once 'AppController.php';
 
 class DefaultController extends AppController{
 
+    private $userRepository;
+    private $user;
+    public function __construct()
+    {
+        $this->userRepository = new UserRepository();
+        $this->user = $this->userRepository->getUserById();
+    }
+
     public function index(){
         if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
             $url = "http://$_SERVER[HTTP_HOST]";
@@ -15,10 +23,10 @@ class DefaultController extends AppController{
         $this->render('register');
     }
     public function newEvent(){
-        $this->renderWhenCookiesAreSet('newEvent');
+        $this->renderWhenCookiesAreSet('newEvent', ['user' => $this->user]);
     }
     public function personalProfile(){
-        $this->renderWhenCookiesAreSet('profile');
+        $this->renderWhenCookiesAreSet('profile', ['user' => $this->user]);
     }
     public function userProfile(){
 

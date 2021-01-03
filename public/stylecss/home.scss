@@ -24,17 +24,19 @@ $font: 'Montserrat', sans-serif;
     display: none;
 }
 .element{
-    display: block;
+    @include flex-row();
+    align-items: center;
+    // display: block;
 }
 .home-page{
     @include block-size(93%, 100%);
     @include flex-column();
     color: $font-color;
     .filtration-panel{
-        @include block-size(100%, 100%);
+        @include block-size(100%, 8vh);
         @include flex-row();
-        justify-content: center;
-        padding: 2em 0 2em;
+        justify-content: space-around;
+        padding: 1em 0 1em;
         font-size: 0.6em;
         border-bottom: 1px solid $border-color;
         text-align: center;
@@ -42,13 +44,36 @@ $font: 'Montserrat', sans-serif;
             // margin: auto 20px auto;
         }
         i{
-            font-size: 4em;
+            margin-right: 0.5em;
+            font-size: 3em;
         }
-        i:hover{
+        a:hover{
             cursor: pointer;
         }
         form{
-            margin: 1em;
+            justify-content: space-around;
+            width: 100%;
+            input{
+                background: $border-color;
+                border: none;
+                border-radius: 20px;
+                padding: 1em;
+                button{
+                    display: none;
+                }
+            }
+            input.filter{
+                border: white 1px solid;
+            }
+            input.filter:hover{
+                cursor: pointer;
+            }
+            i{
+                color: $border-color;
+            }
+        }
+        .form-displayed{
+            @include flex-row();
         }
     }
     .post{
@@ -61,6 +86,10 @@ $font: 'Montserrat', sans-serif;
             @include block-size(50vh, 50vh);
             background: $component-color;
             border-radius: 30px;
+            img{
+                @include block-size(100%, 100%);
+                border-radius: 30px;
+            }
         }
         .post-description{
             @include flex-column();
@@ -94,10 +123,17 @@ $font: 'Montserrat', sans-serif;
                 .sign-section{
                     font-size: 1em;
                     font-weight: bold;
-                }
-                .sign-section:hover{
-                    cursor: pointer;
-                    color: $border-color;
+                    button{
+                        border: none;
+                        background: transparent;
+                        color: $font-color;
+                        font-size: 1em;
+                    }
+                    button:hover{
+                        cursor: pointer;
+                        color: $border-color;
+                        
+                    }
                 }
             }
         }

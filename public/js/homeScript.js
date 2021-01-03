@@ -4,7 +4,8 @@ function onLoad(){
     const hiddenRightSidePanelNavButton = document.getElementById('nav-icon-hidden');
     const topScrollElements = document.getElementsByClassName("fa-angle-up");
     const openFiltersButton = document.getElementsByClassName('open-filters')[0];
-    const closeFiltersButton = document.getElementsByClassName('fa-times-circle')[0];
+    const closeFiltersButtons = document.getElementsByClassName('fa-times-circle');
+    const openSearchingModeButton = document.getElementsByClassName('open-search')[0];
 
     rightSidePanelNavButton.addEventListener('click', function (){
         document.getElementById('right-side-bar').classList.add('hidden-element');
@@ -26,16 +27,46 @@ function onLoad(){
         });
     }
 
+    function hideElement(element){
+        element.classList.remove('element');
+        element.classList.add('hidden-element');
+    }
+
+    function showElement(element){
+
+        element.classList.add('element');
+        element.classList.remove('hidden-element');
+    }
+
     openFiltersButton.addEventListener('click', function (){
-        document.getElementsByClassName('open-filters')[0].classList.remove('element');
-        document.getElementsByClassName('open-filters')[0].classList.add('hidden-element');
-        document.getElementsByClassName('filters')[0].classList.add('element');
+
+        hideElement(document.getElementsByClassName('open-filters')[0]);
+        hideElement(document.getElementsByClassName('open-search')[0]);
+
+        document.getElementsByClassName('filters')[0].classList.add('form-displayed');
         document.getElementsByClassName('filters')[0].classList.remove('hidden-element');
     });
-    closeFiltersButton.addEventListener('click', function (){
-        document.getElementsByClassName('open-filters')[0].classList.add('element');
-        document.getElementsByClassName('open-filters')[0].classList.remove('hidden-element');
-        document.getElementsByClassName('filters')[0].classList.remove('element');
+
+    closeFiltersButtons[0].addEventListener('click', function (){
+        showElement(document.getElementsByClassName('open-filters')[0]);
+        showElement(document.getElementsByClassName('open-search')[0]);
+
+        document.getElementsByClassName('filters')[0].classList.remove('form-displayed');
         document.getElementsByClassName('filters')[0].classList.add('hidden-element');
+    });
+
+    closeFiltersButtons[1].addEventListener('click', function (){
+
+        showElement(document.getElementsByClassName('open-filters')[0]);
+        showElement(document.getElementsByClassName('open-search')[0]);
+        document.getElementsByClassName('search')[0].classList.remove('form-displayed');
+        document.getElementsByClassName('search')[0].classList.add('hidden-element');
+    });
+    openSearchingModeButton.addEventListener('click', function (){
+
+        hideElement(document.getElementsByClassName('open-filters')[0]);
+        hideElement(document.getElementsByClassName('open-search')[0]);
+        document.getElementsByClassName('search')[0].classList.add('form-displayed');
+        document.getElementsByClassName('search')[0].classList.remove('hidden-element');
     });
 }

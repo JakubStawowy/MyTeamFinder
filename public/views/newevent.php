@@ -8,69 +8,72 @@
     <title>Dodaj wydarzenie</title>
 </head>
 <body onload="onLoad()">
-    <div class="container">
-        <div class="menu-bar">
-            
+    <div class="menu-bar">
+        <a class="image" href="home">
             <img src="public/img/Graylogo.png">
-            <ul>
-                <li>
-                    <a href="home">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="eSports">
-                        E-sports
-                    </a>
-                </li>
-                <li>
-                    <a href="normalSports">
-                        Team-sports
-                    </a>
-                </li>
-                <li>
-                    <a href="newEvent">
-                        New event
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-        <div id="right-side-bar-hidden" class="right-side-bar-hidden">
+        </a>
+        <ul>
+            <li>
+                <a href="home">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="eSports">
+                    E-sports
+                </a>
+            </li>
+            <li>
+                <a href="normalSports">
+                    Team-sports
+                </a>
+            </li>
+            <li>
+                <a href="newEvent">
+                    New event
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <div id="right-side-bar-hidden" class="right-side-bar-hidden">
+        <i class="fas fa-angle-up nav-icon"></i>
+        <i id="nav-icon-hidden" class="fas fa-angle-left nav-icon"></i>
+    </div>
+    <div id="right-side-bar" class="right-side-bar">
+        <a>
             <i class="fas fa-angle-up nav-icon"></i>
-            <i id="nav-icon-hidden" class="fas fa-angle-left nav-icon"></i>
-        </div>
-        <div id="right-side-bar" class="right-side-bar">
-            <a>
-                <i class="fas fa-angle-up nav-icon"></i>
-            </a>
-                
-            <div class="user-image">
-                
-            </div>
-            <a>
-                <?
-                    if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
-                        echo $_COOKIE['name'].' '.$_COOKIE['surname'];
-                    }
-                ?>
-            </a>
-            <a href="profile">My profile</a>
-            <a href="profile">Sports</a>
-            <a href="userSignedEvents">Events</a>
-            <a href="userEvents">My events</a>
-            <a>
-                <i class="fas fa-cog"></i>
-                Account settings
-            </a>
-            <a href="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                Logout
-            </a>
-            <a>
-                <i id="nav-icon" class="fas fa-angle-right nav-icon"></i>
-            </a>
-        </div>
+        </a>
+
+            <?
+                if(isset($user)){
+            ?>
+            <img src="public/uploads/<?=$user->getImage()?>">
+            <?}?>
+        <a>
+            <?
+            if(isset($user)){
+                echo $user->getName().' '.$user->getSurname();
+            }
+            ?>
+        </a>
+        <a href="personalProfile">My profile</a>
+        <a href="personalProfile">Sports</a>
+        <a href="userSignedEvents">Events</a>
+        <a href="userEvents">My events</a>
+        <a>
+            <i class="fas fa-cog"></i>
+            Account settings
+        </a>
+        <a href="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+        <a>
+            <i id="nav-icon" class="fas fa-angle-right nav-icon"></i>
+        </a>
+    </div>
+    <div class="container">
         <div class="bottom-bar">
             <i class="fas fa-bars"></i>
             <a href="home">

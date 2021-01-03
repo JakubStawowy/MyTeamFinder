@@ -3,7 +3,9 @@
 }
 
 .element {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .home-page {
@@ -16,26 +18,56 @@
 
 .home-page .filtration-panel {
   width: 100%;
-  height: 100%;
+  height: 8vh;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  padding: 2em 0 2em;
+  justify-content: space-around;
+  padding: 1em 0 1em;
   font-size: 0.6em;
   border-bottom: 1px solid #707070;
   text-align: center;
 }
 
 .home-page .filtration-panel i {
-  font-size: 4em;
+  margin-right: 0.5em;
+  font-size: 3em;
 }
 
-.home-page .filtration-panel i:hover {
+.home-page .filtration-panel a:hover {
   cursor: pointer;
 }
 
 .home-page .filtration-panel form {
-  margin: 1em;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.home-page .filtration-panel form input {
+  background: #707070;
+  border: none;
+  border-radius: 20px;
+  padding: 1em;
+}
+
+.home-page .filtration-panel form input button {
+  display: none;
+}
+
+.home-page .filtration-panel form input.filter {
+  border: white 1px solid;
+}
+
+.home-page .filtration-panel form input.filter:hover {
+  cursor: pointer;
+}
+
+.home-page .filtration-panel form i {
+  color: #707070;
+}
+
+.home-page .filtration-panel .form-displayed {
+  display: flex;
+  flex-direction: row;
 }
 
 .home-page .post {
@@ -52,6 +84,12 @@
   width: 50vh;
   height: 50vh;
   background: #AEAEAE 0% 0% no-repeat padding-box;
+  border-radius: 30px;
+}
+
+.home-page .post .image img {
+  width: 100%;
+  height: 100%;
   border-radius: 30px;
 }
 
@@ -102,7 +140,14 @@
   font-weight: bold;
 }
 
-.home-page .post .post-description .icons-section .sign-section:hover {
+.home-page .post .post-description .icons-section .sign-section button {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1em;
+}
+
+.home-page .post .post-description .icons-section .sign-section button:hover {
   cursor: pointer;
   color: #707070;
 }

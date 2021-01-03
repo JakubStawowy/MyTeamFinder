@@ -8,9 +8,10 @@
     <title>Moj profil</title>
 </head>
 <body onload="onLoad()">
-    <div class="container">
         <div class="menu-bar">
-            <img src="public/img/Graylogo.png">
+            <a class="image" href="home">
+                <img src="public/img/Graylogo.png">
+            </a>
             <ul>
                 <li>
                     <a href="home">
@@ -44,14 +45,13 @@
                 <i class="fas fa-angle-up nav-icon"></i>
             </a>
 
-            <div class="user-image">
-
-            </div>
+                <?
+                    if(isset($user)){
+                ?>
+                <img src="public/uploads/<?=$user->getImage()?>">
             <a>
                 <?
-                if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
-                    echo $_COOKIE['name'].' '.$_COOKIE['surname'];
-                }
+                    echo $user->getName().' '.$user->getSurname();
                 ?>
             </a>
             <a href="personalProfile">My profile</a>
@@ -71,6 +71,7 @@
             </a>
 
         </div>
+    <div class="container">
         <div class="bottom-bar">
             <i class="fas fa-bars"></i>
             <a href="home">
@@ -81,14 +82,9 @@
             </a>
         </div>
         <section class="profile">
-            <?
-                if(isset($user)){
-            ?>
             <div class="profile-data">
-                
-                <button class="profile-image">
-                    <i class="fas fa-image"></i>
-                </button>
+
+                <img src="public/uploads/<?=$user->getImage()?>">
                 <div class="data">
                     <h2>
                         <?
@@ -103,6 +99,7 @@
                     <a>
                         <?
                             echo $user->getAge();
+
                         ?>
                     </a>
                     <div class="stars">

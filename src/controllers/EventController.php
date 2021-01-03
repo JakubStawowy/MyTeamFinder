@@ -4,23 +4,34 @@ require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Event.php';
 require_once __DIR__.'/../repository/EventRepository.php';
+require_once __DIR__.'/../repository/UserRepository.php';
+require_once __DIR__.'/../repository/SportRepository.php';
+
 class EventController extends AppController{
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
-    private $messages = [];
     private $eventRepository;
+    private $userRepository;
+    private $sportRepository;
+    private $user;
     public function __construct()
     {
         parent::__construct();
         $this->eventRepository = new EventRepository();
+        $this->userRepository = new UserRepository();
+        $this->sportRepository = new SportRepository();
+        $this->user = $this->userRepository->getUserById();
+
     }
 
     public function addEvent(){
         $file = $_FILES['file'];
         $filename = $file['name'];
         $file_tmp_name = $file['tmp_name'];
-        if($this->isPost() && is_uploaded_file($file_tmp_name) && $this->validate($file)){
+        if($this->isPost()){
+            if(!(is_uploaded_file($file_tmp_name) && $this->validate($file)))
+                $filename='no-photo.png';
             try{
                 move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
                 $event = new Event(
@@ -42,6 +53,10 @@ class EventController extends AppController{
                 $this->messages[] = $e->getMessage();
             }
         }
+        else{
+            $this->messages[] = "nie mna pliku";
+
+        }
         $this->render('newevent', ['messages'=>$this->messages]);
     }
     private function validate(array $file): bool{
@@ -54,45 +69,6 @@ class EventController extends AppController{
             return false;
         }
         return true;
-    }
-    public function home(){
-        $events = $this->eventRepository->getEvents();
-        $this->render('home',['events' => $events]);
-    }
-    public function eSports(){
-        $events = $this->eventRepository->getEvents('esport');
-        $this->render('home', ['events'=>$events]);
-    }
-    public function normalSports(){
-        $events = $this->eventRepository->getEvents('normal');
-        $this->render('home', ['events'=>$events]);
-    }
-    public function signUpUserForEvent(){
-        if($this->isPost()){
-            $userId = $_COOKIE['id'];
-            $eventId = $_POST['eventId'];
-            try{
-                $this->eventRepository->signUpUserToEvent($userId, $eventId);
-                $this->render('home', ['messages'=>['You have been succesfully signed up for that event']]);
-            }catch (Exception $e){
-                if(substr($e->getMessage(), 9, 5) == "23505")
-                    $this->render('home', ['messages'=>["You are already signed up for that event"]]);
-                else
-                    $this->render('home', ['messages'=>[$e->getMessage()]]);
-            }
-        }
-    }
-    public function signOut(){
-        if($this->isPost()){
-            $userId = $_COOKIE['id'];
-            $eventId = $_POST['eventId'];
-            try{
-                $this->eventRepository->signOut($userId, $eventId);
-                $this->render('home', ['messages'=>['Success!']]);
-            }catch (Exception $e){
-                $this->render('home', ['messages'=>['Event removing failure']]);
-            }
-        }
     }
     public function filterEvents(){
         if($this->isPost()){
@@ -110,5 +86,47 @@ class EventController extends AppController{
         }
         else
             $this->render('home', ['events'=>$this->eventRepository->getEvents(), 'messages'=>['Failed to filter events']]);
+    }
+    public function search(){
+        if($this->isPost()){
+            $title = $_POST['search'];
+            $events = $this->eventRepository->getFilteredEvents(["title='"=>$title]);
+            $this->render('home', ['events'=>$events]);
+        }
+        else
+            $this->render('home', ['events'=>$this->eventRepository->getEvents(), 'messages'=>['Failed to filter events']]);
+    }
+    public function home(){
+        $events = $this->eventRepository->getEvents();
+        $normalSports = $this->sportRepository->getSports();
+        $eSports = $this->sportRepository->getSports('esport');
+        $this->render('home',[
+            'events' => $events,
+            'user' => $this->user,
+            'normalSports' => $normalSports,
+            'eSports' => $eSports
+        ]);
+    }
+    public function eSports(){
+        $events = $this->eventRepository->getEvents('esport');
+        $normalSports = $this->sportRepository->getSports();
+        $eSports = $this->sportRepository->getSports('esport');
+        $this->render('home', [
+            'events'=>$events,
+            'user' => $this->user,
+            'normalSports' => $normalSports,
+            'eSports' => $eSports
+        ]);
+    }
+    public function normalSports(){
+        $events = $this->eventRepository->getEvents('normal');
+        $normalSports = $this->sportRepository->getSports();
+        $eSports = $this->sportRepository->getSports('esport');
+        $this->render('home', [
+            'events'=>$events,
+            'user' => $this->user,
+            'normalSports' => $normalSports,
+            'eSports' => $eSports
+        ]);
     }
 }

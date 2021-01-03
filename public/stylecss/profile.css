@@ -31,6 +31,12 @@
   border-radius: 30px;
 }
 
+.profile .event-section .post .image img {
+  width: 50vh;
+  height: 50vh;
+  border-radius: 30px;
+}
+
 .profile .event-section .post .post-description {
   display: flex;
   flex-direction: column;
@@ -78,6 +84,18 @@
   font-weight: bold;
 }
 
+.profile .event-section .post .post-description .icons-section .sign-section button {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1em;
+}
+
+.profile .event-section .post .post-description .icons-section .sign-section button:hover {
+  cursor: pointer;
+  color: #707070;
+}
+
 .profile .event-section .post .post-description .icons-section .sign-section:hover {
   cursor: pointer;
   color: #707070;
@@ -92,16 +110,9 @@
   color: #E5951D;
 }
 
-.profile .profile-data .profile-image {
+.profile .profile-data img {
   width: 160px;
   height: 160px;
-  border: none;
-  color: white;
-  background: #AEAEAE 0% 0% no-repeat padding-box;
-}
-
-.profile .profile-data .profile-image i {
-  font-size: 5em;
 }
 
 .profile .profile-data .data {
@@ -124,6 +135,8 @@
 
 .profile .profile-data .profile-settings a {
   height: 20%;
+  text-decoration: none;
+  color: white;
 }
 
 .profile .profile-data .profile-settings a i {

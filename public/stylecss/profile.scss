@@ -41,6 +41,10 @@ $font: 'Montserrat', sans-serif;
                 @include block-size(50vh, 50vh);
                 background: $component-color;
                 border-radius: 30px;
+                img{
+                    @include block-size(50vh, 50vh);
+                    border-radius: 30px;
+                }
             }
             .post-description{
                 @include flex-column();
@@ -74,6 +78,18 @@ $font: 'Montserrat', sans-serif;
                     .sign-section{
                         font-size: 1em;
                         font-weight: bold;
+                        
+                        button{
+                            border: none;
+                            background: transparent;
+                            color: $font-color;
+                            font-size: 1em;
+                        }
+                        button:hover{
+                            cursor: pointer;
+                            color: $border-color;
+                            
+                        }
                     }
                     .sign-section:hover{
                         cursor: pointer;
@@ -89,20 +105,11 @@ $font: 'Montserrat', sans-serif;
         .stars{
             color: $star-color;
         }
-        .profile-image{
-            // flex: 2;
+        img{
             @include block-size(160px, 160px);
-            border: none;
-            // border-radius: 20px;
-            color: white;
-            background: #AEAEAE 0% 0% no-repeat padding-box;
-            i{
-                font-size: 5em;
-            }
         }
         .data{
             @include flex-column();
-            // flex: 2;
             justify-content: space-around;
             margin-left: 1em;
             h2{
@@ -115,6 +122,8 @@ $font: 'Montserrat', sans-serif;
             justify-content: flex-end;
             a{
                 height: 20%;
+                text-decoration: none;
+                color: $font-color;
                 i{
                     padding-right: 0.5em;
                 }
