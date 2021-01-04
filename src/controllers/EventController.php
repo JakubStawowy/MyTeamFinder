@@ -21,7 +21,6 @@ class EventController extends AppController{
         $this->eventRepository = new EventRepository();
         $this->userRepository = new UserRepository();
         $this->sportRepository = new SportRepository();
-        $this->user = $this->userRepository->getUserById();
 
     }
 
@@ -59,17 +58,6 @@ class EventController extends AppController{
         }
         $this->render('newevent', ['messages'=>$this->messages]);
     }
-    private function validate(array $file): bool{
-        if($file['size'] > self::MAX_FILE_SIZE){
-            $this->messages[] = 'file size is too large';
-            return false;
-        }
-        if(!in_array($file['type'], self::SUPPORTED_TYPES)){
-            $this->messages[] = 'file type is not supported';
-            return false;
-        }
-        return true;
-    }
     public function filterEvents(){
         if($this->isPost()){
             $filters = [];
@@ -88,24 +76,47 @@ class EventController extends AppController{
             $this->render('home', ['events'=>$this->eventRepository->getEvents(), 'messages'=>['Failed to filter events']]);
     }
     public function search(){
-        if($this->isPost()){
-            $title = $_POST['search'];
-            $events = $this->eventRepository->getFilteredEvents(["title='"=>$title]);
-            $this->render('home', ['events'=>$events]);
+
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? $_SERVER["CONTENT_TYPE"] : "";
+
+        if($contentType === "application/json"){
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+
+            echo json_encode($this->eventRepository->getEventByTitle($decoded['search']));
+
         }
-        else
-            $this->render('home', ['events'=>$this->eventRepository->getEvents(), 'messages'=>['Failed to filter events']]);
+//        if($this->isPost()){
+//            $title = $_POST['search'];
+//            $events = $this->eventRepository->getFilteredEvents(["title='"=>$title]);
+//            $this->render('home', ['events'=>$events]);
+//        }
+//        else
+//            $this->render('home', ['events'=>$this->eventRepository->getEvents(), 'messages'=>['Failed to filter events']]);
     }
     public function home(){
-        $events = $this->eventRepository->getEvents();
-        $normalSports = $this->sportRepository->getSports();
-        $eSports = $this->sportRepository->getSports('esport');
-        $this->render('home',[
-            'events' => $events,
-            'user' => $this->user,
-            'normalSports' => $normalSports,
-            'eSports' => $eSports
-        ]);
+        if(isset($_COOKIE['id'])){
+
+            $events = $this->eventRepository->getEvents();
+            $normalSports = $this->sportRepository->getSports();
+            $eSports = $this->sportRepository->getSports('esport');
+            $this->user = $this->userRepository->getUserById();
+            $this->render('home',[
+                'events' => $events,
+                'user' => $this->user,
+                'normalSports' => $normalSports,
+                'eSports' => $eSports
+            ]);
+        }
+        else{
+
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}");
+        }
     }
     public function eSports(){
         $events = $this->eventRepository->getEvents('esport');
@@ -128,5 +139,16 @@ class EventController extends AppController{
             'normalSports' => $normalSports,
             'eSports' => $eSports
         ]);
+    }
+    private function validate(array $file): bool{
+        if($file['size'] > self::MAX_FILE_SIZE){
+            $this->messages[] = 'file size is too large';
+            return false;
+        }
+        if(!in_array($file['type'], self::SUPPORTED_TYPES)){
+            $this->messages[] = 'file type is not supported';
+            return false;
+        }
+        return true;
     }
 }

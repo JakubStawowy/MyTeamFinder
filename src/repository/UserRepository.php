@@ -36,9 +36,13 @@ class UserRepository extends Repository
         $statement = $this->execute('
             SELECT * FROM public.users WHERE id = ?
         ', [$_COOKIE['id']]);
+//        $statement = $this->execute('
+//            SELECT * FROM public.users WHERE id = 4
+//        ');
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
         //getting user details
+//        $statement = $this->execute('SELECT * FROM public.user_details WHERE id=5');
         $statement = $this->execute('SELECT * FROM public.user_details WHERE id=?', [$user['user_details_id']]);
         $userDetails = $statement->fetch(PDO::FETCH_ASSOC);
         $newUser = new User(

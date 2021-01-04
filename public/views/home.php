@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="public/stylecss/home.min.css" type="text/css"/>
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="public/js/homeScript.js" defer></script>
+    <script type="text/javascript" src="public/js/searchScript.js" defer></script>
     <title>Strona glowna</title>
 </head>
 <body onload="onLoad()">
@@ -148,60 +149,101 @@
                     <input class="filter" type="submit" value="Filter">
                     <i class="fas fa-times-circle"></i>
                 </form>
-                <form class="hidden-element search" action="search" method="post">
+                <div class="hidden-element search" action="search" method="post">
                     <input type="text" name="search" placeholder="Title, description, user">
                     <input class="filter" type="submit" value="Search">
                     <i class="fas fa-times-circle"></i>
-                </form>
+                </div>
             </div>
-
-            <?
-            if(isset($messages)){
-                foreach ($messages as $message){
-                    echo $message;
+            <section class="events">
+                <?
+                if(isset($messages)){
+                    foreach ($messages as $message){
+                        echo $message;
+                    }
                 }
-            }
-            if(isset($events)){
-                foreach ($events as $event):
-            ?>
-            <div class="post">
-                <div class="image">
-                    <img src="public/uploads/<?=$event->getImage()?>">
-                </div>
-                <div class="post-description">
-                    <h2><?= $event->getTitle() ?></h2>
-                    <a><?= $event->getAddedByNameSurname()?></a>
-                    <h4>
-                        signed players: <?= $event->getSignedPlayers().'/'.$event->getNumberOfPlayers() ?>
-                    </h4>
-                    <a class="description">
-                        <?= $event->getDescription() ?>
-                    </a>
-                    <section class="icons-section">
-                        <section class="location-date-section">
-                            <a>
-                                <i class="fas fa-map-marker-alt"></i>
-                                Cracowa
-                            </a>
-                            <a>
-                                <i class="fas fa-calendar-alt"></i>
-                                6 pm, 24-06-2020
-                            </a>
+                if(isset($events)){
+                    foreach ($events as $event):
+                ?>
+                <div class="post">
+                    <div class="image">
+                        <img src="public/uploads/<?=$event->getImage()?>">
+                    </div>
+                    <div class="post-description">
+                        <h2><?= $event->getTitle() ?></h2>
+                        <a><?= $event->getAddedByNameSurname()?></a>
+                        <h4>
+                            signed players: <?= $event->getSignedPlayers().'/'.$event->getNumberOfPlayers() ?>
+                        </h4>
+                        <a class="description">
+                            <?= $event->getDescription() ?>
+                        </a>
+                        <section class="icons-section">
+                            <section class="location-date-section">
+                                <a>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Cracowa
+                                </a>
+                                <a>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    6 pm, 24-06-2020
+                                </a>
+                            </section>
+                            <form class="sign-section" action="signUpUserForEvent" method="post">
+                                <input type="hidden" name="eventId" value="<?= $event->getId() ?>"/>
+                                <button class="mybutton" type="submit">
+                                    Sign in
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </button>
+                            </form>
                         </section>
-                        <form class="sign-section" action="signUpUserForEvent" method="post">
-                            <input type="hidden" name="eventId" value="<?= $event->getId() ?>"/>
-                            <button class="mybutton" type="submit">
-                                Sign in
-                                <i class="fas fa-sign-in-alt"></i>
-                            </button>
-                        </form>
-                    </section>
+                    </div>
                 </div>
-            </div>
-            <?
-                endforeach;
-            }
-            ?>
+                <?
+                    endforeach;
+                }
+                ?>
+            </section>
         </div>
     </div>
 </body>
+<template id="event-template">
+    <div class="post">
+        <div class="image">
+            <img src="">
+        </div>
+        <div class="post-description">
+            <h2></h2>
+            <a class="author"></a>
+            <h4>
+
+            </h4>
+            <a class="description">
+
+            </a>
+            <section class="icons-section">
+                <section class="location-date-section">
+                    <a>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a class="location">
+                            Cracowa
+                        </a>
+                    </a>
+                    <a>
+                        <i class="fas fa-calendar-alt"></i>
+                        <a class="date">
+                            6 pm, 24-06-2020
+                        </a>
+                    </a>
+                </section>
+                <form class="sign-section" action="signUpUserForEvent" method="post">
+                    <input type="hidden" name="eventId" value=""/>
+                    <button class="mybutton" type="submit">
+                        Sign in
+                        <i class="fas fa-sign-in-alt"></i>
+                    </button>
+                </form>
+            </section>
+        </div>
+    </div>
+</template>

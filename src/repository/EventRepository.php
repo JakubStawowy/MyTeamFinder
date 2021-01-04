@@ -13,7 +13,7 @@ class EventRepository extends Repository
     }
 
     public function getEvent(int $id): ?Event{
-        $statement = $this->execute('SELECT * FROM event_view WHERE id=?');
+        $statement = $this->execute('SELECT * FROM event_view WHERE id=?', [$id]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return new Event(
             $result['id'],
@@ -120,6 +120,13 @@ class EventRepository extends Repository
             $results[] = $this->createEvent($event);
         }
         return $results;
+    }
+    public function getEventByTitle(string $title): array{
+
+        $title = '%'.strtolower($title).'%';
+        $statement = $this->execute('SELECT * FROM event_view WHERE LOWER(title) LIKE ? OR LOWER(description) LIKE ? ORDER BY created_at', [$title, $title]);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
     private function createEvent(array $event): Event{
         return new Event(

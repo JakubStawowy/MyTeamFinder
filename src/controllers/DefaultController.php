@@ -9,13 +9,13 @@ class DefaultController extends AppController{
     public function __construct()
     {
         $this->userRepository = new UserRepository();
-        $this->user = $this->userRepository->getUserById();
     }
 
     public function index(){
         if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
             $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: {$url}/home");
+            $this->user = $this->userRepository->getUserById();
         }
         else $this->render('login');
     }
