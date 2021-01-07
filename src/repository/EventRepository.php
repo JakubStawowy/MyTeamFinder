@@ -1,11 +1,14 @@
 <?php
 
-require_once 'Repository.php';
+require_once __DIR__.'/../templates/DatabaseConnector.php';
 require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../models/EventDetails.php';
+require_once __DIR__.'/../models/Event.php';
 
-class EventRepository extends Repository
+class EventRepository extends DatabaseConnector
 {
     private $userRepository;
+
     public function __construct()
     {
         parent::__construct();
@@ -15,38 +18,9 @@ class EventRepository extends Repository
     public function getEvent(int $id): ?Event{
         $statement = $this->execute('SELECT * FROM event_view WHERE id=?', [$id]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
-        return new Event(
-            $result['id'],
-            $result['title'],
-            $result['description'],
-            $result['sport_name'],
-            $result['number_of_players'],
-            $result['location'],
-            $result['date'],
-            $result['image'],
-            $result['created_by'],
-            $result['username'].' '.$result['surname'],
-            $result['signed_players']
-        );
+        return $this->createEvent($result);
     }
-    public function addEvent(Event $event): void{
-        $eventDetails = [
-            $event->getTitle(),
-            $event->getDescription(),
-            $event->getNumberOfPlayers(),
-            $event->getDate(),
-            $event->getLocation(),
-            $event->getImage()
-        ];
-        $this->execute('INSERT INTO event_details VALUES(DEFAULT , ?, ?, ?, ?, ?, ?)', $eventDetails);
-        $statement = $this->execute('SELECT id FROM event_details WHERE title=?', [$eventDetails[0]]);
-        $id = $statement->fetch()['id'];
 
-        $statement = $this->execute('SELECT id FROM sports WHERE name=?', [$event->getSport()]);
-        $sportId = $statement->fetch()['id'];
-
-        $this->execute('INSERT INTO events VALUES (DEFAULT, ?,?, ?, DEFAULT)', [$_COOKIE['id'],$sportId, $id]);
-    }
     public function getEvents($type = null): array{
         $results = [];
         switch ($type){
@@ -77,31 +51,7 @@ class EventRepository extends Repository
         }
         return $results;
     }
-    public function signUpUserToEvent($userId, $eventId): bool{
-        $event = $this->getEvent($eventId);
-        if($event->getSignedPlayers() == $event->getNumberOfPlayers())
-            return false;
-        $this->execute('INSERT INTO players_in_events VALUES(?, ?)', [$userId, $eventId]);
-        $statement = $this->execute('SELECT event_details_id FROM events WHERE id=?', [$eventId]);
-        $eventDetailsId = $statement->fetch()['event_details_id'];
-        $this->execute('UPDATE event_details SET signed_players = signed_players+1 WHERE id=?', [$eventDetailsId]);
-        return true;
-    }
-    public function signOut($userId, $eventId){
 
-        $statement = $this->execute('SELECT event_details_id FROM events WHERE id=?', [$eventId]);
-        $eventDetailsId = $statement->fetch()['event_details_id'];
-
-        if($this->getEvent($eventId)->getAddedById() != $userId){
-            $this->execute('DELETE FROM players_in_events WHERE user_id=? AND event_id=?', [$userId, $eventId]);
-            $this->execute('UPDATE event_details SET signed_players = signed_players-1 WHERE id=?', [$eventDetailsId]);
-        }
-        else{
-            $this->execute('DELETE FROM players_in_events WHERE event_id=?', [$eventId]);
-            $this->execute('DELETE FROM events WHERE id=?', [$eventId]);
-            $this->execute('DELETE FROM event_details WHERE id=?', [$eventDetailsId]);
-        }
-    }
     public function getFilteredEvents(array $filters): array{
         $results = [];
         $query = 'SELECT * FROM event_view WHERE ';
@@ -121,6 +71,7 @@ class EventRepository extends Repository
         }
         return $results;
     }
+
     public function getEventByTitle(string $title): array{
 
         $title = '%'.strtolower($title).'%';
@@ -128,19 +79,34 @@ class EventRepository extends Repository
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getEventDetailsId(Event $event): int{
+        $statement = $this->execute("
+            SELECT id FROM event_details WHERE title=? AND description=? AND date=? AND location=?
+        ", [
+            $event->getEventDetails()->getTitle(),
+            $event->getEventDetails()->getDescription(),
+            $event->getEventDetails()->getDate(),
+            $event->getEventDetails()->getLocation()
+        ]);
+
+        return $statement->fetch()['id'];
+    }
+
     private function createEvent(array $event): Event{
         return new Event(
             $event['id'],
-            $event['title'],
-            $event['description'],
-            $event['sport_name'],
-            $event['number_of_players'],
-            $event['location'],
-            $event['date'],
-            $event['image'],
-            $event['created_by'],
+            $event['added_by'],
             $event['username'].' '.$event['surname'],
-            $event['signed_players']
+            $event['signed_players'],
+            new EventDetails(
+                $event['title'],
+                $event['description'],
+                $event['image'],
+                $event['sport'],
+                $event['number_of_players'],
+                $event['location'],
+                $event['date'])
         );
     }
 }

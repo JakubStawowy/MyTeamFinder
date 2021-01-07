@@ -8,6 +8,7 @@ class DefaultController extends AppController{
     private $user;
     public function __construct()
     {
+        parent::__construct();
         $this->userRepository = new UserRepository();
     }
 
@@ -26,9 +27,14 @@ class DefaultController extends AppController{
         $this->renderWhenCookiesAreSet('newEvent', ['user' => $this->user]);
     }
     public function personalProfile(){
-        $this->renderWhenCookiesAreSet('profile', ['user' => $this->user]);
+        $this->user = $this->userRepository->getUserById();
+        $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $this->user]);
     }
     public function userProfile(){
-
+        if($this->isPost()){
+            $this->user = $this->userRepository->getUserById();
+            $user = $this->userRepository->getUserById($_POST['userId']);
+            $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $user]);
+        }
     }
 }

@@ -4,10 +4,13 @@
 class EventRegisterController extends AppController
 {
     private $eventRepository;
+    private $eventManager;
+
     public function __construct()
     {
         parent::__construct();
         $this->eventRepository = new EventRepository();
+        $this->eventManager = new EventManager();
     }
 
     public function signUpUserForEvent(){
@@ -15,7 +18,7 @@ class EventRegisterController extends AppController
             $userId = $_COOKIE['id'];
             $eventId = $_POST['eventId'];
             try{
-                $this->eventRepository->signUpUserToEvent($userId, $eventId);
+                $this->eventManager->signUpUserToEvent($userId, $eventId);
                 $this->render('home', ['messages'=>['You have been succesfully signed up for that event']]);
             }catch (Exception $e){
                 if(substr($e->getMessage(), 9, 5) == "23505")
@@ -30,7 +33,7 @@ class EventRegisterController extends AppController
             $userId = $_COOKIE['id'];
             $eventId = $_POST['eventId'];
             try{
-                $this->eventRepository->signOut($userId, $eventId);
+                $this->eventManager->signOut($userId, $eventId);
                 $this->render('home', ['messages'=>['Success!']]);
             }catch (Exception $e){
                 $this->render('home', ['messages'=>['Event removing failure']]);

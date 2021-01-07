@@ -3,119 +3,67 @@
 class Event{
 
     private $id;
-    private $title;
-    private $description;
-    private $image;
-    private $sport;
-    private $numberOfPlayers;
-    private $location;
-    private $date;
     private $addedById;
     private $addedByNameSurname;
     private $signedPlayers;
-    public function __construct(int $id, string $title, string $description, string $sport, string $numberOfPlayers, string $location, string $date, string $image, int $addedById, string $addedByNameSurname, int $signedPlayers=0){
+    private $eventDetails;
+
+    public function __construct($id, $addedById, $addedByNameSurname, $signedPlayers, $eventDetails)
+    {
         $this->id = $id;
-        $this->title = $title;
-        $this->description = $description;
-        $this->sport = $sport;
-        $this->numberOfPlayers = $numberOfPlayers;
-        $this->location = $location;
-        $this->date = $date;
-        $this->image = $image;
         $this->addedById = $addedById;
         $this->addedByNameSurname = $addedByNameSurname;
         $this->signedPlayers = $signedPlayers;
+        $this->eventDetails = $eventDetails;
     }
 
-    /**
-     * @return int
-     */
-    public function getAddedById(): int
-    {
-        return $this->addedById;
-    }
-    public function setSignedPlayers(int $signedPlayers){
-        $this->signedPlayers = $signedPlayers;
-    }
-    public function getSignedPlayers(): int{
-        return $this->signedPlayers;
-    }
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
-    public function getAddedByNameSurname(): string
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getAddedById()
+    {
+        return $this->addedById;
+    }
+
+    public function setAddedById($addedById): void
+    {
+        $this->addedById = $addedById;
+    }
+
+    public function getAddedByNameSurname()
     {
         return $this->addedByNameSurname;
     }
 
-    public function getTitle():string
+    public function setAddedByNameSurname($addedByNameSurname): void
     {
-        return $this->title;
+        $this->addedByNameSurname = $addedByNameSurname;
     }
 
-    public function setTitle(string $title)
+    public function getSignedPlayers()
     {
-        $this->title = $title;
+        return $this->signedPlayers;
     }
 
-    public function getDescription():string
+    public function setSignedPlayers($signedPlayers): void
     {
-        return $this->description;
+        $this->signedPlayers = $signedPlayers;
     }
 
-    public function setDescription(string $description)
+    public function getEventDetails()
     {
-        $this->description = $description;
+        return $this->eventDetails;
     }
 
-    public function getImage():string
+    public function setEventDetails($eventDetails): void
     {
-        return $this->image;
-    }
-
-    public function setImage(string $image)
-    {
-        $this->image = $image;
-    }
-
-    public function getSport():string
-    {
-        return $this->sport;
-    }
-
-    public function setSport(string $sport)
-    {
-        $this->sport = $sport;
-    }
-
-    public function getNumberOfPlayers()
-    {
-        return $this->numberOfPlayers;
-    }
-
-    public function setNumberOfPlayers(int $numberOfPlayers)
-    {
-        $this->numberOfPlayers = $numberOfPlayers;
-    }
-
-    public function getLocation():string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(string $location)
-    {
-        $this->location = $location;
-    }
-
-    public function getDate():string
-    {
-        return $this->date;
-    }
-
-    public function setDate(string $date)
-    {
-        $this->date = $date;
+        $this->eventDetails = $eventDetails;
     }
 }

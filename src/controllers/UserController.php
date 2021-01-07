@@ -4,12 +4,15 @@
 class UserController extends AppController
 {
     private $userRepository;
+    private $userManager;
     private $eventRepository;
     private $user;
+
     const UPLOAD_DIRECTORY = '/../public/uploads/';
     public function __construct(){
         parent::__construct();
         $this->userRepository = new UserRepository();
+        $this->userManager = new UserManager();
         $this->eventRepository = new EventRepository();
         $this->user = $this->userRepository->getUserById();
     }
@@ -39,18 +42,19 @@ class UserController extends AppController
             $email = $this->user->getEmail();
             $this->user = new User(
                 $id,
-                $_POST['name'],
-                $_POST['surname'],
                 $email,
                 $_POST['password'],
-                $_POST['country'],
-                $_POST['age'],
-                $_POST['phone'],
-                $filename
+                new UserDetails(
+                    $_POST['name'],
+                    $_POST['surname'],
+                    $_POST['phone'],
+                    $_POST['description'],
+                    $_POST['country'],
+                    $_POST['age'],
+                    $filename
+                )
             );
-            $this->user->setDescription($_POST['description']);
-            $this->user->setImage($filename);
-            $this->userRepository->editUser($this->user);
+            $this->userManager->editUser($this->user);
             $this->renderWhenCookiesAreSet('profile', ['user'=>$this->user]);
         }
         else{

@@ -3,74 +3,23 @@
 
 class User{
     private $id;
-    private $name;
-    private $surname;
     private $email;
     private $password;
-    private $phone;
-    private $description;
-    private $country;
-    private $age;
-    private $image;
+    private $userDetails;
 
-    public function __construct(int $id, string $name, string $surname, string $email, string $password, string $country, int $age, string $phone, string $image = 'no-image.png')
+    public function __construct(int $id, string $email, string $password, UserDetails $userDetails)
     {
         $this->id = $id;
-        $this->name = $name;
-        $this->surname = $surname;
         $this->email = $email;
         $this->password = $password;
-        $this->country = $country;
-        $this->age = $age;
-        $this->phone = $phone;
-        $this->image = $image;
-    }
-
-    public function setImage(string $image): void{
-        $this->image = $image;
-    }
-
-    public function getImage(){
-        return $this->image;
-    }
-    
-    public function getCountry(): string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(string $country): void
-    {
-        $this->country = $country;
-    }
-
-    public function getPhone(): string{
-        return $this->phone;
-    }
-
-    public function getAge(): int
-    {
-        return $this->age;
-    }
-
-    public function setAge(int $age): void
-    {
-        $this->age = $age;
-    }
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
+        $this->userDetails = $userDetails;
     }
 
     public function getId(): int
     {
         return $this->id;
     }
+
     public function setId(int $id): void
     {
         $this->id = $id;
@@ -81,18 +30,30 @@ class User{
         return $this->email;
     }
 
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function getName(): string
+    public function setPassword(string $password): void
     {
-        return $this->name;
+        $this->password = $password;
     }
 
-    public function getSurname(): string
+    public function getUserDetails(): UserDetails
     {
-        return $this->surname;
+        return $this->userDetails;
     }
+
+    public function setUserDetails(UserDetails $userDetails): void
+    {
+        $this->userDetails = $userDetails;
+    }
+
+
 }
