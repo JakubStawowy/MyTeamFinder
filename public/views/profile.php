@@ -1,104 +1,24 @@
-<!DOCTYPE html>
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
-    <link rel="stylesheet" href="public/stylecss/profile.min.css" type="text/css"/>
-    <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="public/js/homeScript.js" defer></script>
-    <title>Moj profil</title>
-</head>
-<body onload="onLoad()">
-        <div class="menu-bar">
-            <a class="image" href="home">
-                <img src="public/img/Graylogo.png">
-            </a>
-            <ul>
-                <li>
-                    <a href="home">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="eSports">
-                        E-sports
-                    </a>
-                </li>
-                <li>
-                    <a href="normalSports">
-                        Team-sports
-                    </a>
-                </li>
-                <li>
-                    <a href="newEvent">
-                        New event
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-        <div id="right-side-bar-hidden" class="right-side-bar-hidden">
-            <i class="fas fa-angle-up nav-icon"></i>
-            <i id="nav-icon-hidden" class="fas fa-angle-left nav-icon"></i>
-        </div>
-        <div id="right-side-bar" class="right-side-bar">
-            <a>
-                <i class="fas fa-angle-up nav-icon"></i>
-            </a>
-
-                <?
-                    if(isset($user)){
-                ?>
-                <img src="public/uploads/<?=$user->getImage()?>">
-            <a>
-                <?
-                    echo $user->getName().' '.$user->getSurname();
-                ?>
-            </a>
-            <a href="personalProfile">My profile</a>
-            <a href="personalProfile">Sports</a>
-            <a href="userSignedEvents">Events</a>
-            <a href="userEvents">My events</a>
-            <a href="userSettings">
-                <i class="fas fa-cog"></i>
-                Account settings
-            </a>
-            <a href="logout" >
-                <i class="fas fa-sign-out-alt"></i>
-                Logout
-            </a>
-            <a>
-                <i id="nav-icon" class="fas fa-angle-right nav-icon"></i>
-            </a>
-
-        </div>
+<?php include('header.php') ?>
     <div class="container">
-        <div class="bottom-bar">
-            <i class="fas fa-bars"></i>
-            <a href="home">
-                <i class="fas fa-home"></i>
-            </a>
-            <a href="profile">
-                <i class="fas fa-user"></i>
-            </a>
-        </div>
+        <? if(isset($userProfile)){?>
         <section class="profile">
             <div class="profile-data">
 
-                <img src="public/uploads/<?=$user->getImage()?>">
+                <img src="public/uploads/<?=$userProfile->getUserDetails()->getImage()?>">
                 <div class="data">
                     <h2>
                         <?
-                            echo $user->getName().' '.$user->getSurname();
+                            echo $userProfile->getUserDetails()->getName().' '.$userProfile->getUserDetails()->getSurname();
                         ?>
                     </h2>
                     <a>
                         <?
-                            echo $user->getCountry();
+                            echo $userProfile->getUserDetails()->getCountry();
                         ?>
                     </a>
                     <a>
                         <?
-                            echo $user->getAge();
+                            echo $userProfile->getUserDetails()->getAge();
 
                         ?>
                     </a>
@@ -111,10 +31,16 @@
                     </div>
                 </div>
                 <div class="profile-settings">
+                    <?
+                        if($userProfile->getId() == $_COOKIE['id']){
+                    ?>
                     <a href="userSettings">
                         <i class="fas fa-cog"></i>
                         profile settings
                     </a>
+                    <?
+                        }
+                    ?>
                 </div>
             </div>
             <section class="event-section">
@@ -126,16 +52,16 @@
                     ?>
                     <div class="post">
                         <div class="image">
-                            <img src="public/uploads/<?=$event->getImage()?>">
+                            <img src="public/uploads/<?=$event->getEventDetails()->getImage()?>">
                         </div>
                         <div class="post-description">
-                            <h2><?= $event->getTitle() ?></h2>
+                            <h2><?= $event->getEventDetails()->getTitle() ?></h2>
                             <a><?= $event->getAddedByNameSurname()?></a>
                                 <h4>
-                                    signed players: <?= $event->getSignedPlayers().'/'.$event->getNumberOfPlayers() ?>
+                                    signed players: <?= $event->getSignedPlayers().'/'.$event->getEventDetails()->getNumberOfPlayers() ?>
                                 </h4>
                                 <a class="description">
-                                    <?= $event->getDescription() ?>
+                                    <?= $event->getEventDetails()->getDescription() ?>
                                 </a>
                                 <section class="icons-section">
                                     <section class="location-date-section">
@@ -170,7 +96,7 @@
                 </h2>
                 <a>
                     <?
-                        echo $user->getDescription();
+                        echo $userProfile->getUserDetails()->getDescription();
                     ?>
                 </a>
             </div>
@@ -209,9 +135,9 @@
                 </div>
                 </div>
             </section>
-            <?
-                }
-            ?>
         </section>
+            <?
+        }
+        ?>
     </div>
 </body>

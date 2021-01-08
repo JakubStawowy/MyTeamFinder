@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
     <link rel="stylesheet" href="public/stylecss/newevent.min.css" type="text/css"/>
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="public/js/homeScript.js" defer></script>
+    <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
     <title>Dodaj wydarzenie</title>
 </head>
 <body onload="onLoad()">
@@ -48,12 +49,12 @@
             <?
                 if(isset($user)){
             ?>
-            <img src="public/uploads/<?=$user->getImage()?>">
+            <img src="public/uploads/<?=$user->getUserDetails()->getImage()?>">
             <?}?>
         <a>
             <?
             if(isset($user)){
-                echo $user->getName().' '.$user->getSurname();
+                echo $user->getUserDetails()->getName().' '.$user->getUserDetails()->getSurname();
             }
             ?>
         </a>
@@ -82,6 +83,28 @@
             <a href="profile">
                 <i class="fas fa-user"></i>
             </a>
+            <ul class="bottom-menu">
+                <li>
+                    <a href="home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="normalSports">
+                        Team sports
+                    </a>
+                </li>
+                <li>
+                    <a href="eSports">
+                        E-sports
+                    </a>
+                </li>
+                <li>
+                    <a href="addEvent">
+                        New event
+                    </a>
+                </li>
+            </ul>
         </div>
         <form action="addEvent" method="POST" class="new-event-section" ENCTYPE="multipart/form-data">
             <h2>

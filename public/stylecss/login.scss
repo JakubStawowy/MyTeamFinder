@@ -22,86 +22,60 @@ $font: 'Montserrat', sans-serif;
 }
 
 .login-register{
+    height: 100%;
     @include flex-row();
     align-items: center;
-    div{
-        @include block-size(50%, 100%);
-        margin: 20vh 0 20vh;
-    }
+    justify-content: space-around;
     .logo{
         text-align: center;
-        img{
-            width: 50%;
-        }
     }
     .login-container{
         @include flex-column();
         justify-content: space-around;
-        padding: 3em;
-        margin: 0;
-        button{
-            // @include block-size(50%, 30%);
-            padding: 1.5em;
-            width: 50%;
+    }
+    
+    form{
+        @include flex-row();
+        justify-content: space-around;
+        border-radius: 5vw;
+        background: $bar-color;
+        .login-section{
+            @include flex-column();
+            justify-content: space-around;
+            align-items: center;
+            padding: 2em;
+        }
+        .message{
+            color: $font-color;
+            font-size: 0.5em;
+        }
+        input{
+            padding: 1em;
             border: none;
+            background-color: transparent;
+            color: $font-color;
+            border-bottom: 2px solid $font-color;
+        }
+        .no-valid{
+            color: red;
+        }
+        button{
+            width: 80%;
+            margin: 1em;
+            padding: 1em 2em 1em 2em;
+            border: 1px solid $border-color;
             border-radius: 30px;
             font-family: $font;
             line-height: 2.5em;
             color: $font-color;
-            background: $bar-color;
+            background: $container-color;
         }
         button:hover{
             cursor: pointer;
         }
-        .login{
-            @include flex-row();
-            // width: 50%;
-            padding: 1.5em;
-            justify-content: space-around;
-            border-radius: 5vw;
-            background: $bar-color;
-            .login-section{
-                @include flex-column();
-                justify-content: center;
-                align-items: center;
-                margin: 0;
-                padding: 0;
-            }
-            .message{
-                color: $font-color;
-                font-size: 0.5em;
-                margin: 1em;
-            }
-            input{
-                width: 60%;
-                margin: 1em;
-                padding: 1em;
-                border: none;
-                background-color: transparent;
-                color: $font-color;
-                border-bottom: 2px solid $font-color;
-            }
-            .no-valid{
-                color: red;
-                // border-bottom: 2px solid red;
-            }
-            button{
-                @include block-size(60%, 15%);
-                margin: 1em;
-                border: 1px solid $border-color;
-                border-radius: 30px;
-                font-family: $font;
-                line-height: 2.5em;
-                color: $font-color;
-                background: $container-color;
-            }
-            button:hover{
-                cursor: pointer;
-            }
-            a{
-                color: $font-color;
-                font-size: 0.5em;
-            }
+        a{
+            color: $font-color;
+            font-size: 0.5em;
         }
     }
 }
@@ -109,10 +83,13 @@ $font: 'Montserrat', sans-serif;
 
 @media only screen and (max-width: 768px){
     .container{
+        .login-register{
+            display: inline;
+        }
         .login-container{
             width: 100%;
             form{
-                // @include flex-column();
+                @include flex-column();
                 width: 100%;
                 padding: 0;
                 justify-content: space-around;

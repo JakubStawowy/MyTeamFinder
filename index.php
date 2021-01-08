@@ -10,7 +10,7 @@ Routing::get('home', 'EventController');
 Routing::get('eSports', 'EventController');
 Routing::get('normalSports', 'EventController');
 Routing::get('newEvent', 'DefaultController');
-Routing::get('personalProfile', 'UserController');
+Routing::get('personalProfile', 'DefaultController');
 Routing::get('userProfile', 'DefaultController');
 Routing::get('userSettings', 'UserController');
 Routing::get('userSignedEvents', 'UserController');
@@ -24,5 +24,6 @@ Routing::post('signOut', 'EventRegisterController');
 Routing::post('saveUser', 'UserController');
 Routing::post('filterEvents', 'EventController');
 Routing::post('search', 'EventController');
+Routing::post('removeEvent', 'EventController');
 
 Routing::run($path);

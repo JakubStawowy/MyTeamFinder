@@ -26,54 +26,70 @@ $font: 'Montserrat', sans-serif;
 .element{
     @include flex-row();
     align-items: center;
-    // display: block;
 }
 .home-page{
     @include block-size(93%, 100%);
-    @include flex-column();
     color: $font-color;
     .filtration-panel{
         @include block-size(100%, 8vh);
         @include flex-row();
-        justify-content: space-around;
+        justify-content: center;
         padding: 1em 0 1em;
         font-size: 0.6em;
         border-bottom: 1px solid $border-color;
         text-align: center;
-        a{
-            // margin: auto 20px auto;
-        }
         i{
             margin-right: 0.5em;
             font-size: 3em;
         }
+        a{
+            color: $font-color;
+            margin-left: 2em;
+        }
         a:hover{
             cursor: pointer;
+            color: $border-color;
         }
-        form{
-            justify-content: space-around;
+        form, div {
             width: 100%;
-            input{
+            input {
+                flex: 2;
+                color: $container-color;
                 background: $border-color;
                 border: none;
                 border-radius: 20px;
                 padding: 1em;
+                margin: 2em;
                 button{
                     display: none;
                 }
             }
-            input.filter{
-                border: white 1px solid;
+            input.search{
+                flex: 3;
             }
-            input.filter:hover{
+
+            input.search-button, input.filter{
+                flex: 1;
+            }
+
+            input.search-button:hover, input.filter:hover {
                 cursor: pointer;
+                background: #818181;
+                border: $border-color 1px solid;
             }
+
             i{
                 color: $border-color;
+            }
+            i:hover{
+                cursor: pointer;
+                color: #818181;
             }
         }
         .form-displayed{
             @include flex-row();
+            justify-content: space-around;
+            align-items: center;
         }
     }
     .post{
@@ -90,6 +106,15 @@ $font: 'Montserrat', sans-serif;
                 @include block-size(100%, 100%);
                 border-radius: 30px;
             }
+        }
+        input{
+        
+            color: $font-color;
+            border: none;
+            background: transparent;
+        }
+        input:hover{
+            cursor: pointer;
         }
         .post-description{
             @include flex-column();
@@ -144,17 +169,39 @@ $font: 'Montserrat', sans-serif;
 @media only screen and (max-width: 768px){
     
     .home-page{
+        width: 90%;
         .filtration-panel{
             width: 100%;
+            padding: 0;
+            opacity: 95%;
+            .form-displayed{
+                @include flex-column();
+                justify-content: space-around;
+                position: absolute;
+                height: 76vh;
+                background: $container-color;
+                input{
+                    width: 80%;
+                    margin: 0;
+                    flex: 0;
+                }
+                .filter{
+                    flex: 0;
+                }
+            }
         }
         .post{
             width: 100%;
             margin: 20px 0 20px 0;
-            border-radius: 0;
+            // border-radius: 0;
             .image{
                 @include block-size(20vw, 20vw);
-                border-radius: 0;
-                border-bottom-right-radius: 10px;
+                // border-radius: 0;
+                img{
+
+                    border-bottom-left-radius: 0;
+                    border-top-right-radius: 0;
+                }
             }
         }
     }

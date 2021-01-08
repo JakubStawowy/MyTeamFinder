@@ -44,8 +44,11 @@ function createEvent(event) {
     const title = clone.querySelector("h2");
     title.innerHTML = event.title;
 
-    const author = clone.querySelector(".author");
-    author.innerHTML = event.username+" "+event.surname;
+    const author = clone.querySelector('input[name="username-surname"]');
+    author.value = event.username+" "+event.surname;
+
+    const authorId = clone.querySelector('input[name="userId"]');
+    authorId.value = event.created_by;
 
     const signedPlayers = clone.querySelector("h4");
     signedPlayers.innerHTML = "signed players: "+event.signed_players+"/"+event.number_of_players;
