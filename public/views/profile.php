@@ -40,6 +40,17 @@
                     </a>
                     <?
                         }
+                        else if($user->getRole() == 'admin' && $userProfile->getRole() == 'normal'){
+                    ?>
+                        <form action="makeAdmin" method="post">
+                            <input type="hidden" name="userId" value="<?= $userProfile->getId() ?>">
+                            <button type="submit">
+                                <i class="fas fa-toolbox"></i>
+                                make admin
+                            </button>
+                        </form>
+                    <?
+                        }
                     ?>
                 </div>
             </div>
@@ -49,42 +60,7 @@
             <?
             if(isset($events)){
                 foreach ($events as $event):
-                    ?>
-                    <div class="post">
-                        <div class="image">
-                            <img src="public/uploads/<?=$event->getEventDetails()->getImage()?>">
-                        </div>
-                        <div class="post-description">
-                            <h2><?= $event->getEventDetails()->getTitle() ?></h2>
-                            <a><?= $event->getAddedByNameSurname()?></a>
-                                <h4>
-                                    signed players: <?= $event->getSignedPlayers().'/'.$event->getEventDetails()->getNumberOfPlayers() ?>
-                                </h4>
-                                <a class="description">
-                                    <?= $event->getEventDetails()->getDescription() ?>
-                                </a>
-                                <section class="icons-section">
-                                    <section class="location-date-section">
-                                        <a>
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            Cracowa
-                                        </a>
-                                        <a>
-                                            <i class="fas fa-calendar-alt"></i>
-                                            6 pm, 24-06-2020
-                                        </a>
-                                    </section>
-                                    <form class="sign-section" action="signOut" method="post">
-                                        <input type="hidden" name="eventId" value="<?= $event->getId() ?>"/>
-                                        <button class="mybutton" type="submit">
-                                            Sign out
-                                            <i class="fas fa-sign-in-alt"></i>
-                                        </button>
-                                    </form>
-                                </section>
-                        </div>
-                    </div>
-                <?
+                    include('event.php');
                 endforeach;
             }
             ?>
@@ -114,26 +90,52 @@
                 </div>
             </div>
             <section class="profile-feedback">
+
                 <h2>
                     User feedback
                 </h2>
-                <div class="feedback">
+                <?
+                    if(isset($feedback)){
+                        foreach ($feedback as $item):
+                ?>
+                    <div class="feedback">
 
-                <div class="image">
+                        <div class="image">
+                            <img src="public/uploads/<?=$item->getUserImage()?>">
+                        </div>
+                        <div class="feedback-body">
 
-                </div>
-                <a>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                   
-                </a>
-                <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                </div>
-                </div>
+                            <a class="user date">
+                                <?= $item->getAddedByNameSurname()?>
+                                <?= $item->getCreatedAt()?>
+                            </a>
+                            <a>
+                                <?= $item->getComment() ?>
+                            </a>
+                        </div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                <?
+                    endforeach;
+                    }
+                    if($userProfile->getId() != $_COOKIE['id']){
+
+                ?>
+                        <form action="leaveComment" method="post">
+                            <input type="hidden" name="userId" value="<?= $userProfile->getId() ?>">
+                            <input class="comment-text" type="text" name="feedback">
+                            <input class="comment-submit button-disabled" type="submit" value="leave comment">
+                        </form>
+                <?
+                    }
+                ?>
             </section>
         </section>
             <?

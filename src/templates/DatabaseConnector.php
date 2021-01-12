@@ -16,4 +16,14 @@ class DatabaseConnector
         $statement->execute($args);
         return $statement;
     }
+
+    protected function getPDOConnection() {
+        return $this->database->connect();
+    }
+
+    protected function executePDOConnection(PDO $connection, string $query, array $args = null) {
+        $statement = $connection->prepare($query);
+        $statement->execute($args);
+        return $statement;
+    }
 }

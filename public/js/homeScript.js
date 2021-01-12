@@ -69,4 +69,6 @@ function onLoad(){
         document.getElementsByClassName('search')[0].classList.add('form-displayed');
         document.getElementsByClassName('search')[0].classList.remove('hidden-element');
     });
+
 }
+

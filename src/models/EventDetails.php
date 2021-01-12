@@ -84,7 +84,7 @@ class EventDetails
 
     public function getDate()
     {
-        return $this->date;
+        return substr($this->date, 0, 16);
     }
 
     public function setDate($date): void

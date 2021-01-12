@@ -23,80 +23,15 @@ $font: 'Montserrat', sans-serif;
 
 .profile{
     color: $font-color;
-    margin: 6em;
+    margin: 2em;
     .event-section{
         @include flex-column();
         a{
-            margin-top: 2em;
             text-decoration: none; 
             color: $font-color;
         }
-        .post{
-            @include block-size(calc(100%-8em), 50vh);
-            @include flex-row();
-            margin-top: 4em;
-            border: 1px solid $border-color;
-            border-radius: 30px;
-            .image{
-                @include block-size(50vh, 50vh);
-                background: $component-color;
-                border-radius: 30px;
-                img{
-                    @include block-size(50vh, 50vh);
-                    border-radius: 30px;
-                }
-            }
-            .post-description{
-                @include flex-column();
-                margin: 2em;
-                width: 50%;
-                justify-content: space-around;
-                h2{
-                    margin: 0;
-                }
-                h4{
-                    margin: 0;
-                }
-                a{
-                    @include flex-row();
-                    font-size: 0.6em;
-                    align-items: center;
-                    i{
-                        margin-right: 0.5em;
-                        font-size: 2em;
-                    }
-                }
-                .icons-section{
-                    @include flex-row();
-                    justify-content: space-between;
-                    align-items: center;
-                    .location-date-section{
-                        @include flex-column();
-                        height: 150%;
-                        justify-content: space-around;
-                    }
-                    .sign-section{
-                        font-size: 1em;
-                        font-weight: bold;
-                        
-                        button{
-                            border: none;
-                            background: transparent;
-                            color: $font-color;
-                            font-size: 1em;
-                        }
-                        button:hover{
-                            cursor: pointer;
-                            color: $border-color;
-                            
-                        }
-                    }
-                    .sign-section:hover{
-                        cursor: pointer;
-                        color: $border-color;
-                    }
-                }
-            }
+        .event{
+            margin: 2em 0;
         }
     }
     
@@ -107,6 +42,8 @@ $font: 'Montserrat', sans-serif;
         }
         img{
             @include block-size(160px, 160px);
+            object-fit: cover;
+            border-radius: 10px;
         }
         .data{
             @include flex-column();
@@ -118,17 +55,23 @@ $font: 'Montserrat', sans-serif;
         }
         .profile-settings{
             @include flex-row();
-            flex: 6;
+            // flex: 4;
             justify-content: flex-end;
             a{
-                height: 20%;
+                font-size: 1em;
                 text-decoration: none;
                 color: $font-color;
                 i{
                     padding-right: 0.5em;
                 }
             }
-            a:hover{
+            button{
+                background: transparent;
+                border: none;
+                color: $font-color;
+                font-size: 1em;
+            }
+            a:hover, button:hover{
                 cursor: pointer;
             }
         }
@@ -155,26 +98,70 @@ $font: 'Montserrat', sans-serif;
             }
         }
     }
-    .feedback{
-        @include flex-row();
-        margin-top: 2em;
-        align-items: center;
-        border-bottom: 1px solid $border-color;
-        .image{
-            @include block-size(60px, 60px);
-            background: $component-color;
-            border-radius: 15px;
-        }
-        a{
-            flex:7;
-            width: 85%;
-            padding-left: 2em;
-        }
-        .stars{
+    .profile-feedback{
+
+        .feedback{
             @include flex-row();
-            flex: 1;
-            justify-content: flex-end;
-            color: $star-color;
+            margin: 2em 0 2em;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            .image{
+                @include block-size(60px, 60px);
+                background: $component-color;
+                border-radius: 15px;
+                img{
+                    @include block-size(60px, 60px);
+                    border-radius: 15px;
+                    object-fit: cover;
+                }
+            }
+            .feedback-body{
+                @include flex-column();
+                a.date, a.user{
+                    font-size: 0.8em;
+                }
+            }
+            a{
+                flex:7;
+                width: 85%;
+                padding-left: 20px;
+            }
+            .stars{
+                @include flex-row();
+                flex: 1;
+                justify-content: flex-end;
+                color: $star-color;
+            }
+        }
+
+        form{
+            @include flex-row();
+            justify-content: space-between;
+            margin-bottom: 2em;
+            input{
+
+                border-radius: 30px;
+                width: 20%;
+                color: $font-color;
+                background: $border-color;
+                border: none;
+                font-size: 1em;
+            }
+            input.comment-submit:hover{
+                cursor: pointer;
+                background: #818181;
+            }
+            input.comment-text{
+                width: 70%;
+                padding: 1em;
+                background: transparent;
+                border: 1px $border-color solid;
+            }
+            
+            .button-disabled{
+                color: #505050;
+                pointer-events: none;
+            }
         }
     }
 }

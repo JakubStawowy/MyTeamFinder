@@ -6,6 +6,7 @@ require_once __DIR__.'/../models/Event.php';
 require_once __DIR__.'/../repository/EventRepository.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../repository/SportRepository.php';
+require_once __DIR__.'/../managers/EventManager.php';
 
 class EventController extends AppController{
 
@@ -24,6 +25,7 @@ class EventController extends AppController{
         $this->eventRepository = new EventRepository();
         $this->userRepository = new UserRepository();
         $this->sportRepository = new SportRepository();
+        $this->eventManager = new EventManager();
 
     }
 
@@ -47,7 +49,7 @@ class EventController extends AppController{
                         $filename,
                         $_POST['sport'],
                         $_POST['numberOfPlayers'],
-                        'krakow', '2020-02-11'
+                        'krakow', $_POST['date'].' '.$_POST['time']
                     )
                 );
                 $this->eventManager->addEvent($event);
@@ -145,6 +147,7 @@ class EventController extends AppController{
             $this->render('home', ['messages'=>["Event removed succesfully!"]]);
         }
     }
+
     private function validate(array $file): bool{
         if($file['size'] > self::MAX_FILE_SIZE){
             $this->messages[] = 'file size is too large';

@@ -92,73 +92,52 @@ $font: 'Montserrat', sans-serif;
             align-items: center;
         }
     }
-    .post{
+    .event{
+        
         @include block-size(calc(100%-8em), 50vh);
         @include flex-row();
         margin: 4em 4em 0;
+        padding: 1em;
         border: 1px solid $border-color;
         border-radius: 30px;
-        .image{
+        .event-image{
             @include block-size(50vh, 50vh);
-            background: $component-color;
             border-radius: 30px;
             img{
-                @include block-size(100%, 100%);
+                // @include block-size(100%, 100%);
+                @include block-size(50vh, 50vh);
+                object-fit: cover;
                 border-radius: 30px;
             }
         }
-        input{
         
-            color: $font-color;
-            border: none;
-            background: transparent;
-        }
-        input:hover{
-            cursor: pointer;
-        }
-        .post-description{
+        section{
             @include flex-column();
-            margin: 2em;
-            width: 50%;
-            justify-content: space-around;
-            h2{
-                margin: 0;
+            width: 60%;
+            justify-content: space-between;
+            margin-left: 1em;
+            input.title{
+                font-size: 2em;
             }
-            h4{
-                margin: 0;
+            input{
+                font-size: 1em;
             }
-            a{
+            input:hover{
+                cursor: pointer;
+            }
+            a.event-description{
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            section.icons-section, div{
                 @include flex-row();
-                font-size: 0.6em;
-                align-items: center;
-                i{
-                    margin-right: 0.5em;
-                    font-size: 2em;
-                }
             }
             .icons-section{
-                @include flex-row();
                 justify-content: space-between;
-                align-items: center;
-                .location-date-section{
-                    @include flex-column();
-                    height: 150%;
-                    justify-content: space-around;
-                }
-                .sign-section{
-                    font-size: 1em;
-                    font-weight: bold;
-                    button{
-                        border: none;
-                        background: transparent;
-                        color: $font-color;
-                        font-size: 1em;
-                    }
-                    button:hover{
-                        cursor: pointer;
-                        color: $border-color;
-                        
-                    }
+                padding-bottom: 1em;
+                a.mybutton:hover{
+                    cursor: pointer;
+                    color: $border-color;
                 }
             }
         }
@@ -171,7 +150,6 @@ $font: 'Montserrat', sans-serif;
     .home-page{
         width: 90%;
         .filtration-panel{
-            width: 100%;
             padding: 0;
             opacity: 95%;
             .form-displayed{
@@ -190,14 +168,15 @@ $font: 'Montserrat', sans-serif;
                 }
             }
         }
-        .post{
-            width: 100%;
+        .event{
+            // width: 100%;
             margin: 20px 0 20px 0;
             // border-radius: 0;
-            .image{
+            .event-image{
                 @include block-size(20vw, 20vw);
                 // border-radius: 0;
                 img{
+                    @include block-size(20vw, 20vw);
 
                     border-bottom-left-radius: 0;
                     border-top-right-radius: 0;

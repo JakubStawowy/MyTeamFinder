@@ -1,40 +1,9 @@
 <?php include('header.php') ?>
 <div class="container">
-    <div class="bottom-bar">
-        <i class="fas fa-bars"></i>
-        <a href="home">
-            <i class="fas fa-home"></i>
-        </a>
-        <a href="personalProfile">
-            <i class="fas fa-user"></i>
-        </a>
-        <ul>
-            <li>
-                <a href="home">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="normalSports">
-                    Team sports
-                </a>
-            </li>
-            <li>
-                <a href="eSports">
-                    E-sports
-                </a>
-            </li>
-            <li>
-                <a href="addEvent">
-                    New event
-                </a>
-            </li>
-        </ul>
-    </div>
     <?
         if(isset($user)){
     ?>
-    <form action="saveUser" method="post" ENCTYPE="multipart/form-data">
+    <form class="settings" action="saveUser" method="post" ENCTYPE="multipart/form-data">
         <div class="section1 settings-section">
             <div class="label">
                 <a>
@@ -52,7 +21,7 @@
                 <a>
                 Phone number
                 </a>
-                <input name="phone" type="text" placeholder="<?= $user->getUserDetails()->getPhone()?>">
+                <input name="phone" type="text" value="<?= $user->getUserDetails()->getPhone()?>">
             </div>
         </div>
         <div class="section2 settings-section">
@@ -60,33 +29,38 @@
                 <a>
                     Name
                 </a>
-                <input name="name" type="text" placeholder="<?= $user->getUserDetails()->getName()?>">
+                <input name="name" type="text" value="<?= $user->getUserDetails()->getName()?>">
             </div>
             <div class="label">
                 <a>
                     Surname
                 </a>
-                <input name="surname" type="text" placeholder="<?= $user->getUserDetails()->getSurname()?>">
+                <input name="surname" type="text" value="<?= $user->getUserDetails()->getSurname()?>">
             </div>
             <div class="label">
                 <a>
                     Age
                 </a>
-                <input name="age" type="number" placeholder="<?= $user->getUserDetails()->getAge()?>">
+                <input name="age" type="number" value="<?= $user->getUserDetails()->getAge()?>">
             </div>
             <div class="label">
                 <a>
                     Country
                 </a>
-                <input name="country" type="text" placeholder="<?= $user->getUserDetails()->getCountry()?>">
+                <input name="country" type="text" value="<?= $user->getUserDetails()->getCountry()?>">
             </div>
         </div>
         <div class="section3 settings-section">
-            <input type="file" name="image" class="image-button">
+            <label>
+                <textarea name="description" class="description">
+                    aa
+                    <?= $user->getUserDetails()->getDescription() ?>
+                </textarea>
+            </label>
         </div>
         <div class="section4 settings-section">
-            <textarea name="description" class="description" placeholder="<?= $user->getUserDetails()->getDescription() ?>"></textarea>
-        
+            <input type="file" name="image" class="image-button">
+        <button type="submit">Save</button>
         </div>
         
         <div class="message">
@@ -98,7 +72,6 @@
                 }
                 ?>
             </div>
-        <button class="section6" type="submit">Save</button>
     </form>
     <?
         }

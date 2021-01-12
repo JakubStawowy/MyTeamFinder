@@ -1,6 +1,6 @@
 .profile {
   color: white;
-  margin: 6em;
+  margin: 2em;
 }
 
 .profile .event-section {
@@ -9,96 +9,12 @@
 }
 
 .profile .event-section a {
-  margin-top: 2em;
   text-decoration: none;
   color: white;
 }
 
-.profile .event-section .post {
-  width: calc(100%-8em);
-  height: 50vh;
-  display: flex;
-  flex-direction: row;
-  margin-top: 4em;
-  border: 1px solid #707070;
-  border-radius: 30px;
-}
-
-.profile .event-section .post .image {
-  width: 50vh;
-  height: 50vh;
-  background: #AEAEAE 0% 0% no-repeat padding-box;
-  border-radius: 30px;
-}
-
-.profile .event-section .post .image img {
-  width: 50vh;
-  height: 50vh;
-  border-radius: 30px;
-}
-
-.profile .event-section .post .post-description {
-  display: flex;
-  flex-direction: column;
-  margin: 2em;
-  width: 50%;
-  justify-content: space-around;
-}
-
-.profile .event-section .post .post-description h2 {
-  margin: 0;
-}
-
-.profile .event-section .post .post-description h4 {
-  margin: 0;
-}
-
-.profile .event-section .post .post-description a {
-  display: flex;
-  flex-direction: row;
-  font-size: 0.6em;
-  align-items: center;
-}
-
-.profile .event-section .post .post-description a i {
-  margin-right: 0.5em;
-  font-size: 2em;
-}
-
-.profile .event-section .post .post-description .icons-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.profile .event-section .post .post-description .icons-section .location-date-section {
-  display: flex;
-  flex-direction: column;
-  height: 150%;
-  justify-content: space-around;
-}
-
-.profile .event-section .post .post-description .icons-section .sign-section {
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.profile .event-section .post .post-description .icons-section .sign-section button {
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 1em;
-}
-
-.profile .event-section .post .post-description .icons-section .sign-section button:hover {
-  cursor: pointer;
-  color: #707070;
-}
-
-.profile .event-section .post .post-description .icons-section .sign-section:hover {
-  cursor: pointer;
-  color: #707070;
+.profile .event-section .event {
+  margin: 2em 0;
 }
 
 .profile .profile-data {
@@ -113,6 +29,8 @@
 .profile .profile-data img {
   width: 160px;
   height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .profile .profile-data .data {
@@ -129,12 +47,11 @@
 .profile .profile-data .profile-settings {
   display: flex;
   flex-direction: row;
-  flex: 6;
   justify-content: flex-end;
 }
 
 .profile .profile-data .profile-settings a {
-  height: 20%;
+  font-size: 1em;
   text-decoration: none;
   color: white;
 }
@@ -143,7 +60,14 @@
   padding-right: 0.5em;
 }
 
-.profile .profile-data .profile-settings a:hover {
+.profile .profile-data .profile-settings button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1em;
+}
+
+.profile .profile-data .profile-settings a:hover, .profile .profile-data .profile-settings button:hover {
   cursor: pointer;
 }
 
@@ -173,33 +97,82 @@
   margin: 1em;
 }
 
-.profile .feedback {
+.profile .profile-feedback .feedback {
   display: flex;
   flex-direction: row;
-  margin-top: 2em;
+  margin: 2em 0 2em;
   align-items: center;
   border-bottom: 1px solid #707070;
 }
 
-.profile .feedback .image {
+.profile .profile-feedback .feedback .image {
   width: 60px;
   height: 60px;
   background: #AEAEAE 0% 0% no-repeat padding-box;
   border-radius: 15px;
 }
 
-.profile .feedback a {
-  flex: 7;
-  width: 85%;
-  padding-left: 2em;
+.profile .profile-feedback .feedback .image img {
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+  object-fit: cover;
 }
 
-.profile .feedback .stars {
+.profile .profile-feedback .feedback .feedback-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile .profile-feedback .feedback .feedback-body a.date, .profile .profile-feedback .feedback .feedback-body a.user {
+  font-size: 0.8em;
+}
+
+.profile .profile-feedback .feedback a {
+  flex: 7;
+  width: 85%;
+  padding-left: 20px;
+}
+
+.profile .profile-feedback .feedback .stars {
   display: flex;
   flex-direction: row;
   flex: 1;
   justify-content: flex-end;
   color: #E5951D;
+}
+
+.profile .profile-feedback form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+.profile .profile-feedback form input {
+  border-radius: 30px;
+  width: 20%;
+  color: white;
+  background: #707070;
+  border: none;
+  font-size: 1em;
+}
+
+.profile .profile-feedback form input.comment-submit:hover {
+  cursor: pointer;
+  background: #818181;
+}
+
+.profile .profile-feedback form input.comment-text {
+  width: 70%;
+  padding: 1em;
+  background: transparent;
+  border: 1px #707070 solid;
+}
+
+.profile .profile-feedback form .button-disabled {
+  color: #505050;
+  pointer-events: none;
 }
 
 @media only screen and (max-width: 768px) {

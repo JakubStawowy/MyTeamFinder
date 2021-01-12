@@ -15,6 +15,9 @@ class EventRepository extends DatabaseConnector
         $this->userRepository = new UserRepository();
     }
 
+    public function test(){
+        $this->execute("insert into test values (4, 3)");
+    }
     public function getEvent(int $id): ?Event{
         $statement = $this->execute('SELECT * FROM event_view WHERE id=?', [$id]);
         $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -96,8 +99,8 @@ class EventRepository extends DatabaseConnector
     private function createEvent(array $event): Event{
         return new Event(
             $event['id'],
-            $event['added_by'],
-            $event['username'].' '.$event['surname'],
+            $event['created_by'],
+            $event['name'].' '.$event['surname'],
             $event['signed_players'],
             new EventDetails(
                 $event['title'],

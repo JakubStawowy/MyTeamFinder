@@ -5,11 +5,14 @@ require_once 'AppController.php';
 class DefaultController extends AppController{
 
     private $userRepository;
+    private $eventRepository;
     private $user;
     public function __construct()
     {
         parent::__construct();
         $this->userRepository = new UserRepository();
+        $this->eventRepository = new EventRepository();
+        $this->user = $this->userRepository->getUserById();
     }
 
     public function index(){
@@ -24,17 +27,26 @@ class DefaultController extends AppController{
         $this->render('register');
     }
     public function newEvent(){
+//        $this->user = $this->userRepository->getUserById();
         $this->renderWhenCookiesAreSet('newEvent', ['user' => $this->user]);
     }
+    public function event(){
+        if($this->isGet()){
+//            $this->user = $this->userRepository->getUserById();
+            $this->renderWhenCookiesAreSet('eventPage', ['user'=>$this->user, 'event'=>$this->eventRepository->getEvent($_GET['eventId'])]);
+        }
+    }
     public function personalProfile(){
-        $this->user = $this->userRepository->getUserById();
-        $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $this->user]);
+//        $this->user = $this->userRepository->getUserById();
+        $feedback = $this->userRepository->getUserFeedback($_COOKIE['id']);
+        $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $this->user, 'feedback'=>$feedback]);
     }
     public function userProfile(){
-        if($this->isPost()){
-            $this->user = $this->userRepository->getUserById();
-            $user = $this->userRepository->getUserById($_POST['userId']);
-            $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $user]);
+        if($this->isGet()){
+//            $this->user = $this->userRepository->getUserById();
+            $user = $this->userRepository->getUserById($_GET['userId']);
+            $feedback = $this->userRepository->getUserFeedback($_GET['userId']);
+            $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $user, 'feedback'=>$feedback]);
         }
     }
 }

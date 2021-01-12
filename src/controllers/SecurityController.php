@@ -87,7 +87,8 @@ class SecurityController extends AppController{
                 $country,
                 $age,
                 'no-photo.png'
-            )
+            ),
+            'normal'
         ))){
             $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
         }

@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../templates/DatabaseConnector.php';
 require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../models/Feedback.php';
 require_once __DIR__.'/../models/UserDetails.php';
 
 class UserRepository extends DatabaseConnector
@@ -30,7 +31,6 @@ class UserRepository extends DatabaseConnector
             SELECT * FROM user_view WHERE id = ?
         ', [$id]);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-
         return $this->createUser($user);
     }
 
@@ -47,9 +47,28 @@ class UserRepository extends DatabaseConnector
         return $statement->fetch(PDO::FETCH_ASSOC)['id'];
     }
 
+    public function getUserFeedback(int $userId): array {
+
+        $feedbacks = [];
+        $statement = $this->execute('SELECT * FROM feedbacks WHERE about_user=?', [$userId]);
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $feedback):
+            $addedBy = $this->getUserById($feedback['added_by']);
+            $feedbacks[] = new Feedback(
+                $feedback['added_by'],
+                $feedback['comment'],
+                $addedBy->getUserDetails()->getImage(),
+                $feedback['created_at'],
+                $addedBy->getUserDetails()->getName().' '.$addedBy->getUserDetails()->getSurname()
+            );
+        endforeach;
+        return $feedbacks;
+    }
+
     public function createUser(array $user): User {
         if($user['image'] == null)
-            $user['image'] = 'no-photo.png';
+            $user['image'] = 'Ndak.png';
         return new User(
             $user['id'],
             $user['email'],
@@ -62,7 +81,8 @@ class UserRepository extends DatabaseConnector
                 $user['country'],
                 $user['age'],
                 $user['image']
-            )
+            ),
+            $user['role']
         );
     }
 

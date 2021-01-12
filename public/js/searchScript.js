@@ -1,5 +1,5 @@
 const search = document.querySelector('input[placeholder="Title, description, user"]');
-const searchButton = document.querySelector('input[class="filter"]');
+const searchButton = document.querySelector('.filter');
 const eventContainer = document.querySelector('.events');
 function searchEvents(event){
     if(event.key === "Enter"){
@@ -22,10 +22,9 @@ function searchEvents(event){
         });
     }
 }
+
 search.addEventListener("keyup", searchEvents);
-searchButton.addEventListener('click', function () {
-    alert("xd");
-});
+searchButton.addEventListener('click', searchEvents);
 
 function loadEvents(events) {
     events.forEach(event => {
@@ -38,32 +37,27 @@ function createEvent(event) {
 
     const template = document.querySelector("#event-template");
     const clone = template.content.cloneNode(true);
+
     const image = clone.querySelector("img");
     image.src = `/public/uploads/${event.image}`;
 
-    const title = clone.querySelector("h2");
-    title.innerHTML = event.title;
-
-    const author = clone.querySelector('input[name="username-surname"]');
-    author.value = event.username+" "+event.surname;
-
-    const authorId = clone.querySelector('input[name="userId"]');
-    authorId.value = event.created_by;
-
-    const signedPlayers = clone.querySelector("h4");
-    signedPlayers.innerHTML = "signed players: "+event.signed_players+"/"+event.number_of_players;
-
-    const description = clone.querySelector(".description");
-    description.innerHTML = event.description;
-
-    const location = clone.querySelector(".location");
-    location.innerHTML = event.location;
-
-    const date = clone.querySelector(".date");
-    date.innerHTML = event.date;
-
-    const eventId = clone.querySelector('input[name="eventId"]');
+    const eventId = clone.querySelector("input[name='eventId']");
     eventId.value = event.id;
+
+    const title = clone.querySelector(".title");
+    title.value = event.title;
+
+    const userId = clone.querySelector("input[name='userId']");
+    userId.value = event.created_by;
+
+    const username = clone.querySelector(".username");
+    username.value = event.username+" "+event.surname;
+
+    const signedPlayersSection = clone.querySelector(".signed-players-section");
+    signedPlayersSection.innerHTML = "signed players: "+event.signed_players+"/"+event.number_of_players;
+
+    const description = clone.querySelector('.event-description');
+    description.innerHTML = event.description;
 
     eventContainer.appendChild(clone);
 }

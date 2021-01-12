@@ -87,6 +87,10 @@ $font: 'Montserrat', sans-serif;
         a:hover{
             cursor: pointer;
         }
+        .date-label{
+            margin: 0;
+            padding: 0;
+        }
     }
     .description{
         grid-area: description;

@@ -6,6 +6,7 @@ $path = parse_url($path, PHP_URL_PATH);
 
 Routing::get('', 'DefaultController');
 Routing::get('register', 'DefaultController');
+Routing::get('event', 'DefaultController');
 Routing::get('home', 'EventController');
 Routing::get('eSports', 'EventController');
 Routing::get('normalSports', 'EventController');
@@ -19,11 +20,13 @@ Routing::post('login', 'SecurityController');
 Routing::post('logout', 'SecurityController');
 Routing::post('addEvent', 'EventController');
 Routing::post('registerUser', 'SecurityController');
-Routing::post('signUpUserForEvent', 'EventRegisterController');
+Routing::get('signUpUserForEvent', 'EventRegisterController');
 Routing::post('signOut', 'EventRegisterController');
 Routing::post('saveUser', 'UserController');
 Routing::post('filterEvents', 'EventController');
 Routing::post('search', 'EventController');
 Routing::post('removeEvent', 'EventController');
+Routing::post('leaveComment', 'UserController');
+Routing::post('makeAdmin', 'UserController');
 
 Routing::run($path);

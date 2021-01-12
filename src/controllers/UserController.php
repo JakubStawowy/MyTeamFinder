@@ -22,11 +22,11 @@ class UserController extends AppController
     }
     public function userEvents(){
         $events = $this->eventRepository->getEvents('userEvents');
-        $this->renderWhenCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user]);
+        $this->renderWhenCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user, 'userProfile'=>$this->user]);
     }
     public function userSignedEvents(){
         $events = $this->eventRepository->getEvents('userSignedEvents');
-        $this->renderWhenCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user]);
+        $this->renderWhenCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user, 'userProfile'=>$this->user]);
     }
     public function userSettings(){
         $this->renderWhenCookiesAreSet('userSettings', ['user'=>$this->user]);
@@ -37,10 +37,11 @@ class UserController extends AppController
         $file_tmp_name = $file['tmp_name'];
         if($this->isPost()){
             if(!(is_uploaded_file($file_tmp_name)))
-                $filename='no-image.png';
+                $filename=$this->userRepository->getUserById()->getUserDetails()->getImage();
             move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
             $id = $this->user->getId();
             $email = $this->user->getEmail();
+            $role = $this->user->getRole();
             $this->user = new User(
                 $id,
                 $email,
@@ -53,13 +54,30 @@ class UserController extends AppController
                     $_POST['country'],
                     $_POST['age'],
                     $filename
-                )
+                ),
+                $role
             );
             $this->userManager->editUser($this->user);
-            $this->renderWhenCookiesAreSet('profile', ['user'=>$this->user]);
+            $this->renderWhenCookiesAreSet('profile', ['user'=>$this->user, 'userProfile'=>$this->user]);
         }
         else{
             $this->renderWhenCookiesAreSet('userSettings', ['messages'=>["Failed to edit account"]]);
+        }
+    }
+
+    public function leaveComment(){
+        if($this->isPost()){
+            $this->userManager->addComment($_POST['feedback'], $_POST['userId']);
+            $feedback = $this->userRepository->getUserFeedback($_POST['userId']);
+            $this->render('profile', ['userProfile'=>$this->userRepository->getUserById($_POST['userId']), 'user'=>$this->user, 'feedback'=>$feedback]);
+        }
+    }
+
+    public function makeAdmin(){
+        if($this->isPost()){
+            $this->userManager->makeUserAdmin($_POST['userId']);
+            $feedback = $this->userRepository->getUserFeedback($_POST['userId']);
+            $this->renderWhenCookiesAreSet('profile', ['userProfile'=>$this->userRepository->getUserById($_POST['userId']), 'user'=>$this->user, 'feedback'=>$feedback]);
         }
     }
 }

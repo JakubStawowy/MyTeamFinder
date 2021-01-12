@@ -73,6 +73,11 @@
   cursor: pointer;
 }
 
+.new-event-section .date-location .date-label {
+  margin: 0;
+  padding: 0;
+}
+
 .new-event-section .description {
   grid-area: description;
   padding: 2em;

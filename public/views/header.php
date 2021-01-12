@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="public/stylecss/settings.min.css" type="text/css"/>
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="public/js/homeScript.js" defer></script>
+    <script type="text/javascript" src="public/js/profileScript.js" defer></script>
     <script type="text/javascript" src="public/js/searchScript.js" defer></script>
     <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
+    <script type="text/javascript" src="public/js/statistics.js" defer></script>
+<!--    <script type="text/javascript" src="public/js/newEvent.js" defer></script>-->
 
     <title>My Team Finder</title>
 </head>
