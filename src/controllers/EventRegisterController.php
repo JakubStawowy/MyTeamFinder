@@ -1,6 +1,5 @@
 <?php
 
-
 class EventRegisterController extends AppController
 {
     private $eventRepository;
@@ -13,33 +12,16 @@ class EventRegisterController extends AppController
         $this->eventManager = new EventManager();
     }
 
-    public function signUp(int $id){
-        $this->eventManager->signUpUserToEvent($_COOKIE['id'], $id);
-        http_response_code(200);
-    }
-
     public function signUpUserForEvent(int $eventId){
-        try{
-            $this->eventManager->signUpUserToEvent($_COOKIE['id'], $eventId);
+        if($this->eventManager->signUpUserToEvent($_COOKIE['id'], $eventId)){
             http_response_code(200);
-        }catch (Exception $e){
-            if(substr($e->getMessage(), 9, 5) == "23505")
-                $this->render('home', ['messages'=>["You are already signed up for that event"]]);
-            else
-                $this->render('home', ['messages'=>[$e->getMessage()]]);
         }
+        else http_response_code(409);
 
     }
-    public function signOut(){
-        if($this->isPost()){
-            $userId = $_COOKIE['id'];
-            $eventId = $_POST['eventId'];
-            try{
-                $this->eventManager->signOut($userId, $eventId);
-                $this->render('home', ['messages'=>['Success!']]);
-            }catch (Exception $e){
-                $this->render('home', ['messages'=>['Event removing failure']]);
-            }
-        }
+
+    public function signOutUserFromEvent(int $eventId){
+        $this->eventManager->signOut($_COOKIE['id'], $eventId);
+        http_response_code(200);
     }
 }

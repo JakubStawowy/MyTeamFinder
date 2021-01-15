@@ -66,22 +66,18 @@ class EventController extends AppController{
         }
         $this->render('newevent', ['messages'=>$this->messages]);
     }
-    public function filterEvents(){
-        if($this->isPost()){
-            $filters = [];
-            if($_POST['free-spots'] != null)
-                $filters["number_of_players-signed_players>='"] = $_POST['free-spots'];
-            if($_POST['location'] != null)
-                $filters["location='"] = $_POST['location'];
-            if($_POST['date'] != null)
-                $filters["date='"] = $_POST['date'];
-            if($_POST['sport'] != null)
-                $filters[" sport_name='"] = $_POST['sport'];
-            $events = $this->eventRepository->getFilteredEvents($filters);
-            $this->render('home', ['events'=>$events]);
+    public function filter(){
+
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? $_SERVER["CONTENT_TYPE"] : "";
+        if($contentType === "application/json"){
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            echo json_encode($this->eventRepository->getFilteredEvents($decoded));
         }
-        else
-            $this->render('home', ['events'=>$this->eventRepository->getEvents(), 'messages'=>['Failed to filter events']]);
     }
     public function search(){
 
@@ -103,14 +99,12 @@ class EventController extends AppController{
         if(isset($_COOKIE['id'])){
 
             $events = $this->eventRepository->getEvents();
-            $normalSports = $this->sportRepository->getSports();
-            $eSports = $this->sportRepository->getSports('esport');
             $this->user = $this->userRepository->getUserById();
+            $userSignedEvents = $this->userRepository->getUserSignedEvents();
             $this->render('home',[
                 'events' => $events,
                 'user' => $this->user,
-                'normalSports' => $normalSports,
-                'eSports' => $eSports
+                'userSignedEvents'=>$userSignedEvents
             ]);
         }
         else{
@@ -120,24 +114,22 @@ class EventController extends AppController{
     }
     public function eSports(){
         $events = $this->eventRepository->getEvents('esport');
-        $normalSports = $this->sportRepository->getSports();
-        $eSports = $this->sportRepository->getSports('esport');
+        $this->user = $this->userRepository->getUserById();
+        $userSignedEvents = $this->userRepository->getUserSignedEvents();
         $this->render('home', [
             'events'=>$events,
             'user' => $this->user,
-            'normalSports' => $normalSports,
-            'eSports' => $eSports
+            'userSignedEvents'=>$userSignedEvents
         ]);
     }
     public function normalSports(){
         $events = $this->eventRepository->getEvents('normal');
-        $normalSports = $this->sportRepository->getSports();
-        $eSports = $this->sportRepository->getSports('esport');
+        $this->user = $this->userRepository->getUserById();
+        $userSignedEvents = $this->userRepository->getUserSignedEvents();
         $this->render('home', [
             'events'=>$events,
             'user' => $this->user,
-            'normalSports' => $normalSports,
-            'eSports' => $eSports
+            'userSignedEvents'=>$userSignedEvents
         ]);
     }
 

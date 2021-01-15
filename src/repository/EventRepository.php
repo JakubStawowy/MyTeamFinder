@@ -56,23 +56,23 @@ class EventRepository extends DatabaseConnector
     }
 
     public function getFilteredEvents(array $filters): array{
-        $results = [];
+
         $query = 'SELECT * FROM event_view WHERE ';
-        if(!empty($filters)){
-            foreach (array_keys($filters) as $key){
-                $query = $query.$key.$filters[$key]."' AND ";
-            }
-            $query = substr($query, 0, -4);
-        }
-        else
-            $query = substr($query, 0, -6);
+        if($filters['spots']!=null)
+            $query = $query.' number_of_players-signed_players>='.$filters['spots'].' AND';
+        if($filters['location']!=null)
+            $query = $query." location='".$filters['location']."'".' AND';
+        if($filters['dateFrom']!=null)
+            $query = $query." date>'".$filters['dateFrom']."'".' AND';
+        if($filters['dateTo']!=null)
+            $query = $query." date<='".$filters['dateTo']."'".' AND';
+        if($filters['sport']!=null)
+            $query = $query." sport='".$filters['sport']."'".' AND';
+        $query = substr($query, 0 ,-4);
         $query = $query.' ORDER BY created_at';
         $statement = $this->execute($query);
-        $events = $statement->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($events as $event){
-            $results[] = $this->createEvent($event);
-        }
-        return $results;
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getEventByTitle(string $title): array{

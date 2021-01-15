@@ -5,27 +5,86 @@
 
         <section class="home-page">
             <div class="filtration-panel">
+
                 <a class="element open-filters">
                     <i class="fas fa-sliders-h"></i>
                     Filtration (location, date etc.)
                 </a>
+                <form class="hidden-element filters" action="filterEvents" method="post">
+                    <input type="number" name="spots" placeholder="Free spots">
+                    <input type="text" name="location" placeholder="location">
+                    <input type="text" name="dateFrom" placeholder="date (from)">
+                    <input type="text" name="dateTo" placeholder="date (to)">
+                    <input type="text" name="sport" placeholder="sport">
+                    <!-- <input class="filter-button" type="submit" value="Filter"> -->
+                    <i class="fas fa-search filter-button input-disabled">
+                        <a>
+                            Filter
+                            Filter
+                        </a>
+                    </i>
+
+                    <i class="fas fa-times-circle">
+                        <a>
+                            Close
+                        </a>
+                    </i>
+                </form>
+
+
                 <a class="element open-search">
                     <i class="fas fa-search"></i>
                     Search
                 </a>
-                <form class="hidden-element filters" action="filterEvents" method="post">
-                    <input type="number" name="free-spots" placeholder="Free spots">
-                    <input type="text" name="location" placeholder="location">
-                    <input type="text" name="date" placeholder="date">
-                    <input type="text" name="sport" placeholder="sport">
-                    <input type="submit" value="Filter">
-                    <i class="fas fa-times-circle"></i>
-                </form>
-                <div class="hidden-element search" action="search" method="post">
-                    <input type="text" name="search" placeholder="Title, description, user">
-                    <input class="filter" type="submit" value="Search">
-                    <i class="fas fa-times-circle"></i>
+                <div class="hidden-element search">
+                    <input class="search-area" type="text" name="search" placeholder="Title, description, user">
+
+                    <i class="fas fa-search search-button input-disabled">
+                        <a>
+                            Search
+                        </a>
+                    </i>
+                    <!-- <input class="search-button" type="submit" value="Search"> -->
+                    <i class="fas fa-times-circle">
+                        <a>
+                            Close
+                        </a>
+                    </i>
                 </div>
+
+
+                <?
+                    if($user->getRole() == 'admin'){
+                ?>
+                    <a class="element open-add-sport">
+                        <i class="fas fa-plus"></i>
+                        Add sport
+                    </a>
+                    <div class="hidden-element add-sport">
+                        <input type="text" name="sport-name" placeholder="Sport name">
+                        <select name="type">
+                            <option value="normal">normal sport</option>
+                            <option value="esport">e-sport</option>
+                        </select>
+<!--                        <input type="submit" class="add-sport-button input-disabled" value="Add">-->
+
+                        <i class="fas fa-plus add-sport-button input-disabled">
+                            <a>
+                                Add
+                            </a>
+                        </i>
+                        <i class="close-add-sport fas fa-times-circle">
+
+                            <a>
+                                Close
+                            </a>
+                        </i>
+                    </div>
+                <?
+                    }
+                ?>
+
+
             </div>
             <section class="events">
                 <?

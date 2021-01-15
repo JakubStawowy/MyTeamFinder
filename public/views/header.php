@@ -12,11 +12,10 @@
     <script type="text/javascript" src="public/js/searchScript.js" defer></script>
     <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
     <script type="text/javascript" src="public/js/statistics.js" defer></script>
-<!--    <script type="text/javascript" src="public/js/newEvent.js" defer></script>-->
 
     <title>My Team Finder</title>
 </head>
-<body onload="onLoad()">
+<body>
         <div class="menu-bar">
             <a class="image" href="home">
                 <img src="public/img/Graylogo.png">

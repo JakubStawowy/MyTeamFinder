@@ -14,4 +14,8 @@ class SportRepository extends DatabaseConnector
         return $result;
     }
 
+    public function addSport($name, $type='normal'): void {
+        $this->execute('INSERT INTO sports VALUES(DEFAULT, ?, ?)', [$name, $type]);
+    }
+
 }

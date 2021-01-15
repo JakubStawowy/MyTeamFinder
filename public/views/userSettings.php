@@ -53,7 +53,6 @@
         <div class="section3 settings-section">
             <label>
                 <textarea name="description" class="description">
-                    aa
                     <?= $user->getUserDetails()->getDescription() ?>
                 </textarea>
             </label>

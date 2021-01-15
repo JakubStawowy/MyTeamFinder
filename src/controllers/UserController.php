@@ -35,6 +35,13 @@ class UserController extends AppController
         $file = $_FILES['image'];
         $filename = $file['name'];
         $file_tmp_name = $file['tmp_name'];
+        if($_POST['password'] == null)
+            $password = $this->userRepository->getUserById($_COOKIE['id'])->getPassword();
+        else if($_POST['password'] == $_POST['confirmedPassword'])
+            $password = $_POST['password'];
+        else
+            $password = $this->userRepository->getUserById($_COOKIE['id'])->getPassword();
+
         if($this->isPost()){
             if(!(is_uploaded_file($file_tmp_name)))
                 $filename=$this->userRepository->getUserById()->getUserDetails()->getImage();
@@ -45,7 +52,7 @@ class UserController extends AppController
             $this->user = new User(
                 $id,
                 $email,
-                $_POST['password'],
+                $password,
                 new UserDetails(
                     $_POST['name'],
                     $_POST['surname'],

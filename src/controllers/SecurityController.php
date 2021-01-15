@@ -30,8 +30,6 @@ class SecurityController extends AppController{
             }
             else {
                 $this->userManager->logUser($user->getId());
-                setcookie('name', $user->getUserDetails()->getName(), time()+(86400 * 30), "/");
-                setcookie('surname', $user->getUserDetails()->getSurname(), time()+(86400 * 30), "/");
                 setcookie('id', $user->getId(), time()+(86400 * 30), "/");
                 $url = "http://$_SERVER[HTTP_HOST]";
                 header("Location: {$url}/home");
@@ -43,12 +41,8 @@ class SecurityController extends AppController{
     }
 
     public function logout(){
-        if(isset($_COOKIE['name']) || isset($_COOKIE['surname']) || isset($_COOKIE['id'])){
-            unset($_COOKIE['name']);
-            unset($_COOKIE['surname']);
+        if(isset($_COOKIE['id'])){
             unset($_COOKIE['id']);
-            setcookie('name', null, -1, '/');
-            setcookie('surname', null, -1, '/');
             setcookie('id', null, -1, '/');
         }
         $url = "http://$_SERVER[HTTP_HOST]";

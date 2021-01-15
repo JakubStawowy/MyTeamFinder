@@ -26,14 +26,18 @@
 
         <section class="icons-section">
             <section class="location-date-section">
-                <a>
-                    <i class="fas fa-map-marker-alt"></i>
-                    <?= $event->getEventDetails()->getLocation()?>
-                </a>
-                <a>
-                    <i class="fas fa-calendar-alt"></i>
-                    <?= $event->getEventDetails()->getDate()?>
-                </a>
+                    <i class="fas fa-map-marker-alt">
+                        <a>
+
+                            <?= $event->getEventDetails()->getLocation()?>
+                        </a>
+                    </i>
+                    <i class="fas fa-calendar-alt">
+                        <a>
+
+                            <?= $event->getEventDetails()->getDate()?>
+                        </a>
+                    </i>
             </section>
             <?
                 if($event->getAddedById() == $_COOKIE['id']){
@@ -50,13 +54,23 @@
             <?
                 }
                 else{
+                    if(!in_array($event->getId(), $userSignedEvents)){
             ?>
-                    <a class="sign-in mybutton">
+                    <a id="sign-<?= $event->getId()?>" class="sign-in mybutton">
                         Sign in
                         <i class="fas fa-sign-in-alt"></i>
                     </a>
                 </form>
             <?
+                    }
+                    else{
+            ?>
+                <a id="sign-out-<?= $event->getId()?>" class="sign-out mybutton">
+                    Sign out
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            <?
+                    }
                 }
             ?>
         </section>

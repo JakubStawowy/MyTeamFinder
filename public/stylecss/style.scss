@@ -160,7 +160,7 @@ body{
     display: none;
 }
 .container{
-    @include block-size(100%, 88vh);
+    @include block-size(93%, 88vh);
     @include flex-column();
     
 }
@@ -276,6 +276,7 @@ body{
         }
     }
     .container{
+        width: 100%;
         flex-direction: column;
         align-items: center;
         .top-bar{

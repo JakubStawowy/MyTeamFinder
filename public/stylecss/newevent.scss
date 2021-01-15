@@ -44,12 +44,20 @@ $font: 'Montserrat', sans-serif;
     .publish-button{
         
         grid-area: button;
-        border: 1px solid $border-color;
+        border: none;
         border-radius: 30px;
         font-size: 1.5em;
-        color: #474242;
-        background: $bar-color;
+        color: $font-color;
+        background: $border-color;
+
+        
     }
+
+    .publish-button:hover{
+        cursor: pointer;
+        background: #818181;
+    }
+
     .image-button{
         @include flex-row();
         grid-area: picture;
@@ -114,6 +122,9 @@ $font: 'Montserrat', sans-serif;
         padding: 2em 0 10em;
         justify-content: space-around;
         align-items: center;
+        input{
+            width: 70%;
+        }
         .publish-button{
             @include block-size(70%, 10vh);
             order: 7;

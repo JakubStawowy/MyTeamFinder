@@ -9,7 +9,7 @@
 }
 
 .home-page {
-  width: 93%;
+  width: 100%;
   height: 100%;
   color: white;
 }
@@ -45,9 +45,26 @@
   width: 100%;
 }
 
+.home-page .filtration-panel form i, .home-page .filtration-panel div i {
+  color: #707070;
+}
+
+.home-page .filtration-panel form i a, .home-page .filtration-panel div i a {
+  color: #707070;
+  display: none;
+}
+
+.home-page .filtration-panel form i:hover, .home-page .filtration-panel div i:hover {
+  cursor: pointer;
+  color: #818181;
+}
+
+.home-page .filtration-panel form i:hover a, .home-page .filtration-panel div i:hover a {
+  color: #818181;
+}
+
 .home-page .filtration-panel form input, .home-page .filtration-panel div input {
-  flex: 2;
-  color: #474242 0% 0% no-repeat padding-box;
+  color: white;
   background: #707070;
   border: none;
   border-radius: 20px;
@@ -59,33 +76,36 @@
   display: none;
 }
 
-.home-page .filtration-panel form input.search, .home-page .filtration-panel div input.search {
-  flex: 3;
+.home-page .filtration-panel form select, .home-page .filtration-panel div select {
+  border: none;
+  margin: 2em;
+  background: #707070;
+  border-radius: 20px;
+  padding: 1em;
+  color: white;
 }
 
-.home-page .filtration-panel form input.search-button, .home-page .filtration-panel form input.filter, .home-page .filtration-panel div input.search-button, .home-page .filtration-panel div input.filter {
-  flex: 1;
+.home-page .filtration-panel form .input-disabled, .home-page .filtration-panel div .input-disabled {
+  color: #505050;
+  pointer-events: none;
 }
 
-.home-page .filtration-panel form input.search-button:hover, .home-page .filtration-panel form input.filter:hover, .home-page .filtration-panel div input.search-button:hover, .home-page .filtration-panel div input.filter:hover {
-  cursor: pointer;
-  background: #818181;
-  border: #707070 1px solid;
+.home-page .filtration-panel form .input-disabled a, .home-page .filtration-panel div .input-disabled a {
+  color: #505050;
 }
 
-.home-page .filtration-panel form i, .home-page .filtration-panel div i {
-  color: #707070;
+.home-page .filtration-panel form input.add-sport-button, .home-page .filtration-panel div input.add-sport-button {
+  width: 10%;
 }
 
-.home-page .filtration-panel form i:hover, .home-page .filtration-panel div i:hover {
-  cursor: pointer;
-  color: #818181;
+.home-page .filtration-panel form input.search-area, .home-page .filtration-panel div input.search-area {
+  width: 50%;
 }
 
 .home-page .filtration-panel .form-displayed {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
@@ -94,6 +114,7 @@
   height: 50vh;
   display: flex;
   flex-direction: row;
+  font-weight: 400;
   margin: 4em 4em 0;
   padding: 1em;
   border: 1px solid #707070;
@@ -153,6 +174,11 @@
   color: #707070;
 }
 
+.home-page .event section .icons-section i a {
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+}
+
 @media only screen and (max-width: 768px) {
   .home-page {
     width: 90%;
@@ -169,13 +195,22 @@
     height: 76vh;
     background: #474242 0% 0% no-repeat padding-box;
   }
-  .home-page .filtration-panel .form-displayed input {
+  .home-page .filtration-panel .form-displayed input, .home-page .filtration-panel .form-displayed select, .home-page .filtration-panel .form-displayed input.search-area, .home-page .filtration-panel .form-displayed input.add-sport-button {
     width: 80%;
     margin: 0;
     flex: 0;
   }
-  .home-page .filtration-panel .form-displayed .filter {
-    flex: 0;
+  .home-page .filtration-panel .form-displayed i {
+    display: flex;
+    flex-direction: row;
+  }
+  .home-page .filtration-panel .form-displayed i a {
+    margin-left: 0.5em;
+    font-family: "Montserrat", sans-serif;
+    display: block;
+  }
+  .home-page .filtration-panel .form-displayed i a:hover {
+    color: #818181;
   }
   .home-page .event {
     margin: 20px 0 20px 0;

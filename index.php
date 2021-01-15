@@ -21,12 +21,13 @@ Routing::post('logout', 'SecurityController');
 Routing::post('addEvent', 'EventController');
 Routing::post('registerUser', 'SecurityController');
 Routing::get('signUpUserForEvent', 'EventRegisterController');
-Routing::post('signOut', 'EventRegisterController');
+Routing::get('signOutUserFromEvent', 'EventRegisterController');
 Routing::post('saveUser', 'UserController');
-Routing::post('filterEvents', 'EventController');
+Routing::post('filter', 'EventController');
 Routing::post('search', 'EventController');
 Routing::post('removeEvent', 'EventController');
 Routing::post('leaveComment', 'UserController');
 Routing::post('makeAdmin', 'UserController');
+Routing::post('addSport', 'DefaultController');
 
 Routing::run($path);

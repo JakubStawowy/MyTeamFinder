@@ -28,7 +28,7 @@ $font: 'Montserrat', sans-serif;
     align-items: center;
 }
 .home-page{
-    @include block-size(93%, 100%);
+    @include block-size(100%, 100%);
     color: $font-color;
     .filtration-panel{
         @include block-size(100%, 8vh);
@@ -51,10 +51,27 @@ $font: 'Montserrat', sans-serif;
             color: $border-color;
         }
         form, div {
+
             width: 100%;
+
+            i{
+                color: $border-color;
+                a{
+                    color: $border-color;
+                    display: none;
+                }
+            }
+
+            i:hover{
+                cursor: pointer;
+                color: #818181;
+                a{
+                    color: #818181;
+                }
+            }
+
             input {
-                flex: 2;
-                color: $container-color;
+                color: $font-color;
                 background: $border-color;
                 border: none;
                 border-radius: 20px;
@@ -64,31 +81,35 @@ $font: 'Montserrat', sans-serif;
                     display: none;
                 }
             }
-            input.search{
-                flex: 3;
+            
+            select{
+                border: none;
+                margin: 2em;
+                background: $border-color;
+                border-radius: 20px;
+                padding: 1em;
+                color: $font-color;
+            }
+            
+            .input-disabled{
+                color: #505050;
+                pointer-events: none;
+                a{
+                    color: #505050;
+                }
             }
 
-            input.search-button, input.filter{
-                flex: 1;
+            input.add-sport-button{
+                width: 10%;
             }
-
-            input.search-button:hover, input.filter:hover {
-                cursor: pointer;
-                background: #818181;
-                border: $border-color 1px solid;
-            }
-
-            i{
-                color: $border-color;
-            }
-            i:hover{
-                cursor: pointer;
-                color: #818181;
+            
+            input.search-area{
+                width: 50%;
             }
         }
         .form-displayed{
             @include flex-row();
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
         }
     }
@@ -96,6 +117,7 @@ $font: 'Montserrat', sans-serif;
         
         @include block-size(calc(100%-8em), 50vh);
         @include flex-row();
+        font-weight: 400;
         margin: 4em 4em 0;
         padding: 1em;
         border: 1px solid $border-color;
@@ -104,7 +126,6 @@ $font: 'Montserrat', sans-serif;
             @include block-size(50vh, 50vh);
             border-radius: 30px;
             img{
-                // @include block-size(100%, 100%);
                 @include block-size(50vh, 50vh);
                 object-fit: cover;
                 border-radius: 30px;
@@ -139,6 +160,13 @@ $font: 'Montserrat', sans-serif;
                     cursor: pointer;
                     color: $border-color;
                 }
+                i{
+                    a{
+
+                        font-weight: 400;
+                        font-family: $font;
+                    }
+                }
             }
         }
     }
@@ -158,23 +186,29 @@ $font: 'Montserrat', sans-serif;
                 position: absolute;
                 height: 76vh;
                 background: $container-color;
-                input{
+                input, select, input.search-area, input.add-sport-button{
                     width: 80%;
                     margin: 0;
                     flex: 0;
                 }
-                .filter{
-                    flex: 0;
+                i{
+                    @include flex-row();
+                    a{
+                        margin-left: 0.5em;
+                        font-family: $font;
+                        display: block;
+                        // color: $border-color;
+                    }
+                    a:hover{     
+                        color: #818181;
+                    }
                 }
             }
         }
         .event{
-            // width: 100%;
             margin: 20px 0 20px 0;
-            // border-radius: 0;
             .event-image{
                 @include block-size(20vw, 20vw);
-                // border-radius: 0;
                 img{
                     @include block-size(20vw, 20vw);
 

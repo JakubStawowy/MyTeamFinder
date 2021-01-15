@@ -66,6 +66,16 @@ class UserRepository extends DatabaseConnector
         return $feedbacks;
     }
 
+    public function getUserSignedEvents(){
+        $result = [];
+        $statement = $this->execute('SELECT event_id FROM players_in_events WHERE user_id=?', [$_COOKIE['id']]);
+        $resultSet = $statement->fetchAll(PDO::PARAM_STR);
+        foreach ($resultSet as $rs){
+            $result[] = $rs['event_id'];
+        }
+        return $result;
+    }
+
     public function createUser(array $user): User {
         if($user['image'] == null)
             $user['image'] = 'Ndak.png';

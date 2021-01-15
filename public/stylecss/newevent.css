@@ -17,11 +17,16 @@
 
 .new-event-section .publish-button {
   grid-area: button;
-  border: 1px solid #707070;
+  border: none;
   border-radius: 30px;
   font-size: 1.5em;
-  color: #474242;
-  background: transparent linear-gradient(180deg, #E5951D 0%, #734B0F 100%) 0% 0% no-repeat padding-box;
+  color: white;
+  background: #707070;
+}
+
+.new-event-section .publish-button:hover {
+  cursor: pointer;
+  background: #818181;
 }
 
 .new-event-section .image-button {
@@ -99,6 +104,9 @@
     padding: 2em 0 10em;
     justify-content: space-around;
     align-items: center;
+  }
+  .new-event-section input {
+    width: 70%;
   }
   .new-event-section .publish-button {
     width: 70%;

@@ -1,74 +1,145 @@
-function onLoad(){
+const openFiltersButton = document.querySelector('.open-filters');
+const openSearchButton = document.querySelector('.open-search');
+const openAddSportButton = document.querySelector('.open-add-sport');
+const closeButton = document.querySelectorAll('.fa-times-circle');
+const filters = document.querySelector('.filters');
+const search = document.querySelector('.search');
+const addSport = document.querySelector('.add-sport');
+const topScrollElements = document.querySelectorAll('.fa-angle-up')
+const rightSidePanelNavButton = document.querySelector('#nav-icon');
+const hiddenRightSidePanelNavButton = document.querySelector('#nav-icon-hidden');
+const sportNameTextBox = document.querySelector('input[name="sport-name"]');
+const addSportButton = document.querySelector('.add-sport-button');
+const filterButton = filters.querySelector('.filter-button');
+const filterInputs = filters.querySelectorAll('input');
 
-    const rightSidePanelNavButton = document.getElementById('nav-icon');
-    const hiddenRightSidePanelNavButton = document.getElementById('nav-icon-hidden');
-    const topScrollElements = document.getElementsByClassName("fa-angle-up");
-    const openFiltersButton = document.getElementsByClassName('open-filters')[0];
-    const closeFiltersButtons = document.getElementsByClassName('fa-times-circle');
-    const openSearchingModeButton = document.getElementsByClassName('open-search')[0];
+if(addSport!=null && sportNameTextBox!=null && addSportButton!=null && openAddSportButton!=null){
 
-    rightSidePanelNavButton.addEventListener('click', function (){
-        document.getElementById('right-side-bar').classList.add('hidden-element');
-        document.getElementById('right-side-bar').classList.remove('flex-element');
-        document.getElementById('right-side-bar-hidden').classList.add('flex-element');
-        document.getElementById('right-side-bar-hidden').classList.remove('hidden-element');
-    });
-
-    hiddenRightSidePanelNavButton.addEventListener('click', function (){
-        document.getElementById('right-side-bar').classList.add('flex-element');
-        document.getElementById('right-side-bar').classList.remove('hidden-element');
-        document.getElementById('right-side-bar-hidden').classList.add('hidden-element');
-        document.getElementById('right-side-bar-hidden').classList.remove('flex-element');
-    });
-
-    for(let i = 0; i < topScrollElements.length; i++){
-        topScrollElements[i].addEventListener('click', function (){
-            window.scrollTo(0, 0);
-        });
+    function validateSport() {
+        setTimeout(function () {
+            if(sportNameTextBox.value.length>0)
+                addSportButton.classList.remove('input-disabled');
+            else
+                addSportButton.classList.add('input-disabled');
+        }, 100);
     }
 
-    function hideElement(element){
-        element.classList.remove('element');
-        element.classList.add('hidden-element');
-    }
+    sportNameTextBox.addEventListener('keyup', validateSport);
+    sportNameTextBox.addEventListener('click', validateSport);
 
-    function showElement(element){
-
-        element.classList.add('element');
-        element.classList.remove('hidden-element');
-    }
-
-    openFiltersButton.addEventListener('click', function (){
-
-        hideElement(document.getElementsByClassName('open-filters')[0]);
-        hideElement(document.getElementsByClassName('open-search')[0]);
-
-        document.getElementsByClassName('filters')[0].classList.add('form-displayed');
-        document.getElementsByClassName('filters')[0].classList.remove('hidden-element');
+    openAddSportButton.addEventListener('click', function () {
+        showForm(addSport);
+        hideButton(openFiltersButton);
+        hideButton(openAddSportButton);
+        hideButton(openSearchButton);
     });
 
-    closeFiltersButtons[0].addEventListener('click', function (){
-        showElement(document.getElementsByClassName('open-filters')[0]);
-        showElement(document.getElementsByClassName('open-search')[0]);
-
-        document.getElementsByClassName('filters')[0].classList.remove('form-displayed');
-        document.getElementsByClassName('filters')[0].classList.add('hidden-element');
-    });
-
-    closeFiltersButtons[1].addEventListener('click', function (){
-
-        showElement(document.getElementsByClassName('open-filters')[0]);
-        showElement(document.getElementsByClassName('open-search')[0]);
-        document.getElementsByClassName('search')[0].classList.remove('form-displayed');
-        document.getElementsByClassName('search')[0].classList.add('hidden-element');
-    });
-    openSearchingModeButton.addEventListener('click', function (){
-
-        hideElement(document.getElementsByClassName('open-filters')[0]);
-        hideElement(document.getElementsByClassName('open-search')[0]);
-        document.getElementsByClassName('search')[0].classList.add('form-displayed');
-        document.getElementsByClassName('search')[0].classList.remove('hidden-element');
+    addSportButton.addEventListener('click', function () {
+       const sportName = sportNameTextBox.value;
+       const sportType = document.querySelector('select').value;
+       const result = sportName+'+'+sportType;
+        alert(result);
+       fetch(`/addSport/${result}`).then(function () {
+           alert("udalo sie");
+       });
     });
 
 }
+
+function hideButton(element){
+    if(element.classList.contains('element')){
+        element.classList.remove('element');
+        element.classList.add('hidden-element');
+    }
+}
+
+function showButton(element){
+    if(element.classList.contains('hidden-element')){
+        element.classList.add('element');
+        element.classList.remove('hidden-element');
+    }
+}
+
+function showForm(element){
+    if(element.classList.contains('hidden-element')){
+        element.classList.add('form-displayed');
+        element.classList.remove('hidden-element');
+    }
+}
+
+function hideForm(element){
+    if(element.classList.contains('form-displayed')){
+        element.classList.add('hidden-element');
+        element.classList.remove('form-displayed');
+    }
+}
+
+function validateFilters(){
+    for(let i=0; i < filterInputs.length; i++){
+        if(filterInputs[i].value.length>0)
+            return true;
+    }
+    return false;
+}
+
+rightSidePanelNavButton.addEventListener('click', function (){
+    document.querySelector('.right-side-bar').classList.add('hidden-element');
+    document.querySelector('.right-side-bar').classList.remove('flex-element');
+    document.querySelector('.right-side-bar-hidden').classList.add('flex-element');
+    document.querySelector('.right-side-bar-hidden').classList.remove('hidden-element');
+});
+
+hiddenRightSidePanelNavButton.addEventListener('click', function (){
+    document.querySelector('.right-side-bar').classList.add('flex-element');
+    document.querySelector('.right-side-bar').classList.remove('hidden-element');
+    document.querySelector('.right-side-bar-hidden').classList.add('hidden-element');
+    document.querySelector('.right-side-bar-hidden').classList.remove('flex-element');
+});
+
+topScrollElements.forEach(scrollToTop=>scrollToTop.addEventListener('click', function () {
+    window.scrollTo(0, 0);
+}));
+
+openFiltersButton.addEventListener('click', function (){
+    showForm(filters);
+    hideButton(openFiltersButton);
+    if(openAddSportButton!=null){
+        hideButton(openAddSportButton);
+    }
+    hideButton(openSearchButton);
+});
+
+filterInputs.forEach(filter=>filter.addEventListener('keyup',function () {
+    setTimeout(function () {
+        if(validateFilters()){
+            filterButton.classList.remove('input-disabled');
+        }
+        else{
+            filterButton.classList.add('input-disabled');
+        }
+    },100)
+}))
+
+openSearchButton.addEventListener('click', function () {
+    showForm(search);
+    hideButton(openFiltersButton);
+    if(openAddSportButton!=null){
+        hideButton(openAddSportButton);
+    }
+    hideButton(openSearchButton);
+});
+
+closeButton.forEach(close=>close.addEventListener('click', function () {
+    hideForm(filters);
+    hideForm(search);
+    if(addSport!=null){
+        hideForm(addSport);
+    }
+
+    showButton(openFiltersButton);
+    if(openAddSportButton!=null){
+        showButton(openAddSportButton);
+    }
+    showButton(openSearchButton);
+}));
 
