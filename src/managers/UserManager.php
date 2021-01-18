@@ -13,13 +13,20 @@ class UserManager extends DatabaseConnector
     }
 
     public function logUser($userId){
+        $PDOConnection = $this->getPDOConnection();
         try{
-            $this->execute("INSERT INTO logs VALUES(DEFAULT, ?, DEFAULT);", [$userId]);
+            $this->executePDOConnection($PDOConnection,"INSERT INTO logs VALUES(DEFAULT, ?, DEFAULT);", [$userId]);
+            $this->executePDOConnection($PDOConnection,"UPDATE users SET enabled=true WHERE id=?", [$userId]);
         }catch (PDOException $e){
-            die("PDO Error: ".$e->getMessage());
+            if($PDOConnection->inTransaction()){
+                $PDOConnection->rollBack();
+            }
         }
     }
 
+    public function logoutUser($userId){
+        $this->execute("UPDATE users SET enabled=false WHERE id=?", [$userId]);
+    }
     public function registerUser(User $user){
         $PDOConnection = $this->getPDOConnection();
         try{
@@ -30,7 +37,6 @@ class UserManager extends DatabaseConnector
                     $user->getUserDetails()->getCountry(),
                     $user->getUserDetails()->getAge()]);
             $user_details_id = $PDOConnection->lastInsertId();
-//            $this->userRepository->getUserDetailsId($user)
             $this->executePDOConnection($PDOConnection, 'INSERT INTO public.users VALUES(DEFAULT, ?, ?, ?, DEFAULT)', [$user_details_id, $user->getEmail(), $user->getPassword()]);
             $user->setId($this->userRepository->getUserId($user));
             return true;

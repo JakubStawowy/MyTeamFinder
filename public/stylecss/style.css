@@ -199,6 +199,27 @@ body a {
   margin-left: 1em;
 }
 
+.event section input:hover {
+  cursor: pointer;
+}
+
+.event section button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1em;
+}
+
+.event section button:hover {
+  cursor: pointer;
+  color: #707070;
+}
+
+.event section a.event-description {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .event section input.title {
   font-size: 2em;
 }
@@ -223,6 +244,11 @@ body a {
 .event section .icons-section a.mybutton:hover {
   cursor: pointer;
   color: #707070;
+}
+
+.event section .icons-section i a {
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
 }
 
 @media only screen and (max-width: 768px) {

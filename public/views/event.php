@@ -7,7 +7,7 @@
             <input type="hidden" name="eventId" value="<?= $event->getId() ?>">
             <input class="title" type="submit" value="<?= $event->getEventDetails()->getTitle() ?>">
         </form>
-        <form action="userProfile" method="get">
+        <form action="userProfile" method="post">
             <input type="hidden" name="userId" value="<?= $event->getAddedById()?>">
             <input class="username" type="submit" value="<?= $event->getAddedByNameSurname()?>">
         </form>
@@ -42,15 +42,13 @@
             <?
                 if($event->getAddedById() == $_COOKIE['id']){
             ?>
-                
-                <a class="mybutton" type="submit">
-                    Edit
-                    <i class="fas fa-cog"></i>
-                </a>
-                <a class="mybutton">
-                    Remove
-                    <i class="fas fa-times-circle"></i>
-                </a>
+                <form action="editEvent" method="get">
+                    <input type="hidden" name="eventId" value="<?= $event->getId()?>">
+                    <button class="mybutton" type="submit">
+                        Edit
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </form>
             <?
                 }
                 else{

@@ -21,7 +21,7 @@ $font: 'Montserrat', sans-serif;
 	flex-direction: row;
 }
 
-.new-event-section{
+form.new-event-section{
     width: 70vw;
     padding: 4em 8em 4em 8em;
     display: grid;
@@ -112,6 +112,30 @@ $font: 'Montserrat', sans-serif;
         color: #AEAEAE;
         background: transparent;
     }
+}
+
+form.remove-event{
+    
+    @include flex-row();
+    justify-content: center;
+
+
+    input{
+        
+        border-radius: 30px;
+        font-size: 1.5em;
+        color: $font-color;
+        background: #CD5C5C;
+        border: none;
+        padding: 1em;
+        margin-bottom: 2em;
+    }
+
+    input:hover{
+        cursor: pointer;
+        background: #DE6D6D;
+    }
+    
 }
 
 @media only screen and (max-width: 768px){

@@ -24,6 +24,23 @@ class EventRepository extends DatabaseConnector
         return $this->createEvent($result);
     }
 
+    public function getUserEvents(int $userId, $type = null){
+        $results = [];
+        switch ($type){
+            case 'signed':
+                $statement = $this->execute('SELECT * FROM users_in_events WHERE user_id=?', [$userId]);
+                break;
+            default:
+                $statement = $this->execute('SELECT * FROM event_view WHERE created_by=?', [$userId]);
+        }
+        $events = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($events as $event){
+            $results[] = $this->createEvent($event);
+        }
+        return $results;
+
+    }
+
     public function getEvents($type = null): array{
         $results = [];
         switch ($type){
@@ -33,17 +50,6 @@ class EventRepository extends DatabaseConnector
                 break;
             case 'userEvents':
                 $statement = $this->execute('SELECT * FROM event_view WHERE created_by=? ORDER BY created_at DESC', [$_COOKIE['id']]);
-                break;
-            case 'userSignedEvents':
-                $statement = $this->execute('SELECT event_id FROM players_in_events WHERE user_id=?', [$_COOKIE['id']]);
-                $eventIds = $statement->fetchAll(PDO::FETCH_ASSOC);
-                $query = 'SELECT * FROM event_view WHERE';
-                foreach ($eventIds as $eventId){
-                    $query = $query.' id='.$eventId['event_id'].' OR';
-                }
-                $query = substr($query, 0, -3);
-                $query = $query.' ORDER BY created_at DESC';
-                $statement = $this->execute($query);
                 break;
             default:
                 $statement = $this->execute('SELECT * FROM event_view ORDER BY created_at DESC;');
@@ -83,17 +89,13 @@ class EventRepository extends DatabaseConnector
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getEventDetailsId(Event $event): int{
+    public function getEventDetailsId(int $eventId): int{
         $statement = $this->execute("
-            SELECT id FROM event_details WHERE title=? AND description=? AND date=? AND location=?
-        ", [
-            $event->getEventDetails()->getTitle(),
-            $event->getEventDetails()->getDescription(),
-            $event->getEventDetails()->getDate(),
-            $event->getEventDetails()->getLocation()
-        ]);
+            SELECT event_details_id FROM event_ids WHERE event_id=?
+        ", [$eventId]
+        );
 
-        return $statement->fetch()['id'];
+        return $statement->fetch()['event_details_id'];
     }
 
     private function createEvent(array $event): Event{

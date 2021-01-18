@@ -1,4 +1,4 @@
-.new-event-section {
+form.new-event-section {
   width: 70vw;
   padding: 4em 8em 4em 8em;
   display: grid;
@@ -6,16 +6,16 @@
   color: #AEAEAE;
 }
 
-.new-event-section h2 {
+form.new-event-section h2 {
   grid-area: title;
   color: white;
 }
 
-.new-event-section button:hover {
+form.new-event-section button:hover {
   cursor: pointer;
 }
 
-.new-event-section .publish-button {
+form.new-event-section .publish-button {
   grid-area: button;
   border: none;
   border-radius: 30px;
@@ -24,12 +24,12 @@
   background: #707070;
 }
 
-.new-event-section .publish-button:hover {
+form.new-event-section .publish-button:hover {
   cursor: pointer;
   background: #818181;
 }
 
-.new-event-section .image-button {
+form.new-event-section .image-button {
   display: flex;
   flex-direction: row;
   grid-area: picture;
@@ -37,7 +37,7 @@
   align-items: center;
 }
 
-.new-event-section .image-button i {
+form.new-event-section .image-button i {
   width: 50%;
   height: 100%;
   font-size: 5em;
@@ -46,7 +46,7 @@
   background: transparent;
 }
 
-.new-event-section input {
+form.new-event-section input {
   padding: 1em;
   margin: 1em 0 1em;
   font-size: 1em;
@@ -56,34 +56,34 @@
   background: transparent;
 }
 
-.new-event-section .event-title {
+form.new-event-section .event-title {
   grid-area: event-title;
 }
 
-.new-event-section .sport {
+form.new-event-section .sport {
   grid-area: sport;
 }
 
-.new-event-section .players {
+form.new-event-section .players {
   grid-area: players;
 }
 
-.new-event-section .date-location {
+form.new-event-section .date-location {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.new-event-section .date-location a:hover {
+form.new-event-section .date-location a:hover {
   cursor: pointer;
 }
 
-.new-event-section .date-location .date-label {
+form.new-event-section .date-location .date-label {
   margin: 0;
   padding: 0;
 }
 
-.new-event-section .description {
+form.new-event-section .description {
   grid-area: description;
   padding: 2em;
   margin: 2em 0;
@@ -94,6 +94,27 @@
   font-family: "Montserrat", sans-serif;
   color: #AEAEAE;
   background: transparent;
+}
+
+form.remove-event {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+form.remove-event input {
+  border-radius: 30px;
+  font-size: 1.5em;
+  color: white;
+  background: #CD5C5C;
+  border: none;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+form.remove-event input:hover {
+  cursor: pointer;
+  background: #DE6D6D;
 }
 
 @media only screen and (max-width: 768px) {

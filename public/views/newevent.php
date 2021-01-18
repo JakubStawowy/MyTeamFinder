@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
+    <link rel="stylesheet" href="public/stylecss/newevent.min.css" type="text/css"/>
+    <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
+    <script type="text/javascript" src="public/js/defaultScript.js" defer></script>
+
+    <title>My Team Finder</title>
+</head>
 <?php include('header.php'); ?>
     <div class="container">
         <form action="addEvent" method="POST" class="new-event-section" ENCTYPE="multipart/form-data">
@@ -11,7 +22,6 @@
             <input name="sport" class="sport" type="text" placeholder="Sport">
             <input name="numberOfPlayers" class="players" type="text" placeholder="Number of players">
             <input type="file" name="file" class="image-button">
-            </input>
             <textarea name="description" class="description" placeholder="Description, requirements"></textarea>
             <div class="date-location">
                 <div class="date">
@@ -21,9 +31,7 @@
                 </div>
                 <div class="location">
                     <i class="fas fa-map-marker-alt"></i>
-                    <a>
-                        Location (optional)
-                    </a>
+                    <input type="text" name="location" placeholder="location(optional)">
                 </div>
             </div>
             

@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
+    <link rel="stylesheet" href="public/stylecss/profile.min.css" type="text/css"/>
+    <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="public/js/profileScript.js" defer></script>
+    <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
+    <script type="text/javascript" src="public/js/statistics.js" defer></script>
+    <script type="text/javascript" src="public/js/defaultScript.js" defer></script>
+
+    <title>My Team Finder</title>
+</head>
+
 <?php include('header.php') ?>
     <div class="container">
         <? if(isset($userProfile)){?>
@@ -55,15 +69,26 @@
                 </div>
             </div>
             <section class="event-section">
-            <a href="userSignedEvents">Events</a>
-            <a href="userEvents">My events</a>
-            <?
-            if(isset($events)){
-                foreach ($events as $event):
-                    include('event.php');
-                endforeach;
-            }
-            ?>
+                <section class="buttons-section">
+
+                    <form action="userSignedEvents" method="get">
+                        <input type="hidden" name="userId" value="<?= $userProfile->getId()?>">
+                        <input type="submit" value="Signed events">
+                    </form>
+                    <form action="userEvents" method="get">
+                        <input type="hidden" name="userId" value="<?= $userProfile->getId()?>">
+                        <input type="submit" value="Events">
+                    </form>
+                </section>
+<!--                <a href="userSignedEvents">Events</a>-->
+<!--                <a href="userEvents">My events</a>-->
+                <?
+                if(isset($events)){
+                    foreach ($events as $event):
+                        include('event.php');
+                    endforeach;
+                }
+                ?>
             </section>
             <div class="profile-description">
 

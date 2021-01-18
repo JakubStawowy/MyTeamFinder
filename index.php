@@ -25,9 +25,11 @@ Routing::get('signOutUserFromEvent', 'EventRegisterController');
 Routing::post('saveUser', 'UserController');
 Routing::post('filter', 'EventController');
 Routing::post('search', 'EventController');
-Routing::post('removeEvent', 'EventController');
+Routing::get('removeEvent', 'EventController');
 Routing::post('leaveComment', 'UserController');
 Routing::post('makeAdmin', 'UserController');
 Routing::post('addSport', 'DefaultController');
+Routing::get('editEvent', 'EventController');
+Routing::get('saveEvent', 'EventController');
 
 Routing::run($path);

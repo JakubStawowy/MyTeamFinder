@@ -170,7 +170,6 @@ body{
     .event{
         
         color: $font-color;
-        // @include block-size(80vw, 50vh
         width: 80vw;
         @include flex-row();
         margin: 4em 4em 0;
@@ -192,6 +191,24 @@ body{
             width: 60%;
             justify-content: space-between;
             margin-left: 1em;
+            input:hover{
+                cursor: pointer;
+            }
+            button{
+                background: transparent;
+                border: none;
+                color: $font-color;
+                font-size: 1em;
+            }
+            button:hover{
+                cursor: pointer;
+                color: $border-color;
+            }
+            a.event-description{
+                
+                white-space: nowrap;
+                overflow: hidden;
+            }
             input.title{
                 font-size: 2em;
             }
@@ -210,6 +227,13 @@ body{
                 a.mybutton:hover{
                     cursor: pointer;
                     color: $border-color;
+                }
+                i{
+                    a{
+
+                        font-weight: 400;
+                        font-family: $font;
+                    }
                 }
             }
         }

@@ -26,9 +26,23 @@ $font: 'Montserrat', sans-serif;
     margin: 2em;
     .event-section{
         @include flex-column();
-        a{
-            text-decoration: none; 
-            color: $font-color;
+        margin-top: 1em;
+        .buttons-section{
+            @include flex-row();
+            justify-content: space-between;
+            width: 30%;
+            input{
+                background: $border-color;
+                border: none;
+                border-radius: 30px;
+                padding: 1em;
+                color: $font-color;
+                font-size: 1em;
+            }
+            input:hover{
+                background: #818181;
+                cursor: pointer;
+            }
         }
         .event{
             margin: 2em 0;

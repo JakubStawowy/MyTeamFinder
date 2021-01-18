@@ -29,25 +29,29 @@ class DefaultController extends AppController{
     }
     public function newEvent(){
         $this->user = $this->userRepository->getUserById();
-        $this->renderWhenCookiesAreSet('newEvent', ['user' => $this->user]);
+        $this->renderIfCookiesAreSet('newEvent', ['user' => $this->user]);
     }
     public function event(){
         if($this->isGet()){
             $this->user = $this->userRepository->getUserById();
-            $this->renderWhenCookiesAreSet('eventPage', ['user'=>$this->user, 'event'=>$this->eventRepository->getEvent($_GET['eventId'])]);
+            $this->renderIfCookiesAreSet('eventPage', [
+                'user'=>$this->user,
+                'event'=>$this->eventRepository->getEvent($_GET['eventId']),
+                'userSignedEvents'=>$this->userRepository->getUserSignedEvents()
+            ]);
         }
     }
     public function personalProfile(){
         $this->user = $this->userRepository->getUserById();
         $feedback = $this->userRepository->getUserFeedback($_COOKIE['id']);
-        $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $this->user, 'feedback'=>$feedback]);
+        $this->renderIfCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $this->user, 'feedback'=>$feedback]);
     }
     public function userProfile(){
-        if($this->isGet()){
+        if($this->isPost()){
             $this->user = $this->userRepository->getUserById();
-            $user = $this->userRepository->getUserById($_GET['userId']);
-            $feedback = $this->userRepository->getUserFeedback($_GET['userId']);
-            $this->renderWhenCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $user, 'feedback'=>$feedback]);
+            $user = $this->userRepository->getUserById($_POST['userId']);
+            $feedback = $this->userRepository->getUserFeedback($_POST['userId']);
+            $this->renderIfCookiesAreSet('profile', ['user' => $this->user, 'userProfile' => $user, 'feedback'=>$feedback]);
         }
     }
 

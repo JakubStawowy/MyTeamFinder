@@ -42,6 +42,7 @@ class SecurityController extends AppController{
 
     public function logout(){
         if(isset($_COOKIE['id'])){
+            $this->userManager->logoutUser($_COOKIE['id']);
             unset($_COOKIE['id']);
             setcookie('id', null, -1, '/');
         }

@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
+    <link rel="stylesheet" href="public/stylecss/settings.min.css" type="text/css"/>
+    <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
+    <script type="text/javascript" src="public/js/defaultScript.js" defer></script>
+
+    <title>My Team Finder</title>
+</head>
+
 <?php include('header.php') ?>
 <div class="container">
     <?

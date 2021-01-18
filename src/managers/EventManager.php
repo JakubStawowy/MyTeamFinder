@@ -83,7 +83,7 @@ class EventManager extends DatabaseConnector
     public function removeEvent($eventId){
         $PDOConnection = $this->getPDOConnection();
         try{
-            $event_details_id = $this->eventRepository->getEventDetailsId($this->eventRepository->getEvent($eventId));
+            $event_details_id = $this->eventRepository->getEventDetailsId($eventId);
             $this->executePDOConnection($PDOConnection, "DELETE FROM events WHERE id=?", [$eventId]);
             $this->executePDOConnection($PDOConnection, "DELETE FROM event_details WHERE id=?", [$event_details_id]);
         }catch (Exception $e){
@@ -91,6 +91,29 @@ class EventManager extends DatabaseConnector
             if($PDOConnection->inTransaction())
                 $PDOConnection->rollBack();
         }
+    }
+
+    public function editEvent(Event $event){
+        $PDOConnection = $this->getPDOConnection();
+        try{
+
+            $this->executePDOConnection($PDOConnection, '
+                UPDATE event_details SET title=?, description=?, number_of_players=?, location=?, image=?, date=? WHERE id=?;
+            ', [
+                $event->getEventDetails()->getTitle(),
+                $event->getEventDetails()->getDescription(),
+                $event->getEventDetails()->getNumberOfPlayers(),
+                $event->getEventDetails()->getLocation(),
+                $event->getEventDetails()->getImage(),
+                $event->getEventDetails()->getDate(),
+                $this->eventRepository->getEventDetailsId($event->getId())
+            ]);
+        } catch (Exception $e){
+            echo $e->getMessage();
+            if($PDOConnection->inTransaction())
+                $PDOConnection->rollBack();
+        }
+
     }
 
 }

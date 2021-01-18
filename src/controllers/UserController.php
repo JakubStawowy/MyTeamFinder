@@ -17,19 +17,30 @@ class UserController extends AppController
         $this->eventRepository = new EventRepository();
         $this->user = $this->userRepository->getUserById();
     }
-    public function personalProfile(){
-        $this->renderWhenCookiesAreSet('profile', ['user'=>$this->user]);
-    }
+
     public function userEvents(){
-        $events = $this->eventRepository->getEvents('userEvents');
-        $this->renderWhenCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user, 'userProfile'=>$this->user]);
+        if($this->isGet()){
+            $userProfile = $this->userRepository->getUserById($_GET['userId']);
+            $events = $this->eventRepository->getUserEvents($_GET['userId']);
+            $this->renderIfCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user, 'userProfile'=>$userProfile]);
+        }
     }
     public function userSignedEvents(){
-        $events = $this->eventRepository->getEvents('userSignedEvents');
-        $this->renderWhenCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user, 'userProfile'=>$this->user]);
+        if($this->isGet()){
+            $userProfile = $this->userRepository->getUserById($_GET['userId']);
+            $userSignedEventsIds = $this->userRepository->getUserSignedEvents();
+            $events = $this->eventRepository->getUserEvents($_GET['userId'], 'signed');
+
+            $this->renderIfCookiesAreSet('profile', [
+                'events'=>$events,
+                'user'=>$this->user,
+                'userProfile'=>$userProfile,
+                'userSignedEvents'=>$userSignedEventsIds
+            ]);
+        }
     }
     public function userSettings(){
-        $this->renderWhenCookiesAreSet('userSettings', ['user'=>$this->user]);
+        $this->renderIfCookiesAreSet('userSettings', ['user'=>$this->user]);
     }
     public function saveUser(){
         $file = $_FILES['image'];
@@ -65,10 +76,11 @@ class UserController extends AppController
                 $role
             );
             $this->userManager->editUser($this->user);
-            $this->renderWhenCookiesAreSet('profile', ['user'=>$this->user, 'userProfile'=>$this->user]);
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/personalProfile");
         }
         else{
-            $this->renderWhenCookiesAreSet('userSettings', ['messages'=>["Failed to edit account"]]);
+            $this->renderIfCookiesAreSet('userSettings', ['messages'=>["Failed to edit account"]]);
         }
     }
 
@@ -76,6 +88,9 @@ class UserController extends AppController
         if($this->isPost()){
             $this->userManager->addComment($_POST['feedback'], $_POST['userId']);
             $feedback = $this->userRepository->getUserFeedback($_POST['userId']);
+
+//            $url = "http://$_SERVER[HTTP_HOST]";
+//            header("Location: {$url}/userProfile");
             $this->render('profile', ['userProfile'=>$this->userRepository->getUserById($_POST['userId']), 'user'=>$this->user, 'feedback'=>$feedback]);
         }
     }
@@ -84,7 +99,7 @@ class UserController extends AppController
         if($this->isPost()){
             $this->userManager->makeUserAdmin($_POST['userId']);
             $feedback = $this->userRepository->getUserFeedback($_POST['userId']);
-            $this->renderWhenCookiesAreSet('profile', ['userProfile'=>$this->userRepository->getUserById($_POST['userId']), 'user'=>$this->user, 'feedback'=>$feedback]);
+            $this->renderIfCookiesAreSet('profile', ['userProfile'=>$this->userRepository->getUserById($_POST['userId']), 'user'=>$this->user, 'feedback'=>$feedback]);
         }
     }
 }

@@ -6,11 +6,28 @@
 .profile .event-section {
   display: flex;
   flex-direction: column;
+  margin-top: 1em;
 }
 
-.profile .event-section a {
-  text-decoration: none;
+.profile .event-section .buttons-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.profile .event-section .buttons-section input {
+  background: #707070;
+  border: none;
+  border-radius: 30px;
+  padding: 1em;
   color: white;
+  font-size: 1em;
+}
+
+.profile .event-section .buttons-section input:hover {
+  background: #818181;
+  cursor: pointer;
 }
 
 .profile .event-section .event {

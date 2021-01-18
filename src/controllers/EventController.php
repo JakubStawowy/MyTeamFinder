@@ -134,12 +134,46 @@ class EventController extends AppController{
     }
 
     public function removeEvent(){
-        if($this->isPost()){
-            $this->eventManager->removeEvent($_POST['eventId']);
-            $this->render('home', ['messages'=>["Event removed succesfully!"]]);
+        if($this->isGet()){
+            $this->eventManager->removeEvent($_GET['eventId']);
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/home");
         }
     }
 
+    public function editEvent(){
+        if($this->isGet()){
+            $this->renderIfCookiesAreSet('editEvent', ['event'=>$this->eventRepository->getEvent($_GET['eventId'])]);
+        }
+    }
+    public function saveEvent() {
+        if($this->isPost()){
+            $file = $_FILES['image'];
+            $filename = $file['name'];
+            $file_tmp_name = $file['tmp_name'];
+
+            if(!(is_uploaded_file($file_tmp_name)))
+                $filename=$this->eventRepository->getEvent($_POST['eventId'])->getEventDetails()->getImage();
+
+            $this->eventManager->editEvent(new Event(
+               $_POST['eventId'],
+               $_COOKIE['id'],
+               '',
+               0,
+               new EventDetails(
+                   $_POST['title'],
+                   $_POST['description'],
+                   $filename,
+                   $_POST['sport'],
+                   $_POST['numberOfPlayers'],
+                   $_POST['location'],
+                   $_POST['date']
+               )
+            ));
+        }
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/home");
+    }
     private function validate(array $file): bool{
         if($file['size'] > self::MAX_FILE_SIZE){
             $this->messages[] = 'file size is too large';
