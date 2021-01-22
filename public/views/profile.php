@@ -3,6 +3,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
     <link rel="stylesheet" href="public/stylecss/profile.min.css" type="text/css"/>
+    <link rel="icon" href="public/img/Loggo1.png">
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="public/js/profileScript.js" defer></script>
     <script type="text/javascript" src="public/js/mobileScript.js" defer></script>

@@ -17,7 +17,7 @@ class DefaultController extends AppController{
     }
 
     public function index(){
-        if(isset($_COOKIE['name']) && isset($_COOKIE['surname'])){
+        if(isset($_COOKIE['id'])){
             $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: {$url}/home");
             $this->user = $this->userRepository->getUserById();

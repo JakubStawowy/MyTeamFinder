@@ -2,7 +2,7 @@
     <div class="event-image">
         <img src="public/uploads/<?=$event->getEventDetails()->getImage()?>">
     </div>
-    <section>
+    <section class="event-container">
         <form method="get" action="event">
             <input type="hidden" name="eventId" value="<?= $event->getId() ?>">
             <input class="title" type="submit" value="<?= $event->getEventDetails()->getTitle() ?>">
@@ -12,8 +12,9 @@
             <input class="username" type="submit" value="<?= $event->getAddedByNameSurname()?>">
         </form>
         <div class="signed-players-section">
-            signed players: 
+            signed players:
             <a id="event-signed-players-<?= $event->getId()?>">
+                 
                 <?= $event->getSignedPlayers()?>
             </a>
             /

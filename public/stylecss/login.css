@@ -46,23 +46,29 @@
 }
 
 .login-register form .no-valid {
-  color: red;
+  border-bottom: 2px solid #CD5C5C;
 }
 
 .login-register form button {
-  width: 80%;
   margin: 1em;
   padding: 1em 2em 1em 2em;
-  border: 1px solid #707070;
   border-radius: 30px;
   font-family: "Montserrat", sans-serif;
   line-height: 2.5em;
   color: white;
   background: #474242 0% 0% no-repeat padding-box;
+  border: none;
+  font-size: 1em;
 }
 
 .login-register form button:hover {
   cursor: pointer;
+  color: #707070;
+}
+
+.login-register form .input-disabled {
+  opacity: 50%;
+  pointer-events: none;
 }
 
 .login-register form a {
@@ -70,9 +76,13 @@
   font-size: 0.5em;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) and (max-device-width: 768px) {
+  .container {
+    padding: 0;
+  }
   .container .login-register {
     display: inline;
+    width: 100%;
   }
   .container .login-container {
     width: 100%;
@@ -86,11 +96,15 @@
     align-items: center;
     background: transparent;
   }
+  .container .login-container form .login-section {
+    width: 100%;
+  }
   .container .login-container form a {
     margin-bottom: 4vh;
   }
   .container .login-container form input {
     margin-bottom: 4vh;
+    width: 60%;
   }
   .container .login-container form button {
     margin-bottom: 4vh;

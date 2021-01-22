@@ -117,31 +117,43 @@ form.remove-event input:hover {
   background: #DE6D6D;
 }
 
-@media only screen and (max-width: 768px) {
-  .new-event-section {
+@media only screen and (max-width: 768px) and (max-device-width: 768px) {
+  form.new-event-section {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 2em 0 10em;
+    padding: 0;
     justify-content: space-around;
     align-items: center;
   }
-  .new-event-section input {
+  form.new-event-section input, form.new-event-section textarea {
     width: 70%;
   }
-  .new-event-section .publish-button {
+  form.new-event-section .publish-button {
     width: 70%;
     height: 10vh;
     order: 7;
   }
-  .new-event-section .date-location a {
+  form.new-event-section .date-location {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  form.new-event-section .date-location .date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  form.new-event-section .date-location .date input {
+    width: 30%;
+  }
+  form.new-event-section .date-location a {
     display: none;
   }
-  .new-event-section .date-location i {
-    padding: 2em;
+  form.new-event-section .date-location i {
     font-size: 2em;
   }
-  .new-event-section .date-location i:hover {
+  form.new-event-section .date-location i:hover {
     cursor: pointer;
   }
 }

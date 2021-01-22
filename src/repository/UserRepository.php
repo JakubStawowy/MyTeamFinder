@@ -35,13 +35,13 @@ class UserRepository extends DatabaseConnector
     }
 
     public function getUserId(User $user){
-        $statement = $this->execute('SELECT id FROM public.users WHERE email=? AND password=?', [$user->getEmail(), $user->getPassword()]);
+        $statement = $this->execute('SELECT id FROM users WHERE email=? AND password=?', [$user->getEmail(), $user->getPassword()]);
         return $statement->fetch()['id'];
     }
 
     public function getUserDetailsId(User $user){
         $statement = $this->execute(
-          'SELECT id FROM public.user_details WHERE name=? AND surname=?',
+          'SELECT id FROM user_details WHERE name=? AND surname=?',
             [$user->getUserDetails()->getName(), $user->getUserDetails()->getSurname()]
         );
         return $statement->fetch(PDO::FETCH_ASSOC)['id'];
@@ -95,5 +95,4 @@ class UserRepository extends DatabaseConnector
             $user['role']
         );
     }
-
 }

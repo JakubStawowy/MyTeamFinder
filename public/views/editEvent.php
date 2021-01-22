@@ -6,6 +6,7 @@
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
     <script type="text/javascript" src="public/js/defaultScript.js" defer></script>
+    <link rel="icon" href="public/img/Loggo1.png">
 
     <title>Edit event</title>
 </head>
@@ -39,9 +40,7 @@
                 </div>
                 <div class="location">
                     <i class="fas fa-map-marker-alt"></i>
-                    <a>
-                        <input name="location" type="text" value="<?= $event->getEventDetails()->getLocation() ?>">
-                    </a>
+                    <input name="location" type="text" value="<?= $event->getEventDetails()->getLocation() ?>">
                 </div>
             </div>
 

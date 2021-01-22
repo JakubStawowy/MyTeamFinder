@@ -102,6 +102,10 @@
   width: 50%;
 }
 
+.home-page .filtration-panel form .no-valid, .home-page .filtration-panel div .no-valid {
+  border: 2px solid #CD5C5C;
+}
+
 .home-page .filtration-panel .form-displayed {
   display: flex;
   flex-direction: row;
@@ -134,12 +138,15 @@
   border-radius: 30px;
 }
 
+.home-page .event section.event-container {
+  padding: 1em;
+}
+
 .home-page .event section {
   display: flex;
   flex-direction: column;
   width: 60%;
   justify-content: space-between;
-  margin-left: 1em;
 }
 
 .home-page .event section button {
@@ -160,6 +167,7 @@
 
 .home-page .event section input {
   font-size: 1em;
+  padding: 0;
 }
 
 .home-page .event section input:hover {
@@ -191,7 +199,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) and (max-device-width: 768px) {
   .home-page {
     width: 90%;
   }

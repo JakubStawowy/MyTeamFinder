@@ -13,7 +13,7 @@
                         <a>
                             forgot your password?
                         </a>
-                        <button type="submit">Login</button>
+                        <button class="input-disabled" type="submit">Login</button>
 
                         <div class="message">
                             <?php

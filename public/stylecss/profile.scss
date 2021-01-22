@@ -23,7 +23,7 @@ $font: 'Montserrat', sans-serif;
 
 .profile{
     color: $font-color;
-    margin: 2em;
+    margin:5em;
     .event-section{
         @include flex-column();
         margin-top: 1em;
@@ -43,6 +43,7 @@ $font: 'Montserrat', sans-serif;
                 background: #818181;
                 cursor: pointer;
             }
+
         }
         .event{
             margin: 2em 0;
@@ -180,7 +181,7 @@ $font: 'Montserrat', sans-serif;
     }
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 768px) and (max-device-width: 768px){
     
     .profile{
         margin: 2em;

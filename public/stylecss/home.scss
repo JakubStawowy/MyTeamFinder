@@ -106,6 +106,10 @@ $font: 'Montserrat', sans-serif;
             input.search-area{
                 width: 50%;
             }
+
+            .no-valid{
+                border: 2px solid #CD5C5C;
+            }
         }
         .form-displayed{
             @include flex-row();
@@ -131,12 +135,13 @@ $font: 'Montserrat', sans-serif;
                 border-radius: 30px;
             }
         }
-        
+        section.event-container{
+            padding: 1em;
+        }
         section{
             @include flex-column();
             width: 60%;
             justify-content: space-between;
-            margin-left: 1em;
             button{
                 background: transparent;
                 border: none;
@@ -152,6 +157,7 @@ $font: 'Montserrat', sans-serif;
             }
             input{
                 font-size: 1em;
+                padding: 0;
             }
             input:hover{
                 cursor: pointer;
@@ -183,7 +189,7 @@ $font: 'Montserrat', sans-serif;
 }
 
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 768px) and (max-device-width: 768px){
     
     .home-page{
         width: 90%;

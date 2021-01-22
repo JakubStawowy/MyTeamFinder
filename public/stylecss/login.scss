@@ -57,21 +57,26 @@ $font: 'Montserrat', sans-serif;
             border-bottom: 2px solid $font-color;
         }
         .no-valid{
-            color: red;
+            border-bottom: 2px solid #CD5C5C;
         }
         button{
-            width: 80%;
             margin: 1em;
             padding: 1em 2em 1em 2em;
-            border: 1px solid $border-color;
             border-radius: 30px;
             font-family: $font;
             line-height: 2.5em;
             color: $font-color;
             background: $container-color;
+            border: none;
+            font-size: 1em;
         }
         button:hover{
             cursor: pointer;
+            color: $border-color;
+        }
+        .input-disabled{
+            opacity: 50%;
+            pointer-events: none;
         }
         a{
             color: $font-color;
@@ -81,10 +86,13 @@ $font: 'Montserrat', sans-serif;
 }
 
 
-@media only screen and (max-width: 768px){
+
+@media only screen and (max-width: 768px) and (max-device-width: 768px){
     .container{
+        padding: 0;
         .login-register{
             display: inline;
+            width: 100%;
         }
         .login-container{
             width: 100%;
@@ -95,11 +103,15 @@ $font: 'Montserrat', sans-serif;
                 justify-content: space-around;
                 align-items: center;
                 background: transparent;
+                .login-section{
+                    width: 100%;
+                }
                 a{
                     margin-bottom: 4vh;
                 }
                 input{
                     margin-bottom: 4vh;
+                    width: 60%;
                 }
                 button{
                     margin-bottom: 4vh;

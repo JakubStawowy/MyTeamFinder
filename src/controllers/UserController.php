@@ -20,16 +20,24 @@ class UserController extends AppController
 
     public function userEvents(){
         if($this->isGet()){
-            $userProfile = $this->userRepository->getUserById($_GET['userId']);
-            $events = $this->eventRepository->getUserEvents($_GET['userId']);
+            if($_GET['userId'] == null)
+                $id = $_COOKIE['id'];
+            else
+                $id = $_GET['userId'];
+            $userProfile = $this->userRepository->getUserById($id);
+            $events = $this->eventRepository->getUserEvents($id);
             $this->renderIfCookiesAreSet('profile', ['events'=>$events, 'user'=>$this->user, 'userProfile'=>$userProfile]);
         }
     }
     public function userSignedEvents(){
         if($this->isGet()){
-            $userProfile = $this->userRepository->getUserById($_GET['userId']);
+            if($_GET['userId'] == null)
+                $id = $_COOKIE['id'];
+            else
+                $id = $_GET['userId'];
+            $userProfile = $this->userRepository->getUserById($id);
             $userSignedEventsIds = $this->userRepository->getUserSignedEvents();
-            $events = $this->eventRepository->getUserEvents($_GET['userId'], 'signed');
+            $events = $this->eventRepository->getUserEvents($id, 'signed');
 
             $this->renderIfCookiesAreSet('profile', [
                 'events'=>$events,
@@ -38,6 +46,7 @@ class UserController extends AppController
                 'userSignedEvents'=>$userSignedEventsIds
             ]);
         }
+
     }
     public function userSettings(){
         $this->renderIfCookiesAreSet('userSettings', ['user'=>$this->user]);

@@ -12,6 +12,9 @@
                         <input name="password" type="password" placeholder="password">
                         <input name="confirmedPassword" type="password" placeholder="repeat password">
                         <input name="phone" type="text" placeholder="phone">
+                        <a class="password-message">
+
+                        </a>
                         <div class="message">
                             <?php
                             if(isset($messages)){
@@ -27,7 +30,7 @@
                         <input name="surname" type="text" placeholder="surname">
                         <input name="age" type="number" placeholder="age">
                         <input name="country" type="text" placeholder="country">
-                        <button>Register</button>
+                        <button class="input-disabled">Register</button>
                         <a href="login">I am already registered</a>
                     </div>
                 </form>

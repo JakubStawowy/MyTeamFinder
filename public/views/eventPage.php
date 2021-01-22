@@ -4,6 +4,7 @@
     <script src="https://kit.fontawesome.com/607b75d37b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/stylecss/style.min.css" type="text/css"/>
     <link rel="stylesheet" href="public/stylecss/home.min.css" type="text/css"/>
+    <link rel="icon" href="public/img/Loggo1.png">
     <script type="text/javascript" src="public/js/mobileScript.js" defer></script>
     <script type="text/javascript" src="public/js/defaultScript.js" defer></script>
     <script type="text/javascript" src="public/js/statistics.js" defer></script>

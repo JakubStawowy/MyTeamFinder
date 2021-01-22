@@ -9,6 +9,8 @@ const sportNameTextBox = document.querySelector('input[name="sport-name"]');
 const addSportButton = document.querySelector('.add-sport-button');
 const filterButton = filters.querySelector('.filter-button');
 const filterInputs = filters.querySelectorAll('input');
+const dateFromInput = filters.querySelector('input[name="dateFrom"]');
+const dateToInput = filters.querySelector('input[name="dateTo"]');
 
 if(addSport!=null && sportNameTextBox!=null && addSportButton!=null && openAddSportButton!=null){
 
@@ -123,3 +125,28 @@ closeButton.forEach(close=>close.addEventListener('click', function () {
     showButton(openSearchButton);
 }));
 
+function isDateCorrect(date) {
+    return/[0-9]{4}-(0[1-9]|1[0-2])-[0-9]{2}/.test(date.substr(0, 10));
+}
+
+function isTimeCorrect(date){
+    return/([0-1][0-9]|2[0-4]):([0-5][0-9])/.test(date.substr(11, 5));
+}
+function validateDateFrom(){
+    setTimeout(function () {
+        if((dateFromInput.value.length===10 && isDateCorrect(dateFromInput.value)) || (isDateCorrect(dateFromInput.value) && isTimeCorrect(dateFromInput.value)))
+            dateFromInput.classList.remove('no-valid');
+        else
+            dateFromInput.classList.add('no-valid');
+    }, 1000);
+}
+function validateDateTo(){
+    setTimeout(function () {
+        if((dateToInput.value.length===10 && isDateCorrect(dateToInput.value)) || (isDateCorrect(dateToInput.value) && isTimeCorrect(dateToInput.value)))
+            dateToInput.classList.remove('no-valid');
+        else
+            dateToInput.classList.add('no-valid');
+    }, 1000);
+}
+dateFromInput.addEventListener('keyup', validateDateFrom);
+dateToInput.addEventListener('keyup', validateDateTo);

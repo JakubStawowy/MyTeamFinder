@@ -25,12 +25,12 @@ class SecurityController extends AppController{
         $password = $_POST["password"];
         $user = $this->userRepository->getUser($email);
         if($user != null){
-            if($user->getPassword() != $password){
+            if(!password_verify($password, $user->getPassword())){
                 $this->render('login', ['messages' => ['Wrong password']]);
             }
             else {
                 $this->userManager->logUser($user->getId());
-                setcookie('id', $user->getId(), time()+(86400 * 30), "/");
+                setcookie('id', $user->getId(), time()+600, "/");
                 $url = "http://$_SERVER[HTTP_HOST]";
                 header("Location: {$url}/home");
             }
@@ -73,7 +73,7 @@ class SecurityController extends AppController{
         if($this->userManager->registerUser(new User(
             0,
             $email,
-            $password,
+            password_hash($password, PASSWORD_DEFAULT),
             new UserDetails(
                 $name,
                 $surname,

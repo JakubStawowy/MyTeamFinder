@@ -138,15 +138,17 @@ form.remove-event{
     
 }
 
-@media only screen and (max-width: 768px){
+
+@media only screen and (max-width: 768px) and (max-device-width: 768px){
     
-    .new-event-section{
+    form.new-event-section{
         @include flex-column();
         width: 100%;
-        padding: 2em 0 10em;
+        // padding: 2em 0 10em;
+        padding: 0;
         justify-content: space-around;
         align-items: center;
-        input{
+        input, textarea{
             width: 70%;
         }
         .publish-button{
@@ -154,11 +156,19 @@ form.remove-event{
             order: 7;
         }
         .date-location{
+            @include flex-column();
+            width: 80%;
+            .date{
+                @include flex-row();
+                justify-content: space-between;
+                input{
+                    width: 30%;
+                }
+            }
             a{
                 display: none;
             }
             i{
-                padding: 2em;
                 font-size: 2em;
             }
             i:hover{
