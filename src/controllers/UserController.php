@@ -100,7 +100,7 @@ class UserController extends AppController
 
 //            $url = "http://$_SERVER[HTTP_HOST]";
 //            header("Location: {$url}/userProfile");
-            $this->render('profile', ['userProfile'=>$this->userRepository->getUserById($_POST['userId']), 'user'=>$this->user, 'feedback'=>$feedback]);
+            $this->renderIfCookiesAreSet('profile', ['userProfile'=>$this->userRepository->getUserById($_POST['userId']), 'user'=>$this->user, 'feedback'=>$feedback]);
         }
     }
 
