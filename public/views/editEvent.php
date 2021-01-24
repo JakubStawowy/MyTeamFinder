@@ -28,9 +28,9 @@
             <input name="title" class="event-title" type="text" value="<?= $event->getEventDetails()->getTitle()?>">
             <input name="sport" class="sport" type="text" value="<?= $event->getEventDetails()->getSport()?>">
             <input name="numberOfPlayers" class="players" type="text" value="<?= $event->getEventDetails()->getNumberOfPlayers()?>">
-            <input type="file" name="file" class="image-button" value="<?= $event->getEventDetails()->getImage()?>">
+            <input type="file" name="file" class="image-button">
             <textarea name="description" class="description">
-                 <? $event->getEventDetails()->getDescription()?>
+                 <?= $event->getEventDetails()->getDescription()?>
             </textarea>
             <div class="date-location">
                 <div class="date">

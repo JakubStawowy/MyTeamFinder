@@ -206,9 +206,15 @@ body{
         
         section{
             @include flex-column();
+            padding: 1em;
             width: 60%;
             justify-content: space-between;
             // margin-left: 1em;
+            input{
+                // width: 100%;
+                white-space: break-spaces;
+                text-align: left;
+            }
             input:hover{
                 cursor: pointer;
             }
@@ -224,8 +230,8 @@ body{
             }
             a.event-description{
                 
-                white-space: nowrap;
-                overflow: hidden;
+                white-space: break-spaces;
+                text-align: left;
             }
             input.title{
                 font-size: 2em;

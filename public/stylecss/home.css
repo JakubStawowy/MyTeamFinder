@@ -163,6 +163,8 @@
 
 .home-page .event section input.title {
   font-size: 2em;
+  text-align: left;
+  width: 100%;
 }
 
 .home-page .event section input {
@@ -201,7 +203,7 @@
 
 @media only screen and (max-width: 768px) and (max-device-width: 768px) {
   .home-page {
-    width: 90%;
+    width: 100%;
   }
   .home-page .filtration-panel {
     padding: 0;
@@ -231,6 +233,12 @@
   }
   .home-page .filtration-panel .form-displayed i a:hover {
     color: #818181;
+  }
+  .home-page section.events {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
   }
   .home-page .event {
     margin: 20px 0 20px 0;

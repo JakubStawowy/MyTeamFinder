@@ -51,7 +51,8 @@ function validateConfirmedPassword(){
                 confirmedPasswordInput.value
             );
             markValidation(confirmedPasswordInput, condition);
-            showMessage(form.querySelector(".password-message"), condition, "Passwords does not match");
+            if(form.querySelector(".password-message").textContent==='')
+                showMessage(form.querySelector(".password-message"), condition, "Passwords does not match");
         },
         1000
     );

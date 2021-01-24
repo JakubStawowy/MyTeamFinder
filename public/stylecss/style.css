@@ -217,8 +217,14 @@ body a {
 .event section {
   display: flex;
   flex-direction: column;
+  padding: 1em;
   width: 60%;
   justify-content: space-between;
+}
+
+.event section input {
+  white-space: break-spaces;
+  text-align: left;
 }
 
 .event section input:hover {
@@ -238,8 +244,8 @@ body a {
 }
 
 .event section a.event-description {
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: break-spaces;
+  text-align: left;
 }
 
 .event section input.title {

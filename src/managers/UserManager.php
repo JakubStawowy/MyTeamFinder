@@ -30,12 +30,14 @@ class UserManager extends DatabaseConnector
     public function registerUser(User $user){
         $PDOConnection = $this->getPDOConnection();
         try{
-            $this->executePDOConnection($PDOConnection, "INSERT INTO public.user_details VALUES(DEFAULT, ?, ?, '', ?, ?, ?)",
+            $this->executePDOConnection($PDOConnection, "INSERT INTO user_details VALUES(DEFAULT, ?, ?, '', ?, ?, ?, ?)",
                 [$user->getUserDetails()->getName(),
                     $user->getUserDetails()->getSurname(),
                     $user->getUserDetails()->getPhone(),
                     $user->getUserDetails()->getCountry(),
-                    $user->getUserDetails()->getAge()]);
+                    $user->getUserDetails()->getAge(),
+                    $user->getUserDetails()->getImage()
+                ]);
             $user_details_id = $PDOConnection->lastInsertId();
             $this->executePDOConnection($PDOConnection, 'INSERT INTO public.users VALUES(DEFAULT, ?, ?, ?, DEFAULT)', [$user_details_id, $user->getEmail(), $user->getPassword()]);
             $user->setId($this->userRepository->getUserId($user));

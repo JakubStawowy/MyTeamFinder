@@ -52,20 +52,25 @@ $font: 'Montserrat', sans-serif;
     
     .profile-data{
         @include flex-row();
-        .stars{
-            color: $star-color;
-        }
-        img{
-            @include block-size(160px, 160px);
-            object-fit: cover;
-            border-radius: 10px;
-        }
-        .data{
-            @include flex-column();
-            justify-content: space-around;
-            margin-left: 1em;
-            h2{
-                margin: 0;
+        justify-content: space-between`;
+        .image-data{
+            @include flex-row();
+            justify-content: flex-start;
+            .stars{
+                color: $star-color;
+            }
+            img{
+                @include block-size(160px, 160px);
+                object-fit: cover;
+                border-radius: 10px;
+            }
+            .data{
+                @include flex-column();
+                justify-content: space-around;
+                margin-left: 1em;
+                h2{
+                    margin: 0;
+                }
             }
         }
         .profile-settings{

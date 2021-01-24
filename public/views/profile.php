@@ -18,31 +18,33 @@
         <? if(isset($userProfile)){?>
         <section class="profile">
             <div class="profile-data">
+                <div class="image-data">
 
-                <img src="public/uploads/<?=$userProfile->getUserDetails()->getImage()?>">
-                <div class="data">
-                    <h2>
-                        <?
+                    <img src="public/uploads/<?=$userProfile->getUserDetails()->getImage()?>">
+                    <div class="data">
+                        <h2>
+                            <?
                             echo $userProfile->getUserDetails()->getName().' '.$userProfile->getUserDetails()->getSurname();
-                        ?>
-                    </h2>
-                    <a>
-                        <?
+                            ?>
+                        </h2>
+                        <a>
+                            <?
                             echo $userProfile->getUserDetails()->getCountry();
-                        ?>
-                    </a>
-                    <a>
-                        <?
+                            ?>
+                        </a>
+                        <a>
+                            <?
                             echo $userProfile->getUserDetails()->getAge();
 
-                        ?>
-                    </a>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
+                            ?>
+                        </a>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="profile-settings">

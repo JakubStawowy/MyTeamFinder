@@ -59,4 +59,21 @@ class DefaultController extends AppController{
         $sportDetails = explode('+', $sport);
         $this->sportRepository->addSport($sportDetails[0], $sportDetails[1]);
     }
+    public function home(){
+        if(isset($_COOKIE['id'])){
+
+            $events = $this->eventRepository->getEvents();
+            $this->user = $this->userRepository->getUserById();
+            $userSignedEvents = $this->userRepository->getUserSignedEvents();
+            $this->renderIfCookiesAreSet('home',[
+                'events' => $events,
+                'user' => $this->user,
+                'userSignedEvents'=>$userSignedEvents
+            ]);
+        }
+        else{
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}");
+        }
+    }
 }

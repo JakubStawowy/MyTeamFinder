@@ -37,27 +37,34 @@
 .profile .profile-data {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
-.profile .profile-data .stars {
+.profile .profile-data .image-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.profile .profile-data .image-data .stars {
   color: #E5951D;
 }
 
-.profile .profile-data img {
+.profile .profile-data .image-data img {
   width: 160px;
   height: 160px;
   object-fit: cover;
   border-radius: 10px;
 }
 
-.profile .profile-data .data {
+.profile .profile-data .image-data .data {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin-left: 1em;
 }
 
-.profile .profile-data .data h2 {
+.profile .profile-data .image-data .data h2 {
   margin: 0;
 }
 

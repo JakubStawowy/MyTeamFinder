@@ -1,6 +1,5 @@
 form.new-event-section {
-  width: 70vw;
-  padding: 4em 8em 4em 8em;
+  padding: 5em;
   display: grid;
   grid-template-areas: 'title button' 'event-title event-title' 'sport picture' 'players picture' 'description description' 'description description' 'date-location none';
   color: #AEAEAE;
@@ -100,6 +99,7 @@ form.remove-event {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 1em;
 }
 
 form.remove-event input {
@@ -109,7 +109,6 @@ form.remove-event input {
   background: #CD5C5C;
   border: none;
   padding: 1em;
-  margin-bottom: 2em;
 }
 
 form.remove-event input:hover {

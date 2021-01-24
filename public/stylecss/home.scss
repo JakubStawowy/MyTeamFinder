@@ -154,6 +154,8 @@ $font: 'Montserrat', sans-serif;
             }
             input.title{
                 font-size: 2em;
+                text-align: left;
+                width: 100%;
             }
             input{
                 font-size: 1em;
@@ -192,7 +194,7 @@ $font: 'Montserrat', sans-serif;
 @media only screen and (max-width: 768px) and (max-device-width: 768px){
     
     .home-page{
-        width: 90%;
+        width: 100%;
         .filtration-panel{
             padding: 0;
             opacity: 95%;
@@ -220,6 +222,11 @@ $font: 'Montserrat', sans-serif;
                     }
                 }
             }
+        }
+        section.events{
+            @include flex-column();
+            justify-content: space-around;
+            align-items: center;
         }
         .event{
             margin: 20px 0 20px 0;

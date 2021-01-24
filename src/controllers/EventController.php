@@ -49,7 +49,7 @@ class EventController extends AppController{
                         $filename,
                         $_POST['sport'],
                         $_POST['numberOfPlayers'],
-                        'krakow', $_POST['date'].' '.$_POST['time']
+                        $_POST['location'], $_POST['date'].' '.$_POST['time']
                     )
                 );
                 $this->eventManager->addEvent($event);
@@ -60,11 +60,7 @@ class EventController extends AppController{
                 $this->messages[] = $e->getMessage();
             }
         }
-        else{
-            $this->messages[] = "nie mna pliku";
-
-        }
-        $this->render('newevent', ['messages'=>$this->messages]);
+        $this->renderIfCookiesAreSet('newevent', ['messages'=>$this->messages]);
     }
     public function filter(){
 
@@ -95,28 +91,28 @@ class EventController extends AppController{
 
         }
     }
-    public function home(){
-        if(isset($_COOKIE['id'])){
-
-            $events = $this->eventRepository->getEvents();
-            $this->user = $this->userRepository->getUserById();
-            $userSignedEvents = $this->userRepository->getUserSignedEvents();
-            $this->render('home',[
-                'events' => $events,
-                'user' => $this->user,
-                'userSignedEvents'=>$userSignedEvents
-            ]);
-        }
-        else{
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}");
-        }
-    }
+//    public function home(){
+//        if(isset($_COOKIE['id'])){
+//
+//            $events = $this->eventRepository->getEvents();
+//            $this->user = $this->userRepository->getUserById();
+//            $userSignedEvents = $this->userRepository->getUserSignedEvents();
+//            $this->renderIfCookiesAreSet('home',[
+//                'events' => $events,
+//                'user' => $this->user,
+//                'userSignedEvents'=>$userSignedEvents
+//            ]);
+//        }
+//        else{
+//            $url = "http://$_SERVER[HTTP_HOST]";
+//            header("Location: {$url}");
+//        }
+//    }
     public function eSports(){
         $events = $this->eventRepository->getEvents('esport');
         $this->user = $this->userRepository->getUserById();
         $userSignedEvents = $this->userRepository->getUserSignedEvents();
-        $this->render('home', [
+        $this->renderIfCookiesAreSet('home', [
             'events'=>$events,
             'user' => $this->user,
             'userSignedEvents'=>$userSignedEvents
@@ -126,7 +122,7 @@ class EventController extends AppController{
         $events = $this->eventRepository->getEvents('normal');
         $this->user = $this->userRepository->getUserById();
         $userSignedEvents = $this->userRepository->getUserSignedEvents();
-        $this->render('home', [
+        $this->renderIfCookiesAreSet('home', [
             'events'=>$events,
             'user' => $this->user,
             'userSignedEvents'=>$userSignedEvents
@@ -148,12 +144,12 @@ class EventController extends AppController{
     }
     public function saveEvent() {
         if($this->isPost()){
-            $file = $_FILES['image'];
+            $file = $_FILES['file'];
             $filename = $file['name'];
             $file_tmp_name = $file['tmp_name'];
-
             if(!(is_uploaded_file($file_tmp_name)))
                 $filename=$this->eventRepository->getEvent($_POST['eventId'])->getEventDetails()->getImage();
+            move_uploaded_file($file_tmp_name, dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename);
 
             $this->eventManager->editEvent(new Event(
                $_POST['eventId'],
@@ -167,7 +163,7 @@ class EventController extends AppController{
                    $_POST['sport'],
                    $_POST['numberOfPlayers'],
                    $_POST['location'],
-                   $_POST['date']
+                   $_POST['date'].' '.$_POST['time']
                )
             ));
         }

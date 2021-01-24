@@ -22,8 +22,7 @@ $font: 'Montserrat', sans-serif;
 }
 
 form.new-event-section{
-    width: 70vw;
-    padding: 4em 8em 4em 8em;
+    padding: 5em;
     display: grid;
     grid-template-areas: 
         'title button'
@@ -118,7 +117,7 @@ form.remove-event{
     
     @include flex-row();
     justify-content: center;
-
+    padding: 1em;
 
     input{
         
@@ -128,7 +127,7 @@ form.remove-event{
         background: #CD5C5C;
         border: none;
         padding: 1em;
-        margin-bottom: 2em;
+        // margin-bottom: 2em;
     }
 
     input:hover{
