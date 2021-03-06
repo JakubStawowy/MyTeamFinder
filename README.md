@@ -19,3 +19,7 @@ Frontend:
 
 Others:
 * Docker
+
+Database ERD diagram:
+
+![database_erd_diagram](https://user-images.githubusercontent.com/57110082/110210569-8b295980-7e92-11eb-94c0-b0b61c5f8d68.png)
