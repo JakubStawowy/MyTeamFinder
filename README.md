@@ -8,7 +8,7 @@ The user can post an event (Football match, Online game etc.) which is displayed
 Technologies used:
 
 Backend:
-* PHP 5.6 language for backend processes
+* PHP 7.4.3 language for backend processes
 * PHP Data Objects (PDO) - interface for database management
 * PostgreSQL
 
