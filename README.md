@@ -13,7 +13,7 @@ Backend:
 * PostgreSQL
 
 Frontend:
-* HTML5
+* HTML
 * CSS - with SASS preprocessor
 * Javascript - for validating forms and displaying some of the page elements
 
